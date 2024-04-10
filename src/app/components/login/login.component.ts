@@ -103,15 +103,19 @@ export class LoginComponent {
   signup() {
     if (this.signupInfo.value.userName && this.signupInfo.value.userEmail && this.signupInfo.value.userPassword && this.signupInfo.value.confirmPassword) {
       if (this.signupInfo.value.userPassword == this.signupInfo.value.confirmPassword) {
-        let users = this.getStorage();
-        if (users.find((user: { email: string; }) => user.email == this.signupInfo.value.userEmail)) {
-          this.showSignupAlert("Já existe um cadastro com este e-mail. Caso tenha esquecido a senha, preencha seu e-mail na tela de login e clique em ’Esqueceu a senha?’", "warning");
+        if (this.signupInfo.valid) {
+          let users = this.getStorage();
+          if (users.find((user: { email: string; }) => user.email == this.signupInfo.value.userEmail)) {
+            this.showSignupAlert("Já existe um cadastro com este e-mail. Caso tenha esquecido a senha, preencha seu e-mail na tela de login e clique em ’Esqueceu a senha?’", "warning");
+          } else {
+            this.addUser(this.signupInfo.value.userName, this.signupInfo.value.userEmail, this.signupInfo.value.userPassword);
+            this.showLoginAlert(`O cadastro da pessoa com o e-mail ${this.signupInfo.value.userEmail} foi realizado com sucesso!`, "success");
+            this.signupInfo.reset();
+            this.closeModal("Submit click");
+          };
         } else {
-          this.addUser(this.signupInfo.value.userName, this.signupInfo.value.userEmail, this.signupInfo.value.userPassword);
-          this.showSignupAlert(`O cadastro da pessoa com o e-mail ${this.signupInfo.value.userEmail} foi realizado com sucesso!`, "success");
-          this.signupInfo.reset();
-          // this.closeModal("Submit click");
-        };
+          this.showSignupAlert("Os campos não foram preenchidos adequadamente.", "danger");
+        }
       } else {
         this.showSignupAlert("Os campos senha e confirmar senha devem ser iguais.", "warning");
       }
@@ -151,7 +155,7 @@ export class LoginComponent {
           if (user.email === userFound.email) {
             return { ...user, password: "novasenha" };
           }
-            return user;
+          return user;
         });
         localStorage.setItem("users", JSON.stringify(updatedUsers));
         alert("Sua senha foi alterada para a senha padrão ‘novasenha’. Faça seu login utilizando essa senha.")
