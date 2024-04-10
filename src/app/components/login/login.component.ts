@@ -49,18 +49,18 @@ export class LoginComponent {
   };
 
   signup() {
-    if (this.signupInfo.value.userEmail && this.signupInfo.value.userPassword && this.signupInfo.value.confirmPassword) {
+    if (this.signupInfo.value.userName && this.signupInfo.value.userEmail && this.signupInfo.value.userPassword && this.signupInfo.value.confirmPassword) {
       if (this.signupInfo.value.userPassword == this.signupInfo.value.confirmPassword) {
         let users = this.getStorage();
         if (users.find((user: { email: string; }) => user.email == this.signupInfo.value.userEmail)) {
           alert("Já existe um cadastro com este e-mail. Caso tenha esquecido a senha, preencha seu e-mail na tela de login e clique em ’Esqueci a senha.’");
         } else {
-          this.addUser(this.signupInfo.value.userEmail, this.signupInfo.value.userPassword);
+          this.addUser(this.signupInfo.value.userName, this.signupInfo.value.userEmail, this.signupInfo.value.userPassword);
           alert(`O cadastro da pessoa com o e-mail ${this.signupInfo.value.userEmail} foi realizado com sucesso!`);
+          this.signupInfo.reset();
+          this.closeModal("Submit click");
+          this.openModal(this.signupSuccess); 
         }
-        this.signupInfo.reset();
-        this.closeModal("Submit click");
-        this.openModal(this.signupSuccess); 
       } else {
         this.openModal(this.signupPasswordMatch); 
       }
@@ -69,8 +69,9 @@ export class LoginComponent {
     }
   };
 
-  addUser (email: string, password: string) {
+  addUser (name: string, email: string, password: string) {
     const newUser = {
+      name: name,
       email: email,
       password: password,
     };

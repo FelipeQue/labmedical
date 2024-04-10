@@ -11,10 +11,15 @@ export class CustomValidatorService {
 
   fullName(): ValidatorFn {
     return (control: AbstractControl):
-    ValidationErrors | null => {
+      ValidationErrors | null => {
+      const value = control.value;
+      if (value == null) {
+        return null;
+      };
+
       const names: Array<string> = control.value.split(' ');
       if (names.length < 2 || names[0].length < 2 || names[1].length < 2) {
-        return {fullName: true};
+        return { fullName: true };
       };
       return null;
     };
