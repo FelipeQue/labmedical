@@ -69,6 +69,14 @@
     height: 100%;
     @include flex-column-center;
     justify-content: space-between;
+    a {
+        font-weight: 700;
+        color: darkred;
+        cursor: pointer;
+        &:hover {
+            color: purple;
+        }
+    }
 }
 
 #login-header {
@@ -120,10 +128,39 @@
     flex-direction: row;
     justify-content: center;
     align-content: center;
+    p {
+        margin-right: 0.5em;
+    }
 }
 
 .login-logo {
     margin: 1em;
     width: 5em;
     height: auto;
+}
+
+// Signup Modal here:
+.modal-body {
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    @include flex-column-left;
+    label {
+        text-align: left;
+    };
+    input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 0.5em;
+        &:focus {
+            border: 2px solid $inputFocusBorder;
+            outline: none;
+        }
+    }
+}
+
+// Alert Modal here:
+.alert {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }

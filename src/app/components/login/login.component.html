@@ -10,8 +10,7 @@
             <div class="login-header">
                 <img class="login-logo" src="../../../assets/images/logo-LABMedical.svg" alt="Marca do LABMedical"/>
             </div>
-            <!-- <form id="login-form" (ngSubmit)="login()" [formGroup]="loginInfo"> -->
-            <form id="login-form">
+            <form id="login-form" (ngSubmit)="login()" [formGroup]="loginInfo">
                 <h1>Login</h1>
                 <div id="login-inputs">
                     <label for="user-email">E-mail:</label>
@@ -28,11 +27,11 @@
 
             </form>
             <div id="login-signup-link">
-                <p>Não tem conta?</p>
-                <a>Cadastre-se.</a>
+                <p>Não possui uma conta?</p>
+                <a (click)="openModal(signUpModal)">Criar conta.</a>
             </div>
             <div id="login-footer">
-                <img class="login-logo" src="../../../assets/images/logo-LAB365.svg" alt="Marca do LABM365"/>
+                <a href="https://lab365.tech"><img class="login-logo" src="../../../assets/images/logo-LAB365.svg" alt="Marca do LABM365"/></a>
             </div>
 
 
@@ -41,3 +40,116 @@
     </div>
 
 </div>
+
+<!-- Signup Modal ("Criar conta"): -->
+
+<ng-template #signUpModal>
+    <form (ngSubmit)="signup()" [formGroup]="signupInfo">
+    <div class="modal-header">
+		<h4 class="modal-title">Criar conta</h4>
+		<button type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="closeModal('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+            <label for="user-email">E-mail:</label>
+            <input
+            id="user-email"
+            name="user-email"
+            type="text"
+            formControlName="userEmail"
+            required
+            [ngClass]="{'error-border': (signupInfo.controls.userEmail.dirty ||
+        signupInfo.controls.userEmail.touched) &&
+        signupInfo.controls.userEmail.errors}"
+            />
+            <span class="error-message"
+            *ngIf="(signupInfo.controls.userEmail.dirty ||
+            signupInfo.controls.userEmail.touched) &&
+            signupInfo.controls.userEmail.errors &&
+            signupInfo.controls.userEmail.errors['required']"
+            >Preencha seu e-mail</span>
+
+            <span class="error-message"
+            *ngIf="(signupInfo.controls.userEmail.dirty &&
+            signupInfo.controls.userEmail.touched) &&
+            signupInfo.controls.userEmail.errors &&
+            signupInfo.controls.userEmail.errors['email']"
+            >Preencha um e-mail válido</span>
+
+            <label for="user-password">Senha:</label>
+            <input
+            id="user-password"
+            name="user-password"
+            type="password"
+            formControlName="userPassword"
+            required
+            [ngClass]="{'error-border': (signupInfo.controls.userPassword.dirty ||
+        signupInfo.controls.userPassword.touched) &&
+        signupInfo.controls.userPassword.errors}"
+            />
+            <span class="error-message"
+            *ngIf="(signupInfo.controls.userPassword.dirty ||
+            signupInfo.controls.userPassword.touched) &&
+            signupInfo.controls.userPassword.errors &&
+            signupInfo.controls.userPassword.errors['required']"
+            >Escolha uma senha</span>
+            <span class="error-message"
+            *ngIf="(signupInfo.controls.userPassword.dirty &&
+            signupInfo.controls.userPassword.touched) &&
+            signupInfo.controls.userPassword.errors &&
+            signupInfo.controls.userPassword.errors['minlength']"
+            >Sua senha deve ter pelo menos 8 caracteres</span>
+
+            <label for="confirm-password">Confirmar senha:</label>
+            <input
+            id="confirm-password"
+            name="confirm-password"
+            type="password"
+            formControlName="confirmPassword"
+            required
+            [ngClass]="{'error-border': (signupInfo.controls.confirmPassword.dirty ||
+        signupInfo.controls.confirmPassword.touched) &&
+        signupInfo.controls.confirmPassword.errors}"
+            />
+            <span class="error-message"
+            *ngIf="(signupInfo.controls.confirmPassword.dirty ||
+            signupInfo.controls.confirmPassword.touched) &&
+            signupInfo.controls.confirmPassword.errors &&
+            signupInfo.controls.confirmPassword.errors['required']"
+            >Confirme sua senha</span>
+            <span class="error-message"
+            *ngIf="(signupInfo.controls.confirmPassword.dirty &&
+            signupInfo.controls.confirmPassword.touched) &&
+            signupInfo.controls.confirmPassword.errors &&
+            signupInfo.controls.confirmPassword.errors['minlength']"
+            >Sua senha deve ter pelo menos 8 caracteres</span>        
+	</div>
+	<div class="modal-footer">
+		<button
+        type="button"
+        class="btn btn-secondary"
+        (click)="closeModal('Close click')">Cancelar</button>
+        <button
+        type="submit"
+        class="btn btn-primary">Cadastrar</button>
+	</div>
+</form>
+    
+  </ng-template>
+
+
+
+
+<ng-template #signupSuccess>
+    <div class="modal-header">
+		<button type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="closeModal('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+        <p>Cadastro criado com sucesso.</p>
+	</div>
+</ng-template>

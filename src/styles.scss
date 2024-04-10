@@ -7,3 +7,17 @@
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
+
+@import '../src/assets/styles/variables';
+
+.error-message {
+    text-transform: uppercase;
+    font-size: .7em;
+    font-weight: 600;
+    color: $errorRed;
+    letter-spacing: 0.02em;
+};
+
+.error-border {
+    border: 1px solid $errorRed !important;
+};
