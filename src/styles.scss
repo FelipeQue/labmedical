@@ -1,4 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
+
+@import '../src/assets/styles/variables';
+
+.error-message {
+    text-transform: uppercase;
+    font-size: .7em;
+    font-weight: 600;
+    color: $errorRed;
+    letter-spacing: 0.02em;
+};
+
+.error-border {
+    border: 1px solid $errorRed !important;
+};
