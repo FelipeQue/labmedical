@@ -1,7 +1,7 @@
 @import '../../../assets/styles/mixins';
 @import '../../../assets/styles/variables';
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 740px) {
     #login-side-image {
         display: none;
     }
@@ -12,7 +12,7 @@
 
 }
 
-@media screen and (min-width: 701px) {
+@media screen and (min-width: 741px) {
     #login-side-image {
         display: flex;
     }
@@ -40,7 +40,7 @@
     background-color: white;
     border-radius: 8px;
     width: 80%;
-    height: 80%;
+    height: auto;
     min-height: 80%;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
