@@ -145,17 +145,15 @@
     @include flex-column-left;
     label {
         text-align: left;
+        margin-top: 0.5em;
     };
     input {
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 4px;
-        margin-bottom: 0.5em;
         &:focus {
             border: 2px solid $inputFocusBorder;
             outline: none;
         }
     }
 }
-
-// Alert Modal here:
