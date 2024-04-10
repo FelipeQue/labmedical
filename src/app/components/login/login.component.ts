@@ -16,17 +16,17 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
+  constructor(
+    private customValidatorService: CustomValidatorService,
+    private router: Router) { };
+
   private modalService = inject(NgbModal);
   private modalRef: any;
 
+  alertLoginVisibility: boolean = false;
   alertSignupVisibility: boolean = false;
   alertMessage: string = '';
   alertType: string = '';
-
-  constructor (
-    private customValidatorService: CustomValidatorService,
-    private router: Router) {
-    }
 
   loginInfo = new FormGroup({
     userEmail: new FormControl(''),
@@ -48,61 +48,67 @@ export class LoginComponent {
     this.modalRef.dismiss(reason);
   };
 
-  showAlert(message: string, type: string) {
+  showLoginAlert(message: string, type: string) {
+    this.alertType = type;
+    this.alertMessage = message;
+    this.alertLoginVisibility = true;
+  };
+
+  showSignupAlert(message: string, type: string) {
     this.alertType = type;
     this.alertMessage = message;
     this.alertSignupVisibility = true;
-  }
+  };
 
   login() {
     if (this.loginInfo.value.userEmail && this.loginInfo.value.userPassword) {
-      let userFound = this.checkEmail();
+      let userFound = this.checkEmail(this.loginInfo.value.userEmail);
       if (userFound) {
         if (userFound.password == this.loginInfo.value.userPassword) {
-    
-          //Aqui quero deixar uma informação no localStorage sobre qual pessoa está logada:
-          // let loggedUser = 
-
+          this.setLoggedUser(this.loginInfo.value.userEmail);
           this.router.navigate(["home"]);
         } else {
-          alert("Senha incorreta. Verifique se digitou corretamente.");
+          this.showLoginAlert("Senha incorreta. Verifique se digitou corretamente.", "warning");
         };
       } else {
-        alert("Não encontramos uma conta associada a esse e-mail. Verifique se digitou corretamente ou crie uma nova conta.")
+        this.showLoginAlert("Não encontramos uma conta associada a esse e-mail. Verifique se digitou corretamente ou crie uma nova conta.", "warning")
       };
     } else {
-      alert("Por favor, preencha todos os campos.");
+      this.showLoginAlert("Por favor, preencha todos os campos.", "warning");
     };
   };
 
-  checkEmail() {
+  checkEmail(email: string) {
     let users = this.getStorage();
-    return users.find((user: { email: string | null | undefined; }) => user.email == this.loginInfo.value.userEmail);
+    return users.find((user: { email: string | null | undefined; }) => user.email == email);
   };
 
-
+  setLoggedUser(email: string) {
+    let loggedUser = this.checkEmail(email);
+    localStorage.setItem("loggedUser", JSON.stringify(loggedUser));
+  };
 
   signup() {
     if (this.signupInfo.value.userName && this.signupInfo.value.userEmail && this.signupInfo.value.userPassword && this.signupInfo.value.confirmPassword) {
       if (this.signupInfo.value.userPassword == this.signupInfo.value.confirmPassword) {
         let users = this.getStorage();
         if (users.find((user: { email: string; }) => user.email == this.signupInfo.value.userEmail)) {
-          this.showAlert("Já existe um cadastro com este e-mail. Caso tenha esquecido a senha, preencha seu e-mail na tela de login e clique em ’Esqueceu a senha?’", "warning");
+          this.showSignupAlert("Já existe um cadastro com este e-mail. Caso tenha esquecido a senha, preencha seu e-mail na tela de login e clique em ’Esqueceu a senha?’", "warning");
         } else {
           this.addUser(this.signupInfo.value.userName, this.signupInfo.value.userEmail, this.signupInfo.value.userPassword);
-          this.showAlert(`O cadastro da pessoa com o e-mail ${this.signupInfo.value.userEmail} foi realizado com sucesso!`, "success"); 
+          this.showSignupAlert(`O cadastro da pessoa com o e-mail ${this.signupInfo.value.userEmail} foi realizado com sucesso!`, "success");
           this.signupInfo.reset();
           // this.closeModal("Submit click");
         };
       } else {
-        this.showAlert("Os campos senha e confirmar senha devem ser iguais.", "warning"); 
+        this.showSignupAlert("Os campos senha e confirmar senha devem ser iguais.", "warning");
       }
-    } else { 
-      this.showAlert("Preencha todos os campos.", "warning"); 
+    } else {
+      this.showSignupAlert("Preencha todos os campos.", "warning");
     }
   };
 
-  addUser (name: string, email: string, password: string) {
+  addUser(name: string, email: string, password: string) {
     const newUser = {
       name: name,
       email: email,

@@ -12,6 +12,9 @@
             </div>
             <form id="login-form" (ngSubmit)="login()" [formGroup]="loginInfo">
                 <h1>Login</h1>
+                <ngb-alert *ngIf="alertLoginVisibility" [dismissible]="false" type={{alertType}}>
+                    {{ alertMessage }}
+                </ngb-alert>
                 <div id="login-inputs">
                     <label for="user-email">E-mail:</label>
                     <input id="user-email" name="user-email" type="text" formControlName="userEmail" />
