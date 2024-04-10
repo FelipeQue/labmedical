@@ -130,6 +130,25 @@ export class LoginComponent {
     };
   };
 
-
+  forgotPassword() {
+    if (this.loginInfo.value.userEmail) {
+      let userFound = this.checkEmail(this.loginInfo.value.userEmail);
+      if (userFound) {
+        let users = this.getStorage();
+        const updatedUsers = users.map((user: { email: any; }) => {
+          if (user.email === userFound.email) {
+            return { ...user, password: "novasenha" };
+          }
+            return user;
+        });
+        localStorage.setItem("users", JSON.stringify(updatedUsers));
+        alert("Sua senha foi alterada para a senha padrão ‘novasenha’. Faça seu login utilizando essa senha.")
+      } else {
+        alert("Pessoa usuária não cadastrada.")
+      }
+    } else {
+      alert("Preencha o campo e-mail.")
+    };
+  };
 
 }
