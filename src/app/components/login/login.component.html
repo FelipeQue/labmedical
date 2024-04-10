@@ -53,6 +53,31 @@
         (click)="closeModal('Cross click')"></button>
 	</div>
 	<div class="modal-body">
+            <label for="user-name">Nome:</label>
+            <input
+            id="user-name"
+            name="user-name"
+            type="text"
+            formControlName="userName"
+            required
+            [ngClass]="{'error-border': (signupInfo.controls.userName.dirty ||
+        signupInfo.controls.userName.touched) &&
+        signupInfo.controls.userName.errors}"
+            />
+            <span class="error-message"
+            *ngIf="(signupInfo.controls.userName.dirty ||
+            signupInfo.controls.userName.touched) &&
+            signupInfo.controls.userName.errors &&
+            signupInfo.controls.userName.errors['required']"
+            >Preencha seu nome</span>
+
+            <span class="error-message"
+            *ngIf="(signupInfo.controls.userName.dirty &&
+            signupInfo.controls.userName.touched) &&
+            signupInfo.controls.userName.errors &&
+            signupInfo.controls.userName.errors['fullName']"
+            >Preencha seu nome com pelo menos um sobrenome</span>
+
             <label for="user-email">E-mail:</label>
             <input
             id="user-email"
@@ -151,5 +176,29 @@
 	</div>
 	<div class="modal-body">
         <p>Cadastro criado com sucesso.</p>
+	</div>
+</ng-template>
+
+<ng-template #signupFieldsMissing>
+    <div class="modal-header">
+		<button type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="closeModal('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+        <p>Preencha todos os campos.</p>
+	</div>
+</ng-template>
+
+<ng-template #signupPasswordMatch>
+    <div class="modal-header">
+		<button type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="closeModal('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+        <p>Os campos senha e confirmar senha devem ser iguais.</p>
 	</div>
 </ng-template>
