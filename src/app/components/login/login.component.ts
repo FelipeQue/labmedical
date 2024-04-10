@@ -1,6 +1,6 @@
-import { Component, TemplateRef, inject, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, TemplateRef, inject, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { CustomValidatorService } from '../../services/custom-validator.service';
 import { Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, NgbAlert],
   providers: [CustomValidatorService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -16,16 +16,17 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  constructor (
-    private customValidatorService: CustomValidatorService,
-    private router: Router) {}
-
-  @ViewChild('signupSuccess') signupSuccess!: TemplateRef<any>;
-  @ViewChild('signupFieldsMissing') signupFieldsMissing!: TemplateRef<any>;
-  @ViewChild('signupPasswordMatch') signupPasswordMatch!: TemplateRef<any>;
-
   private modalService = inject(NgbModal);
   private modalRef: any;
+
+  alertSignupVisibility: boolean = false;
+  alertMessage: string = '';
+  alertType: string = '';
+
+  constructor (
+    private customValidatorService: CustomValidatorService,
+    private router: Router) {
+    }
 
   loginInfo = new FormGroup({
     userEmail: new FormControl(''),
@@ -46,6 +47,12 @@ export class LoginComponent {
   closeModal(reason: string) {
     this.modalRef.dismiss(reason);
   };
+
+  showAlert(message: string, type: string) {
+    this.alertType = type;
+    this.alertMessage = message;
+    this.alertSignupVisibility = true;
+  }
 
   login() {
     if (this.loginInfo.value.userEmail && this.loginInfo.value.userPassword) {
@@ -80,19 +87,18 @@ export class LoginComponent {
       if (this.signupInfo.value.userPassword == this.signupInfo.value.confirmPassword) {
         let users = this.getStorage();
         if (users.find((user: { email: string; }) => user.email == this.signupInfo.value.userEmail)) {
-          alert("Já existe um cadastro com este e-mail. Caso tenha esquecido a senha, preencha seu e-mail na tela de login e clique em ’Esqueci a senha.’");
+          this.showAlert("Já existe um cadastro com este e-mail. Caso tenha esquecido a senha, preencha seu e-mail na tela de login e clique em ’Esqueceu a senha?’", "warning");
         } else {
           this.addUser(this.signupInfo.value.userName, this.signupInfo.value.userEmail, this.signupInfo.value.userPassword);
-          alert(`O cadastro da pessoa com o e-mail ${this.signupInfo.value.userEmail} foi realizado com sucesso!`);
+          this.showAlert(`O cadastro da pessoa com o e-mail ${this.signupInfo.value.userEmail} foi realizado com sucesso!`, "success"); 
           this.signupInfo.reset();
-          this.closeModal("Submit click");
-          this.openModal(this.signupSuccess); 
-        }
+          // this.closeModal("Submit click");
+        };
       } else {
-        this.openModal(this.signupPasswordMatch); 
+        this.showAlert("Os campos senha e confirmar senha devem ser iguais.", "warning"); 
       }
     } else { 
-      this.openModal(this.signupFieldsMissing); 
+      this.showAlert("Preencha todos os campos.", "warning"); 
     }
   };
 
