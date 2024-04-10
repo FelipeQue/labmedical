@@ -1,6 +1,6 @@
 import { Component, TemplateRef, inject, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgbModal, NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbAlert, NgbToast } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { CustomValidatorService } from '../../services/custom-validator.service';
 import { Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, NgbAlert],
+  imports: [ReactiveFormsModule, CommonModule, NgbAlert, NgbToast],
   providers: [CustomValidatorService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -42,6 +42,7 @@ export class LoginComponent {
 
   openModal(content: TemplateRef<any>) {
     this.modalRef = this.modalService.open(content, { centered: true });
+    this.alertLoginVisibility = false;
   };
 
   closeModal(reason: string) {
@@ -53,12 +54,22 @@ export class LoginComponent {
     this.alertType = type;
     this.alertMessage = message;
     this.alertLoginVisibility = true;
+    setTimeout(() => {
+      this.alertLoginVisibility = false;
+    }, 15000);
+  };
+
+  closeAlert() {
+    this.alertLoginVisibility = false;
   };
 
   showSignupAlert(message: string, type: string) {
     this.alertType = type;
     this.alertMessage = message;
     this.alertSignupVisibility = true;
+    setTimeout(() => {
+      this.alertSignupVisibility = false;
+    }, 15000);
   };
 
   login() {

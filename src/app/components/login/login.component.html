@@ -12,16 +12,17 @@
             </div>
             <form id="login-form" (ngSubmit)="login()" [formGroup]="loginInfo">
                 <h1>Login</h1>
-                <ngb-alert *ngIf="alertLoginVisibility" [dismissible]="false" type={{alertType}}>
-                    {{ alertMessage }}
-                </ngb-alert>
                 <div id="login-inputs">
                     <label for="user-email">E-mail:</label>
                     <input id="user-email" name="user-email" type="text" formControlName="userEmail" />
                     <label for="user-password">Senha:</label>
                     <input id="user-password" name="user-password" type="password" formControlName="userPassword" />
                 </div>
-
+                <div *ngIf="alertLoginVisibility">
+                <ngb-alert *ngIf="alertLoginVisibility" [animation]="true" [dismissible]="true" (close)="closeAlert()" type={{alertType}}>
+                    {{ alertMessage }}
+                </ngb-alert>
+                </div>
                 <a (click)="forgotPassword()">Esqueceu a senha?</a>
 
                 <div class="login-button">
@@ -154,9 +155,11 @@
             signupInfo.controls.confirmPassword.errors['minlength']"
             >Sua senha deve ter pelo menos 8 caracteres</span>   
             
+            <div id="signup-alert">
             <ngb-alert *ngIf="alertSignupVisibility" [dismissible]="false" type={{alertType}}>
                 {{ alertMessage }}
             </ngb-alert>
+            </div>
 	</div>
 	<div class="modal-footer">
 		<button
