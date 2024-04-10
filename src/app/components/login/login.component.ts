@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { CustomValidatorService } from '../../services/custom-validator.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,9 @@ import { CustomValidatorService } from '../../services/custom-validator.service'
 })
 export class LoginComponent {
 
-  constructor (private customValidatorService: CustomValidatorService) {}
+  constructor (
+    private customValidatorService: CustomValidatorService,
+    private router: Router) {}
 
   @ViewChild('signupSuccess') signupSuccess!: TemplateRef<any>;
   @ViewChild('signupFieldsMissing') signupFieldsMissing!: TemplateRef<any>;
@@ -45,8 +48,32 @@ export class LoginComponent {
   };
 
   login() {
-    console.log("Botão de login foi clicado.");
+    if (this.loginInfo.value.userEmail && this.loginInfo.value.userPassword) {
+      let userFound = this.checkEmail();
+      if (userFound) {
+        if (userFound.password == this.loginInfo.value.userPassword) {
+    
+          //Aqui quero deixar uma informação no localStorage sobre qual pessoa está logada:
+          // let loggedUser = 
+
+          this.router.navigate(["home"]);
+        } else {
+          alert("Senha incorreta. Verifique se digitou corretamente.");
+        };
+      } else {
+        alert("Não encontramos uma conta associada a esse e-mail. Verifique se digitou corretamente ou crie uma nova conta.")
+      };
+    } else {
+      alert("Por favor, preencha todos os campos.");
+    };
   };
+
+  checkEmail() {
+    let users = this.getStorage();
+    return users.find((user: { email: string | null | undefined; }) => user.email == this.loginInfo.value.userEmail);
+  };
+
+
 
   signup() {
     if (this.signupInfo.value.userName && this.signupInfo.value.userEmail && this.signupInfo.value.userPassword && this.signupInfo.value.confirmPassword) {
