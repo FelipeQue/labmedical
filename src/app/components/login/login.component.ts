@@ -46,6 +46,7 @@ export class LoginComponent {
 
   closeModal(reason: string) {
     this.modalRef.dismiss(reason);
+    this.alertSignupVisibility = false;
   };
 
   showLoginAlert(message: string, type: string) {
