@@ -134,12 +134,19 @@
     flex-direction: row;
     justify-content: center;
     align-content: center;
+    margin-top: 1.2em;
     p {
         margin-right: 0.5em;
     }
 }
 
-.login-logo {
+#login-logo {
+    margin: 1em;
+    width: 9em;
+    height: auto;
+}
+
+#login-logo-lab365 {
     margin: 1em;
     width: 6em;
     height: auto;
