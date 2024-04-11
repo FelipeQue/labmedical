@@ -20,13 +20,14 @@
     display: flex;
     align-content: flex-start;
     justify-content: center;
+    margin-top: 1em;
     img {
         width: 60%;
     }
 }
 
 #nav-container {
-    padding-top: 50%;
+    padding-top: 20%;
     display: flex;
     justify-content: center;
     flex-grow: 1;
@@ -58,6 +59,9 @@
     justify-content: center;
     align-items: center;
     // background-color: blue;
+    fa-icon {
+        font-size: 1.5em;
+    }
 }
 
 .nav-text {
