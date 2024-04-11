@@ -1,0 +1,97 @@
+@import '../../../../assets/styles/mixins';
+@import '../../../../assets/styles/variables';
+
+@media screen and (max-width: 600px) {
+    #sidemenu {
+        width: 4em;
+    }
+    .nav-icon {
+        width: 100%;
+    }
+    .nav-text {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 601px) {
+    #sidemenu {
+        width: 12em;
+    }
+    .nav-icon {
+        width: 35%;
+    }
+    .nav-text {
+        display: flex;
+    }    
+}
+
+#sidemenu {
+    z-index: 2;
+    height: 100%;
+    background-color: $sidemenuBg;
+    color: white;
+    left: 0;
+    top: 0;
+    position: fixed;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+};
+
+#logo-container {
+    display: flex;
+    align-content: flex-start;
+    justify-content: center;
+    margin-top: 1em;
+    img {
+        width: 60%;
+    }
+}
+
+#nav-container {
+    padding-top: 20%;
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.nav-item {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    height: 3.8em;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    border-radius: 6px;
+    padding: 0.7em;
+    margin-top: 0.7em;
+    &:hover {
+        background-color: white;
+        color: $linkHover;
+        cursor: pointer;
+    }
+    &:active {
+        color: black;
+    }
+}
+
+.nav-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // background-color: blue;
+    fa-icon {
+        font-size: 1.5em;
+    }
+}
+
+.nav-text {
+    width: 65%;
+    align-items: center;
+    text-transform: capitalize;
+    text-align: left;
+    font-weight: 400;
+    padding-left: 0.5em;
+}
+
