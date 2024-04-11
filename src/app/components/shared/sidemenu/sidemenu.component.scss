@@ -13,12 +13,16 @@
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 };
 
 #logo-container {
     display: flex;
     align-content: flex-start;
     justify-content: center;
+    img {
+        width: 60%;
+    }
 }
 
 #nav-container {
@@ -29,18 +33,41 @@
 }
 
 .nav-item {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    height: 3.8em;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
     border-radius: 6px;
-    padding: 0.5em;
-    margin-top: 1em;
+    padding: 0.7em;
+    margin-top: 0.7em;
     &:hover {
         background-color: white;
-        color: black;
+        color: $linkHover;
         cursor: pointer;
+    }
+    &:active {
+        color: black;
     }
 }
 
+.nav-icon {
+    width: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // background-color: blue;
+}
+
 .nav-text {
+    width: 65%;
+    display: flex;
+    align-items: center;
+    // background-color: red;
     text-transform: capitalize;
-    font-weight: 300;
+    text-align: left;
+    font-weight: 400;
+    padding-left: 0.5em;
 }
 
