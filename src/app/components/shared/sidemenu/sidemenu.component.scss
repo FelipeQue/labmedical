@@ -1,9 +1,32 @@
 @import '../../../../assets/styles/mixins';
 @import '../../../../assets/styles/variables';
 
+@media screen and (max-width: 600px) {
+    #sidemenu {
+        width: 4em;
+    }
+    .nav-icon {
+        width: 100%;
+    }
+    .nav-text {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 601px) {
+    #sidemenu {
+        width: 12em;
+    }
+    .nav-icon {
+        width: 35%;
+    }
+    .nav-text {
+        display: flex;
+    }    
+}
+
 #sidemenu {
     z-index: 2;
-    width: 12em;
     height: 100%;
     background-color: $sidemenuBg;
     color: white;
@@ -54,7 +77,6 @@
 }
 
 .nav-icon {
-    width: 35%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,9 +88,7 @@
 
 .nav-text {
     width: 65%;
-    display: flex;
     align-items: center;
-    // background-color: red;
     text-transform: capitalize;
     text-align: left;
     font-weight: 400;
