@@ -10,7 +10,6 @@ export class ToolbarComponent {
   loggedUserName: string = "";
   loggedUser: any;
 
-
   constructor() {
     const loggedUserStorage = localStorage.getItem("loggedUser");
     if (loggedUserStorage) {

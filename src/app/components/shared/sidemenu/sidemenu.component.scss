@@ -1,13 +1,46 @@
 @import '../../../../assets/styles/mixins';
+@import '../../../../assets/styles/variables';
 
 #sidemenu {
     z-index: 2;
-    width: 10em;
+    width: 12em;
     height: 100%;
-    background-color: aqua;
+    background-color: $inputFocusBorder;
+    background-image: $sidemenuBg;
+    color: white;
     left: 0;
     top: 0;
     position: fixed;
-    @include flex-column-center;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
 };
+
+#logo-container {
+    display: flex;
+    align-content: flex-start;
+    justify-content: center;
+}
+
+#nav-container {
+    padding-top: 50%;
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.nav-item {
+    border-radius: 6px;
+    padding: 0.5em;
+    margin-top: 1em;
+    &:hover {
+        background-color: white;
+        color: black;
+    }
+}
+
+.nav-text {
+    text-transform: capitalize;
+    font-weight: 300;
+}
+
