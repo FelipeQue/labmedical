@@ -1,9 +1,20 @@
 <div id="toolbar">
 
-    <div id="toolbar-title">Título da página</div>
+    <div id="toolbar-title">
+
+        <div *ngIf="activeRoute === '/'">
+            Estatísticas e Informações
+        </div>
+        <div *ngIf="activeRoute === '/home'">
+            Estatísticas e Informações
+        </div>
+        <div *ngIf="activeRoute === '/medical-records'">
+            Listagem de Prontuário
+        </div>
+    </div>
     <div id="toolbar-user">
         <div id="toolbar-name">{{loggedUserName}}</div>
-        <div id="toolbar-avatar">Foto</div>
+        <div id="toolbar-avatar"><img src="../../../../assets/images/portrait-avatar.png"></div>
     </div>
 
 </div>
