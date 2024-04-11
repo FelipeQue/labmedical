@@ -19,7 +19,7 @@
                     <input id="user-password" name="user-password" type="password" formControlName="userPassword" />
                 </div>
                 <div *ngIf="alertLoginVisibility">
-                <ngb-alert *ngIf="alertLoginVisibility" [animation]="true" [dismissible]="true" (close)="closeAlert()" type={{alertType}}>
+                <ngb-alert *ngIf="alertLoginVisibility" [animation]="true" [dismissible]="false" (close)="closeAlert()" type={{alertType}}>
                     {{ alertMessage }}
                 </ngb-alert>
                 </div>
