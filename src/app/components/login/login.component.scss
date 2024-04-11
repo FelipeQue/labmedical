@@ -71,10 +71,13 @@
     justify-content: space-between;
     a {
         font-weight: 700;
-        color: darkred;
+        color: $linkColor;
         cursor: pointer;
         &:hover {
-            color: purple;
+            color: $linkHover;
+        }
+        &:active {
+            color: $linkActive;
         }
     }
 }
@@ -121,6 +124,9 @@
     &:hover {
         background-color: $buttonHover;
     }
+    &:active {
+        background-color: $buttonActive;
+    }
 }
 
 #login-signup-link {
@@ -128,14 +134,21 @@
     flex-direction: row;
     justify-content: center;
     align-content: center;
+    margin-top: 1.2em;
     p {
         margin-right: 0.5em;
     }
 }
 
-.login-logo {
+#login-logo {
     margin: 1em;
-    width: 5em;
+    width: 9em;
+    height: auto;
+}
+
+#login-logo-lab365 {
+    margin: 1em;
+    width: 6em;
     height: auto;
 }
 

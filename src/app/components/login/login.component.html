@@ -8,7 +8,7 @@
 
         <div id="login-area">
             <div class="login-header">
-                <img class="login-logo" src="../../../assets/images/logo-LABMedical.svg" alt="Marca do LABMedical"/>
+                <img id="login-logo" src="../../../assets/images/logo-LABMedical.svg" alt="Marca do LABMedical"/>
             </div>
             <form id="login-form" (ngSubmit)="login()" [formGroup]="loginInfo">
                 <h1>Login</h1>
@@ -19,7 +19,7 @@
                     <input id="user-password" name="user-password" type="password" formControlName="userPassword" />
                 </div>
                 <div *ngIf="alertLoginVisibility">
-                <ngb-alert *ngIf="alertLoginVisibility" [animation]="true" [dismissible]="true" (close)="closeAlert()" type={{alertType}}>
+                <ngb-alert *ngIf="alertLoginVisibility" [animation]="true" [dismissible]="false" (close)="closeAlert()" type={{alertType}}>
                     {{ alertMessage }}
                 </ngb-alert>
                 </div>
@@ -35,7 +35,7 @@
                 <a (click)="openModal(signUpModal)">Criar conta.</a>
             </div>
             <div id="login-footer">
-                <a href="https://lab365.tech"><img class="login-logo" src="../../../assets/images/logo-LAB365.svg" alt="Marca do LABM365"/></a>
+                <a href="https://lab365.tech"><img id="login-logo-lab365" src="../../../assets/images/logo-LAB365.svg" alt="Marca do LABM365"/></a>
             </div>
 
 
