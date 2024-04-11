@@ -1,0 +1,13 @@
+@import '../../../../assets/styles/mixins';
+
+#sidemenu {
+    z-index: 2;
+    width: 10em;
+    height: 100%;
+    background-color: aqua;
+    left: 0;
+    top: 0;
+    position: fixed;
+    @include flex-column-center;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+};
