@@ -7,7 +7,17 @@ import { Component } from '@angular/core';
 })
 export class ToolbarComponent {
 
-  loggedUser = localStorage.getItem("loggedUser");
+  loggedUserName: string = "";
+  loggedUser: any;
+
+
+  constructor() {
+    const loggedUserStorage = localStorage.getItem("loggedUser");
+    if (loggedUserStorage) {
+      this.loggedUser = JSON.parse(loggedUserStorage);
+      this.loggedUserName = this.loggedUser.name;
+    };
+  };
 
 
 }
