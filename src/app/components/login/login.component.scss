@@ -71,10 +71,13 @@
     justify-content: space-between;
     a {
         font-weight: 700;
-        color: darkred;
+        color: $linkColor;
         cursor: pointer;
         &:hover {
-            color: purple;
+            color: $linkHover;
+        }
+        &:active {
+            color: $linkActive;
         }
     }
 }
@@ -121,6 +124,9 @@
     &:hover {
         background-color: $buttonHover;
     }
+    &:active {
+        background-color: $buttonActive;
+    }
 }
 
 #login-signup-link {
@@ -135,7 +141,7 @@
 
 .login-logo {
     margin: 1em;
-    width: 5em;
+    width: 6em;
     height: auto;
 }
 
