@@ -11,6 +11,9 @@ import { CommonModule } from '@angular/common';
 })
 export class PatientComponent {
 
+  registerMode: boolean = true;
+  editingMode: boolean = false;
+
   datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/\d{4}$/;
   cpfValue = '';
 
@@ -53,5 +56,8 @@ export class PatientComponent {
     }
   }
 
+  savePatient(){
+    console.log("Salvar chamado.");
+  }
 
 }

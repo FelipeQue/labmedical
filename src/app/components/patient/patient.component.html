@@ -1,9 +1,9 @@
 <div id="patient-container">
-    <form id="patient-form">
+    <form id="patient-form" (ngSubmit)="savePatient()" [formGroup]="patientInfo">
         <div class="patient-buttons">
-            <button>Editar</button>
-            <button>Deletar</button>
-            <button>Salvar</button>
+            <button class="secondary-button" [disabled]="registerMode">Editar</button>
+            <button class="danger-button" [disabled]="registerMode">Deletar</button>
+            <button class="primary-button">Salvar</button>
 
             <!-- Durante o cadastro, os botões de editar e deletar devem ficar desativados (desabilitados). -->
 
@@ -18,11 +18,11 @@
                 <span class="error-message" *ngIf="(patientInfo.controls.name.dirty ||
             patientInfo.controls.name.touched) &&
             patientInfo.controls.name.errors &&
-            patientInfo.controls.name.errors['required']">Preencha o seu nome</span>
-                <span class="error-message" *ngIf="(patientInfo.controls.name.dirty ||
+            patientInfo.controls.name.errors['required']">Preencha o nome</span>
+                <span class="error-message" *ngIf="(patientInfo.controls.name.dirty &&
             patientInfo.controls.name.touched) &&
             patientInfo.controls.name.errors &&
-            patientInfo.controls.name.errors['minlength']">Preencha o seu nome completo</span>
+            patientInfo.controls.name.errors['minlength']">Preencha o nome completo da pessoa paciente</span>
                 <span class="error-message" *ngIf="(patientInfo.controls.name.dirty ||
             patientInfo.controls.name.touched) &&
             patientInfo.controls.name.errors &&
@@ -41,8 +41,8 @@ patientInfo.controls.gender.errors}">
             </div>
             <div class="form-unit">
 
-                <label for="patient-birthdate">Data de nascimento (no formato dd/mm/aaaa):</label>
-                <input id="patient-birthdate" name="patient-birthdate" type="text" formControlName="birthdate" required
+                <label for="patient-birthdate">Data de nascimento <em>(dd/mm/aaaa)</em>:</label>
+                <input id="patient-birthdate" name="patient-birthdate" type="text" formControlName="birthDate" required
                     [ngClass]="{'error-border': (patientInfo.controls.birthDate.dirty ||
         patientInfo.controls.birthDate.touched) &&
         patientInfo.controls.birthDate.errors}" />
@@ -52,7 +52,9 @@ patientInfo.controls.gender.errors}">
                 <!-- CPF: Obrigatório com o formato 000.000.000-00 -->
                 <label for="patient-cpf">CPF:</label>
                 <input id="patient-cpf" name="patient-cpf" type="text" formControlName="cpf" required
-                    (input)="formatCpf()" placeholder="000.000.000-00" />
+                    (input)="formatCpf()" placeholder="000.000.000-00" [ngClass]="{'error-border': (patientInfo.controls.cpf.dirty ||
+                    patientInfo.controls.cpf.touched) &&
+                    patientInfo.controls.cpf.errors}" />
             </div>
             <div class="form-unit">
 
@@ -85,19 +87,21 @@ patientInfo.controls.maritalStatus.errors}">
 
             </div>
             <div class="form-unit">
-                <label for="patient-email">Telefone:</label>
+                <label for="patient-email">E-mail:</label>
                 <input id="patient-email" name="patient-email" type="text" formControlName="email" />
             </div>
             <div class="form-unit">
                 <!-- Naturalidade: Obrigatório, com máximo e mínimo de 64 e 8 caracteres, respectivamente -->
                 <label for="patient-birth-city">Naturalidade:</label>
-                <input id="patient-birth-city" name="patient-birth-city" type="text" formControlName="birthCity" />
+                <input id="patient-birth-city" name="patient-birth-city" type="text" formControlName="birthCity"
+                [ngClass]="{'error-border': (patientInfo.controls.birthCity.dirty || patientInfo.controls.birthCity.touched) &&patientInfo.controls.birthCity.errors}" />
             </div>
             <div class="form-unit">
                 <!-- contato de emerg: Obrigatório com o formato (99) 9 9999-99999 -->
                 <label for="patient-emergency-contact">Contato de Emergência:</label>
                 <input id="patient-emergency-contact" name="patient-emergency-contact" type="text"
-                    formControlName="emergencyContact" required />
+                    formControlName="emergencyContact" required 
+                    [ngClass]="{'error-border': (patientInfo.controls.emergencyContact.dirty || patientInfo.controls.emergencyContact.touched) &&patientInfo.controls.emergencyContact.errors}"/>
             </div>
             <div class="form-unit">
                 <label for="patient-alergies">Lista de Alergias:</label>
@@ -123,13 +127,15 @@ patientInfo.controls.maritalStatus.errors}">
             </div>
             <div class="form-unit">
                 <label for="patient-cep">CEP:</label>
-                <input id="patient-cep" name="patient-cep" type="text" formControlName="cep" />
+                <input id="patient-cep" name="patient-cep" type="text" formControlName="cep"
+                [ngClass]="{'error-border': (patientInfo.controls.cep.dirty || patientInfo.controls.cep.touched) &&patientInfo.controls.cep.errors}" />
 
-                <button type="button">Pesquisar CEP</button>
+                <button id="cep-button" type="button">Pesquisar CEP</button>
             </div>
             <div class="form-unit">
                 <label for="address-street">Logradouro:</label>
-                <input id="address-street" name="address-street" type="text" formControlName="addressStreet" />
+                <input id="address-street" name="address-street" type="text" formControlName="addressStreet"
+                [ngClass]="{'error-border': (patientInfo.controls.addressStreet.dirty || patientInfo.controls.addressStreet.touched) &&patientInfo.controls.addressStreet.errors}" />
             </div>
             <div class="form-unit">
                 <label for="address-number">Número:</label>
@@ -145,11 +151,13 @@ patientInfo.controls.maritalStatus.errors}">
             </div>
             <div class="form-unit">
                 <label for="address-number">Cidade:</label>
-                <input id="address-number" name="address-number" type="text" formControlName="addressCity" />
+                <input id="address-number" name="address-number" type="text" formControlName="addressCity"
+                [ngClass]="{'error-border': (patientInfo.controls.addressCity.dirty || patientInfo.controls.addressCity.touched) &&patientInfo.controls.addressCity.errors}" />
             </div>
             <div class="form-unit">
                 <label for="address-number">Estado:</label>
-                <input id="address-number" name="address-number" type="text" formControlName="addressState" />
+                <input id="address-number" name="address-number" type="text" formControlName="addressState"
+                [ngClass]="{'error-border': (patientInfo.controls.addressState.dirty || patientInfo.controls.addressState.touched) &&patientInfo.controls.addressState.errors}" />
             </div>
             <div class="form-unit">
                 <label for="address-number">Ponto de Referência:</label>
