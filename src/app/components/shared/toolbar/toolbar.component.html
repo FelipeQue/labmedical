@@ -2,16 +2,16 @@
 
     <div id="toolbar-title">
 
-        <div *ngIf="activeRoute === '/'">
+        <div *ngIf="getCurrentUrl() == '/'">
             Estatísticas e Informações
         </div>
-        <div *ngIf="activeRoute === '/home'">
+        <div *ngIf="getCurrentUrl() == '/home'">
             Estatísticas e Informações
         </div>
-        <div *ngIf="activeRoute === '/register-patient'">
+        <div *ngIf="getCurrentUrl() == '/register-patient'">
             Cadastrar Paciente
         </div>
-        <div *ngIf="activeRoute === '/medical-records'">
+        <div *ngIf="getCurrentUrl() == '/medical-records'">
             Listagem de Prontuário
         </div>
     </div>
