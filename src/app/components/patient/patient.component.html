@@ -127,9 +127,9 @@ patientInfo.controls.maritalStatus.errors}">
   patientInfo.controls.birthCity.errors['required']">Campo obrigatório</span>
             </div>
             <div class="form-unit">
-                <!-- contato de emerg: Obrigatório com o formato (99) 9 9999-99999 -->
                 <label for="patient-emergency-contact">Contato de Emergência:</label>
-                <input id="patient-emergency-contact" name="patient-emergency-contact" type="text"
+                <input id="patient-emergency-contact" name="patient-emergency-contact" type="tel"
+                mask="(00) 0 0000-0000"
                     formControlName="emergencyContact" required
                     [ngClass]="{'error-border': (patientInfo.controls.emergencyContact.dirty || patientInfo.controls.emergencyContact.touched) &&patientInfo.controls.emergencyContact.errors}" />
                 <span class="error-message" *ngIf="(patientInfo.controls.emergencyContact.dirty ||
