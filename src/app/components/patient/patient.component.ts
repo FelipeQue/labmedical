@@ -19,7 +19,6 @@ export class PatientComponent {
   editingMode: boolean = false;
 
   datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/\d{4}$/;
-  cpfValue = '';
 
   patientInfo = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]),
@@ -67,7 +66,6 @@ export class PatientComponent {
       }
     );
   };
-
 
   savePatient(){
     console.log("Salvar chamado.");
