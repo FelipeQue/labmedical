@@ -12,21 +12,17 @@ export class ToolbarComponent {
   loggedUserName: string = "";
   loggedUser: any;
 
-  activeRoute: string = "";
-
   constructor(private router: Router) {
     const loggedUserStorage = localStorage.getItem("loggedUser");
     if (loggedUserStorage) {
       this.loggedUser = JSON.parse(loggedUserStorage);
       this.loggedUserName = this.loggedUser.name;
     };
-
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd && event.url) {
-        this.activeRoute = event.url;
-      }
-    });
   };
+
+  getCurrentUrl() {
+    return this.router.url;
+  }
 
 
 }
