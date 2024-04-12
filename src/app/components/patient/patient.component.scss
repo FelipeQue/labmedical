@@ -25,22 +25,39 @@
     margin-right: 2em;
     margin-bottom: 2em;
     button {
-        background-color: $buttonColor;
         color: #ffffff;
         border: none;
         border-radius: 4px;
         padding: 10px 20px;
         font-size: 1em;
         cursor: pointer;
-
-        &:hover {
-            background-color: $buttonHover;
-        }
-
-        &:active {
-            background-color: $buttonActive;
+        &:disabled {
+            color: lightgray;
+            background-color: #f0f0f0;
         }
     }
+}
+
+.primary-button {
+    background-color: $buttonColor;
+    &:hover {
+        background-color: $buttonHover;
+    }
+    &:active {
+        background-color: $buttonActive;
+    }
+}
+.secondary-button {
+    background-color: $buttonColor;
+    &:hover {
+        background-color: $buttonHover;
+    }
+    &:active {
+        background-color: $buttonActive;
+    }
+}
+.danger-button {
+    background-color: $dangerButton;
 }
 
 .form-unit {
@@ -63,10 +80,9 @@
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 4px;
-        margin-bottom: 0.5em;
 
         &:focus {
-            border: 2px solid $inputFocusBorder;
+            border: 2px solid $buttonActive;
             outline: none;
         }
     }
@@ -77,8 +93,25 @@
         margin-bottom: 0.5em;
 
         &:focus {
-            border: 2px solid $inputFocusBorder;
+            border: 2px solid $buttonActive;
             outline: none;
         }
+    }
+}
+
+#cep-button {
+    margin-top: 0.5em;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: $buttonColor;
+    &:hover {
+        background-color: $buttonHover;
+    }
+    &:active {
+        background-color: $buttonActive;
     }
 }
