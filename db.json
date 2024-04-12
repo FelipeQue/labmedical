@@ -53,6 +53,34 @@
         "neighborhood": "Soledade",
         "landmark": ""
       }
+    },
+    {
+      "id": "774c",
+      "name": "Lucas Arrais",
+      "gender": "prefer-not",
+      "birthDate": "29041993",
+      "cpf": "00000000000",
+      "rg": "000000 SSP/PE",
+      "maritalStatus": "prefer-not",
+      "phone": "00000000000",
+      "email": "",
+      "birthCity": "Brasília",
+      "emergencyContact": "00000000000",
+      "allergies": "Chuva, frio.",
+      "specialCare": "",
+      "insuranceCompany": "",
+      "insuranceNumber": "",
+      "insuranceExpiration": "",
+      "address": {
+        "cep": "88053655",
+        "city": "Florianópolis",
+        "state": "SC",
+        "street": "Rua das Tainhotas",
+        "number": "",
+        "complement": "",
+        "neighborhood": "Jurerê",
+        "landmark": ""
+      }
     }
   ],
   "consultations": [

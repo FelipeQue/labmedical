@@ -102,6 +102,7 @@ export class PatientComponent {
         next: (response): void => {
           console.log("Patient added successfully:", response);
           alert("Patient added successfully!");
+          this.patientInfo.reset();
         },
         error: (error) => {
           console.error("Error adding patient:", error);
