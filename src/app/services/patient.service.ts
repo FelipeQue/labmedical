@@ -14,5 +14,10 @@ export class PatientService {
     return this.httpClient.get<any>(url, {headers: headers});
   };
 
+  addPatient(newPatientData: any) {
+    let url = '/api/patients';
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.httpClient.post<any>(url, newPatientData, { headers: headers });
+  }
 
 }

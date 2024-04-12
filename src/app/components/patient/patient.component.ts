@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { AddressService } from '../../services/address.service';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+import { PatientService } from '../../services/patient.service';
 
 @Component({
   selector: 'app-patient',
@@ -13,10 +14,11 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 })
 export class PatientComponent {
 
-  constructor (private addressService: AddressService) {};
+  constructor (private addressService: AddressService, private patientService: PatientService) {};
 
   registerMode: boolean = true;
   editingMode: boolean = false;
+
 
   // datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/\d{4}$/;
   datePattern = /^(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])\d{4}$/; //Este pattern não inclui separação por /, isso se dá porque a validação de data via ngx-mask não funcionou. Então criei uma validação por pattern, mas daí o [hiddenInput]="false" da máscara não funcionou. Então usei um pattern de apenas números e apliquei [hiddenInput]="true".
@@ -72,7 +74,16 @@ export class PatientComponent {
     console.log("Salvar chamado.");
     if (this.patientInfo.valid) {
       console.log("formulário válido");
-      alert("tudo certo");
+      this.patientService.addPatient(this.patientInfo.value).subscribe({
+        next: (response): void => {
+          console.log("Patient added successfully:", response);
+          alert("Patient added successfully!");
+        },
+        error: (error) => {
+          console.error("Error adding patient:", error);
+          alert("An error occurred while adding the patient.");
+        }
+    });
     } else {
       alert("Preencha todos os campos obrigatórios corretamente")
     }
