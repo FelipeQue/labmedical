@@ -1,1 +1,48 @@
-<p>patient works!</p>
+
+<form>
+<div>
+<button>Editar</button>
+<button>Deletar</button>
+<button>Salvar</button>
+
+<!-- Durante o cadastro, os botões de editar e deletar devem ficar desativados (desabilitados). -->
+
+</div>
+
+<label for="patient-name">Nome completo:</label>
+            <input
+            id="patient-name"
+            name="patient-name"
+            type="text"
+            formControlName="patientName"
+            required
+            [ngClass]="{'error-border': (patientInfo.controls.patientName.dirty ||
+        patientInfo.controls.patientName.touched) &&
+        patientInfo.controls.patientName.errors}"
+            />
+            <span class="error-message"
+            *ngIf="(patientInfo.controls.patientName.dirty ||
+            patientInfo.controls.patientName.touched) &&
+            patientInfo.controls.patientName.errors &&
+            patientInfo.controls.patientName.errors['required']"
+            >Preencha seu nome</span>
+
+</form>
+
+Campos do formulário:
+Nome Completo: Obrigatório, com máximo e mínimo de 64 e 8 caracteres, respectivamente.
+Gênero: Obrigatório com dropdown de opções pré-definidas.
+Data de Nascimento: Obrigatório, data válida.
+CPF: Obrigatório com o formato 000.000.000-00
+RG com órgão expedidor: Obrigatório, com máximo de 20 caracteres.
+Estado Civil: Obrigatório com dropdown de opções pré-definidas.
+Telefone: Obrigatório com o formato (99) 9 9999-99999
+E-mail: Não obrigatório e com validação.
+Naturalidade: Obrigatório, com máximo e mínimo de 64 e 8 caracteres, respectivamente.
+Contato de Emergência: Obrigatório com o formato (99) 9 9999-99999
+Lista de Alergias: Não obrigatório.
+Lista de Cuidados Específicos: Não obrigatório.
+Convênio: Não obrigatório.
+Número do Convênio: Não obrigatório.
+Validade do Convênio: Não obrigatório.
+Endereço: Cep, Cidade, Estado, Logradouro, Número, Complemento, Bairro e Ponto de Referência.
