@@ -70,6 +70,12 @@ export class PatientComponent {
 
   savePatient(){
     console.log("Salvar chamado.");
+    if (this.patientInfo.valid) {
+      console.log("formulário válido");
+      alert("tudo certo");
+    } else {
+      alert("Preencha todos os campos obrigatórios corretamente")
+    }
   }
 
 }
