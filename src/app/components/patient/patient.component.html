@@ -130,7 +130,7 @@ patientInfo.controls.maritalStatus.errors}">
                 <input id="patient-cep" name="patient-cep" type="text" formControlName="cep"
                 [ngClass]="{'error-border': (patientInfo.controls.cep.dirty || patientInfo.controls.cep.touched) &&patientInfo.controls.cep.errors}" />
 
-                <button id="cep-button" type="button">Pesquisar CEP</button>
+                <button id="cep-button" type="button" (click)="searchAddress()">Pesquisar CEP</button>
             </div>
             <div class="form-unit">
                 <label for="address-street">Logradouro:</label>

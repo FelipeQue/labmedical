@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AddressService } from '../../services/address.service';
 
 @Component({
   selector: 'app-patient',
@@ -10,6 +11,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './patient.component.scss'
 })
 export class PatientComponent {
+
+  constructor (private addressService: AddressService) {};
 
   registerMode: boolean = true;
   editingMode: boolean = false;
@@ -33,7 +36,6 @@ export class PatientComponent {
     insuranceCompany: new FormControl(''),
     insuranceNumber: new FormControl(''),
     insuranceExpiration: new FormControl(''),
-
     cep: new FormControl('', [Validators.required]),
     addressStreet: new FormControl('', [Validators.required]),
     addressNumber: new FormControl(''),
@@ -42,8 +44,9 @@ export class PatientComponent {
     addressCity: new FormControl('', [Validators.required]),
     addressState: new FormControl('', [Validators.required]),
     addressReference: new FormControl(''),
-  
   });
+
+  address: any | undefined;
 
   formatCpf() {
     const numericValue = this.cpfValue.replace(/\D/g, '');
@@ -55,6 +58,25 @@ export class PatientComponent {
       this.cpfValue = formattedCpf;
     }
   }
+
+  searchAddress() {
+    this.addressService.getAddress(this.patientInfo.value.cep).subscribe(
+      {
+        next: (response): void => {
+          this.address = response;
+          this.patientInfo.patchValue({
+          addressStreet: this.address.logradouro,
+          addressNeighborhood: this.address.bairro,
+          addressCity: this.address.localidade,
+          addressState: this.address.uf}
+        );
+        },
+        error: (error) => {
+        }
+      }
+    );
+  };
+
 
   savePatient(){
     console.log("Salvar chamado.");
