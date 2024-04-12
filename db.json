@@ -1,0 +1,56 @@
+{    
+    "patients": [
+      {
+        "id": "patient1",
+        "name": "Maria da Silva",
+        "gender": "Feminino",
+        "birthDate": "1990-05-15",
+        "cpf": "123.456.789-00",
+        "rg": "1234567-SSP/PE",
+        "maritalStatus": "Nunca casou",
+        "phone": "(48) 9 8765-4321",
+        "email": "maria@example.com",
+        "birthCity": "Recife",
+        "emergencyContact": "(11) 9 1111-2222",
+        "allergies": ["Pólen", "Amendoim"],
+        "specialCare": null,
+        "insuranceCompany": null,
+        "insuranceNumber": null,
+        "insuranceExpiration": null,
+        "address": {
+          "cep": "01234-567",
+          "city": "Florianópolis",
+          "state": "SC",
+          "street": "Rua das Mangueiras",
+          "number": "123",
+          "complement": "Apto 4",
+          "neighborhood": "Daniela",
+          "landmark": "Esquina com a Avenida dos Jacarandás"
+        }
+      }
+    ],
+    "consultations": [
+      {
+        "id": "consultation1",
+        "reason": "Dor de cabeça persistente",
+        "date": "2024-04-12",
+        "time": "14:30",
+        "problemDescription": "Paciente relata dores intensas na região frontal.",
+        "prescribedMedication": "Analgésico",
+        "dosagePrecautions": "Tomar 1 comprimido a cada 6 horas."
+      }
+    ],
+    "exams": [
+      {
+        "id": "exam1",
+        "name": "Hemograma completo",
+        "date": "2024-04-15",
+        "time": "08:00",
+        "type": "Sangue",
+        "laboratory": "Laboratório ABC",
+        "documentUrl": null,
+        "results": "Hemoglobina: 12 g/dL, Leucócitos: 8000/mm³"
+      }
+    ]
+  }
+  
