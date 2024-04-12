@@ -12,10 +12,7 @@ import { CommonModule } from '@angular/common';
 export class PatientComponent {
 
   patientInfo = new FormGroup({
-    patientName: new FormControl('', Validators.required),
-
-    userPassword: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    confirmPassword: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    patientName: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(4)]),
   });
 
 
