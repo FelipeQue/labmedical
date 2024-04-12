@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AddressService } from '../../services/address.service';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 @Component({
   selector: 'app-patient',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, NgxMaskDirective, NgxMaskPipe],
   templateUrl: './patient.component.html',
   styleUrl: './patient.component.scss'
 })
@@ -47,17 +48,6 @@ export class PatientComponent {
   });
 
   address: any | undefined;
-
-  formatCpf() {
-    const numericValue = this.cpfValue.replace(/\D/g, '');
-    if (numericValue.length <= 11) {
-      const formattedCpf = numericValue.replace(
-        /^(\d{3})(\d{3})(\d{3})(\d{2})$/,
-        '$1.$2.$3-$4'
-      );
-      this.cpfValue = formattedCpf;
-    }
-  }
 
   searchAddress() {
     this.addressService.getAddress(this.patientInfo.value.cep).subscribe(
