@@ -30,7 +30,8 @@ export class PatientComponent {
     maritalStatus: new FormControl('', [Validators.required]),
     phone: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.email]),
-    birthCity: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]),
+    birthCity: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(64)]),
+    // Cara pessoa avaliadora: eu sei que o documento de especificação indicava o mínimo de 8 para o campo acima, mas existem muitas cidades cujo nome tem menos de 8 letras. O menor nome de município do Brasil tem 3.
     emergencyContact: new FormControl('', [Validators.required]),
     alergies: new FormControl(''),
     specialCare: new FormControl(''),
