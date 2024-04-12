@@ -68,7 +68,7 @@
 #patient-inputs {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    max-width: 100%;
     margin-bottom: 0.5em;
     gap: 1em;
 
@@ -86,6 +86,19 @@
             outline: none;
         }
     }
+
+    textarea {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: none;
+        width: 20em;
+        &:focus {
+            border: 2px solid $buttonActive;
+            outline: none;
+        }
+    }
+
     select {
         padding: 10px;
         border: 1px solid #ccc;
@@ -95,6 +108,15 @@
             outline: none;
         }
     }
+}
+
+#patient-name {
+    width: 20em;
+}
+
+#patient-birthdate {
+    width: 8em;
+    min-width: 100%;
 }
 
 #cep-button {
