@@ -32,8 +32,7 @@ export class PatientComponent {
     maritalStatus: new FormControl('', [Validators.required]),
     phone: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.email]),
-    birthCity: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(64)]),
-    // Cara pessoa avaliadora: eu sei que o documento de especificação indicava o mínimo de 8 para o campo acima, mas existem muitas cidades cujo nome tem menos de 8 letras. O menor nome de município do Brasil tem 3.
+    birthCity: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(64)]),
     emergencyContact: new FormControl('', [Validators.required]),
     allergies: new FormControl(''),
     specialCare: new FormControl(''),
@@ -71,10 +70,35 @@ export class PatientComponent {
   };
 
   savePatient(){
-    console.log("Salvar chamado.");
     if (this.patientInfo.valid) {
-      console.log("formulário válido");
-      this.patientService.addPatient(this.patientInfo.value).subscribe({
+      const newPatient = {
+        "name": this.patientInfo.value.name,
+        "gender": this.patientInfo.value.gender,
+        "birthDate": this.patientInfo.value.birthDate,
+        "cpf": this.patientInfo.value.cpf,
+        "rg": this.patientInfo.value.rg,
+        "maritalStatus": this.patientInfo.value.maritalStatus,
+        "phone": this.patientInfo.value.phone,
+        "email": this.patientInfo.value.email,
+        "birthCity": this.patientInfo.value.birthCity,
+        "emergencyContact": this.patientInfo.value.emergencyContact,
+        "allergies": this.patientInfo.value.allergies,
+        "specialCare": this.patientInfo.value.specialCare,
+        "insuranceCompany": this.patientInfo.value.insuranceCompany,
+        "insuranceNumber": this.patientInfo.value.insuranceNumber,
+        "insuranceExpiration": this.patientInfo.value.insuranceExpiration,
+        "address": {
+          "cep": this.patientInfo.value.cep,
+          "city": this.patientInfo.value.addressCity,
+          "state": this.patientInfo.value.addressState,
+          "street": this.patientInfo.value.addressStreet,
+          "number": this.patientInfo.value.addressNumber,
+          "complement": this.patientInfo.value.addressComplement,
+          "neighborhood": this.patientInfo.value.addressNeighborhood,
+          "landmark": this.patientInfo.value.addressLandmark,
+        }
+      };
+      this.patientService.addPatient(newPatient).subscribe({
         next: (response): void => {
           console.log("Patient added successfully:", response);
           alert("Patient added successfully!");

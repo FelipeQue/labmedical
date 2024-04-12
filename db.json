@@ -1,37 +1,6 @@
 {
   "patients": [
     {
-      "id": "patient1",
-      "name": "Maria da Silva",
-      "gender": "Feminino",
-      "birthDate": "1990-05-15",
-      "cpf": "123.456.789-00",
-      "rg": "1234567-SSP/PE",
-      "maritalStatus": "Nunca casou",
-      "phone": "(48) 9 8765-4321",
-      "email": "maria@example.com",
-      "birthCity": "Recife",
-      "emergencyContact": "(11) 9 1111-2222",
-      "allergies": [
-        "Pólen",
-        "Amendoim"
-      ],
-      "specialCare": null,
-      "insuranceCompany": null,
-      "insuranceNumber": null,
-      "insuranceExpiration": null,
-      "address": {
-        "cep": "01234-567",
-        "city": "Florianópolis",
-        "state": "SC",
-        "street": "Rua das Mangueiras",
-        "number": "123",
-        "complement": "Apto 4",
-        "neighborhood": "Daniela",
-        "landmark": "Esquina com a Avenida dos Jacarandás"
-      }
-    },
-    {
       "id": "fb65",
       "name": "Felipe José",
       "gender": "other",
@@ -56,6 +25,34 @@
       "addressCity": "Florianópolis",
       "addressState": "SC",
       "addressLandmark": ""
+    },
+    {
+      "id": "00d0",
+      "name": "Felipe José José",
+      "gender": "prefer-not",
+      "birthDate": "01011900",
+      "cpf": "00000000000",
+      "rg": "000000 SSP/PE",
+      "maritalStatus": "other",
+      "phone": "00000000000",
+      "email": "",
+      "birthCity": "Olinda",
+      "emergencyContact": "00000000000",
+      "allergies": "Leite, queijo e mesquinharia.",
+      "specialCare": "Frágil, pode quebrar.",
+      "insuranceCompany": "",
+      "insuranceNumber": "",
+      "insuranceExpiration": "",
+      "address": {
+        "cep": "50070-095",
+        "city": "Recife",
+        "state": "PE",
+        "street": "Rua do Progresso",
+        "number": "",
+        "complement": "",
+        "neighborhood": "Soledade",
+        "landmark": ""
+      }
     }
   ],
   "consultations": [
