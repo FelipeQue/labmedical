@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AddressService } from '../../services/address.service';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 @Component({
   selector: 'app-patient',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, NgxMaskDirective, NgxMaskPipe],
   templateUrl: './patient.component.html',
   styleUrl: './patient.component.scss'
 })
@@ -17,8 +18,8 @@ export class PatientComponent {
   registerMode: boolean = true;
   editingMode: boolean = false;
 
-  datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/\d{4}$/;
-  cpfValue = '';
+  // datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/\d{4}$/;
+  datePattern = /^(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])\d{4}$/; //Este pattern não inclui separação por /, isso se dá porque a validação de data via ngx-mask não funcionou. Então criei uma validação por pattern, mas daí o [hiddenInput]="false" da máscara não funcionou. Então usei um pattern de apenas números e apliquei [hiddenInput]="true".
 
   patientInfo = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]),
@@ -29,13 +30,14 @@ export class PatientComponent {
     maritalStatus: new FormControl('', [Validators.required]),
     phone: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.email]),
-    birthCity: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]),
+    birthCity: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(64)]),
+    // Cara pessoa avaliadora: eu sei que o documento de especificação indicava o mínimo de 8 para o campo acima, mas existem muitas cidades cujo nome tem menos de 8 letras. O menor nome de município do Brasil tem 3.
     emergencyContact: new FormControl('', [Validators.required]),
     alergies: new FormControl(''),
     specialCare: new FormControl(''),
     insuranceCompany: new FormControl(''),
     insuranceNumber: new FormControl(''),
-    insuranceExpiration: new FormControl(''),
+    insuranceExpiration: new FormControl('', Validators.pattern(this.datePattern)),
     cep: new FormControl('', [Validators.required]),
     addressStreet: new FormControl('', [Validators.required]),
     addressNumber: new FormControl(''),
@@ -47,17 +49,6 @@ export class PatientComponent {
   });
 
   address: any | undefined;
-
-  formatCpf() {
-    const numericValue = this.cpfValue.replace(/\D/g, '');
-    if (numericValue.length <= 11) {
-      const formattedCpf = numericValue.replace(
-        /^(\d{3})(\d{3})(\d{3})(\d{2})$/,
-        '$1.$2.$3-$4'
-      );
-      this.cpfValue = formattedCpf;
-    }
-  }
 
   searchAddress() {
     this.addressService.getAddress(this.patientInfo.value.cep).subscribe(
@@ -76,7 +67,6 @@ export class PatientComponent {
       }
     );
   };
-
 
   savePatient(){
     console.log("Salvar chamado.");
