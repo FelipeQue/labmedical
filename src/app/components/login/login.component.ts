@@ -162,12 +162,12 @@ export class LoginComponent {
           return user;
         });
         localStorage.setItem("users", JSON.stringify(updatedUsers));
-        alert("Sua senha foi alterada para a senha padrão ‘novasenha’. Faça seu login utilizando essa senha.")
+        this.toastrService.info("Sua senha foi alterada para a senha padrão ‘novasenha’. Faça seu login utilizando essa senha.")
       } else {
-        alert("Pessoa usuária não cadastrada.")
+        this.toastrService.warning("Pessoa usuária não cadastrada.")
       }
     } else {
-      alert("Preencha o campo e-mail.")
+      this.toastrService.warning("Preencha o campo e-mail.")
     };
   };
 

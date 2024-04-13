@@ -67,7 +67,7 @@ export class PatientComponent {
           addressCity: this.address.localidade,
           addressState: this.address.uf}
         );
-        this.toastrService.success('Dados de endereço encontrados.', '');
+        this.toastrService.success('Dados de endereço encontrados.', '', {progressBar: true});
         },
         error: (error) => {
           this.toastrService.error('Informações de endereço não encontradas.', '');
@@ -115,7 +115,7 @@ export class PatientComponent {
         }
     });
     } else {
-      alert("Preencha todos os campos obrigatórios corretamente")
+      this.toastrService.warning("Preencha todos os campos obrigatórios corretamente");
     }
   }
 
