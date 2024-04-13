@@ -4,6 +4,7 @@ import { NgbModal, NgbAlert, NgbToast } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { CustomValidatorService } from '../../services/custom-validator.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,9 @@ export class LoginComponent {
 
   constructor(
     private customValidatorService: CustomValidatorService,
-    private router: Router) { };
+    private router: Router,
+    private toastrService: ToastrService,
+  ) { };
 
   private modalService = inject(NgbModal);
   private modalRef: any;
@@ -78,6 +81,7 @@ export class LoginComponent {
       if (userFound) {
         if (userFound.password == this.loginInfo.value.userPassword) {
           this.setLoggedUser(this.loginInfo.value.userEmail);
+          this.toastrService.success("Login efetuado com sucesso!",'');
           this.router.navigate(["home"]);
         } else {
           this.showLoginAlert("Senha incorreta. Verifique se digitou corretamente.", "warning");

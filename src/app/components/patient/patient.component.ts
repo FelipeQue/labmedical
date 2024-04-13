@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AddressService } from '../../services/address.service';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { PatientService } from '../../services/patient.service';
-import { MsgToastrService } from '../../services/msg-toastr.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-patient',
@@ -18,7 +18,7 @@ export class PatientComponent {
   constructor (
     private addressService: AddressService,
     private patientService: PatientService,
-    private toasterService: MsgToastrService,
+    private toastrService: ToastrService,
   ) {};
 
   registerMode: boolean = true;
@@ -67,10 +67,10 @@ export class PatientComponent {
           addressCity: this.address.localidade,
           addressState: this.address.uf}
         );
-        this.toasterService.showSuccess('Dados de endereço encontrados.', '');
+        this.toastrService.success('Dados de endereço encontrados.', '');
         },
         error: (error) => {
-          this.toasterService.showError('Informações de endereço não encontradas.', '');
+          this.toastrService.error('Informações de endereço não encontradas.', '');
         }
       }
     );
@@ -108,10 +108,10 @@ export class PatientComponent {
       this.patientService.addPatient(newPatient).subscribe({
         next: (response): void => {
           this.patientInfo.reset();
-          this.toasterService.showSuccess('Novo registro de paciente salvo com sucesso!', '');
+          this.toastrService.success('Novo registro de paciente salvo com sucesso!', '');
         },
         error: (error) => {
-          this.toasterService.showError('Algo deu errado ao tentar salvar o registro de paciente.', '');
+          this.toastrService.error('Algo deu errado ao tentar salvar o registro de paciente.', '');
         }
     });
     } else {
