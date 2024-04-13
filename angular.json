@@ -30,7 +30,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },
@@ -68,6 +69,9 @@
               "buildTarget": "labmedical:build:development"
             }
           },
+          "options": {
+            "proxyConfig": "proxy.config.json"
+          },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
@@ -90,7 +94,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           }

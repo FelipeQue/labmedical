@@ -3,6 +3,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { AddressService } from '../../services/address.service';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+import { PatientService } from '../../services/patient.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-patient',
@@ -13,10 +15,15 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 })
 export class PatientComponent {
 
-  constructor (private addressService: AddressService) {};
+  constructor (
+    private addressService: AddressService,
+    private patientService: PatientService,
+    private toastrService: ToastrService,
+  ) {};
 
   registerMode: boolean = true;
   editingMode: boolean = false;
+
 
   // datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/\d{4}$/;
   datePattern = /^(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])\d{4}$/; //Este pattern não inclui separação por /, isso se dá porque a validação de data via ngx-mask não funcionou. Então criei uma validação por pattern, mas daí o [hiddenInput]="false" da máscara não funcionou. Então usei um pattern de apenas números e apliquei [hiddenInput]="true".
@@ -30,10 +37,9 @@ export class PatientComponent {
     maritalStatus: new FormControl('', [Validators.required]),
     phone: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.email]),
-    birthCity: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(64)]),
-    // Cara pessoa avaliadora: eu sei que o documento de especificação indicava o mínimo de 8 para o campo acima, mas existem muitas cidades cujo nome tem menos de 8 letras. O menor nome de município do Brasil tem 3.
+    birthCity: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(64)]),
     emergencyContact: new FormControl('', [Validators.required]),
-    alergies: new FormControl(''),
+    allergies: new FormControl(''),
     specialCare: new FormControl(''),
     insuranceCompany: new FormControl(''),
     insuranceNumber: new FormControl(''),
@@ -45,7 +51,7 @@ export class PatientComponent {
     addressNeighborhood: new FormControl(''),
     addressCity: new FormControl('', [Validators.required]),
     addressState: new FormControl('', [Validators.required]),
-    addressReference: new FormControl(''),
+    addressLandmark: new FormControl(''),
   });
 
   address: any | undefined;
@@ -61,15 +67,56 @@ export class PatientComponent {
           addressCity: this.address.localidade,
           addressState: this.address.uf}
         );
+        this.toastrService.success('Dados de endereço encontrados.', '', {progressBar: true});
         },
         error: (error) => {
+          this.toastrService.error('Informações de endereço não encontradas.', '');
         }
       }
     );
   };
 
   savePatient(){
-    console.log("Salvar chamado.");
+    if (this.patientInfo.valid) {
+      const newPatient = {
+        "name": this.patientInfo.value.name,
+        "gender": this.patientInfo.value.gender,
+        "birthDate": this.patientInfo.value.birthDate,
+        "cpf": this.patientInfo.value.cpf,
+        "rg": this.patientInfo.value.rg,
+        "maritalStatus": this.patientInfo.value.maritalStatus,
+        "phone": this.patientInfo.value.phone,
+        "email": this.patientInfo.value.email,
+        "birthCity": this.patientInfo.value.birthCity,
+        "emergencyContact": this.patientInfo.value.emergencyContact,
+        "allergies": this.patientInfo.value.allergies,
+        "specialCare": this.patientInfo.value.specialCare,
+        "insuranceCompany": this.patientInfo.value.insuranceCompany,
+        "insuranceNumber": this.patientInfo.value.insuranceNumber,
+        "insuranceExpiration": this.patientInfo.value.insuranceExpiration,
+        "address": {
+          "cep": this.patientInfo.value.cep,
+          "city": this.patientInfo.value.addressCity,
+          "state": this.patientInfo.value.addressState,
+          "street": this.patientInfo.value.addressStreet,
+          "number": this.patientInfo.value.addressNumber,
+          "complement": this.patientInfo.value.addressComplement,
+          "neighborhood": this.patientInfo.value.addressNeighborhood,
+          "landmark": this.patientInfo.value.addressLandmark,
+        }
+      };
+      this.patientService.addPatient(newPatient).subscribe({
+        next: (response): void => {
+          this.patientInfo.reset();
+          this.toastrService.success('Novo registro de paciente salvo com sucesso!', '');
+        },
+        error: (error) => {
+          this.toastrService.error('Algo deu errado ao tentar salvar o registro de paciente.', '');
+        }
+    });
+    } else {
+      this.toastrService.warning("Preencha todos os campos obrigatórios corretamente");
+    }
   }
 
 }

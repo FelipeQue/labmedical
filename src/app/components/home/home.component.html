@@ -1,7 +1,21 @@
 <div id="home-page" [ngClass]="{'sidemenu': true}">
-    teste
+    
     <div class="white-box">home worksss!</div>
-    teste
+    
+
+
+    {{patients}}
+
+    <p>====</p>
+
+    <div>
+    @for (patient of patients; track patient.name) {
+        {{patient.name}}
+    }
+</div>
+
+
+
 </div>
 
 

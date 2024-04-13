@@ -1,0 +1,137 @@
+{
+  "patients": [
+    {
+      "id": "fb65",
+      "name": "Felipe José",
+      "gender": "other",
+      "birthDate": "21101983",
+      "cpf": "00000000000",
+      "rg": "000000 SSP/PE",
+      "maritalStatus": "male",
+      "phone": "00000000000",
+      "email": "",
+      "birthCity": "Recife",
+      "emergencyContact": "00000000000",
+      "allergies": "",
+      "specialCare": "",
+      "insuranceCompany": "",
+      "insuranceNumber": "",
+      "insuranceExpiration": "",
+      "cep": "88053655",
+      "addressStreet": "Rua das Tainhotas",
+      "addressNumber": "",
+      "addressComplement": "",
+      "addressNeighborhood": "Jurerê",
+      "addressCity": "Florianópolis",
+      "addressState": "SC",
+      "addressLandmark": ""
+    },
+    {
+      "id": "00d0",
+      "name": "Felipe José José",
+      "gender": "prefer-not",
+      "birthDate": "01011900",
+      "cpf": "00000000000",
+      "rg": "000000 SSP/PE",
+      "maritalStatus": "other",
+      "phone": "00000000000",
+      "email": "",
+      "birthCity": "Olinda",
+      "emergencyContact": "00000000000",
+      "allergies": "Leite, queijo e mesquinharia.",
+      "specialCare": "Frágil, pode quebrar.",
+      "insuranceCompany": "",
+      "insuranceNumber": "",
+      "insuranceExpiration": "",
+      "address": {
+        "cep": "50070-095",
+        "city": "Recife",
+        "state": "PE",
+        "street": "Rua do Progresso",
+        "number": "",
+        "complement": "",
+        "neighborhood": "Soledade",
+        "landmark": ""
+      }
+    },
+    {
+      "id": "774c",
+      "name": "Lucas Arrais",
+      "gender": "prefer-not",
+      "birthDate": "29041993",
+      "cpf": "00000000000",
+      "rg": "000000 SSP/PE",
+      "maritalStatus": "prefer-not",
+      "phone": "00000000000",
+      "email": "",
+      "birthCity": "Brasília",
+      "emergencyContact": "00000000000",
+      "allergies": "Chuva, frio.",
+      "specialCare": "",
+      "insuranceCompany": "",
+      "insuranceNumber": "",
+      "insuranceExpiration": "",
+      "address": {
+        "cep": "88053655",
+        "city": "Florianópolis",
+        "state": "SC",
+        "street": "Rua das Tainhotas",
+        "number": "",
+        "complement": "",
+        "neighborhood": "Jurerê",
+        "landmark": ""
+      }
+    },
+    {
+      "id": "6522",
+      "name": "Felipe José Maria",
+      "gender": "male",
+      "birthDate": "21101983",
+      "cpf": "00000000000",
+      "rg": "000000 SSP/PE",
+      "maritalStatus": "other",
+      "phone": "00000000000",
+      "email": "",
+      "birthCity": "Recife",
+      "emergencyContact": "00000000000",
+      "allergies": "",
+      "specialCare": "",
+      "insuranceCompany": "",
+      "insuranceNumber": "",
+      "insuranceExpiration": "",
+      "address": {
+        "cep": "88053655",
+        "city": "Florianópolis",
+        "state": "SC",
+        "street": "Rua das Tainhotas",
+        "number": "",
+        "complement": "",
+        "neighborhood": "Jurerê",
+        "landmark": ""
+      }
+    }
+  ],
+  "consultations": [
+    {
+      "id": "consultation1",
+      "reason": "Dor de cabeça persistente",
+      "date": "2024-04-12",
+      "time": "14:30",
+      "problemDescription": "Paciente relata dores intensas na região frontal.",
+      "prescribedMedication": "Analgésico",
+      "dosagePrecautions": "Tomar 1 comprimido a cada 6 horas."
+    }
+  ],
+  "exams": [
+    {
+      "id": "exam1",
+      "name": "Hemograma completo",
+      "date": "2024-04-15",
+      "time": "08:00",
+      "type": "Sangue",
+      "laboratory": "Laboratório ABC",
+      "documentUrl": null,
+      "results": "Hemoglobina: 12 g/dL, Leucócitos: 8000/mm³"
+    }
+  ]
+}
