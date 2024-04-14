@@ -1,7 +1,22 @@
 <div id="consultation-container">
 
 
-    <div>Aqui vai ser a área de busca.</div>
+    <div id="patient-search">
+        <p>Busque aqui o paciente</p>
+        <form id="patient-search-form" (ngSubmit)="searchPatient()" [formGroup]="patientInput">
+        <input type="text" formControlName="nameOrId">
+        <button type="submit">Pesquisar</button>
+        </form>
+    </div>
+
+    <div *ngIf="resultsList" class="patient-results">
+        <div *ngFor="let patient of resultsList" (click)="selectPatient()">
+            <div class="patient-card">
+                <div class="card-header">
+                <h2 class="card-name">{{patient}}</h2>    
+            </div>
+    </div>
+
 
     <form id="consultation-form" (ngSubmit)="saveConsultation()" [formGroup]="consultationInfo">
         <div class="consultation-buttons">

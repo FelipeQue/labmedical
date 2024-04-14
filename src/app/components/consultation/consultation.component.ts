@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ConsultationService } from '../../services/consultation.service';
+import { PatientService } from '../../services/patient.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -16,7 +17,15 @@ export class ConsultationComponent {
   constructor (
     private consultationService: ConsultationService,
     private toastrService: ToastrService,
+    private patientService: PatientService,
   ) {};
+
+  patientInput = new FormGroup({
+    nameOrId: new FormControl('')
+  });
+
+  patientsList: any = [];
+  resultsList: any = [];
 
   consultationInfo = new FormGroup({
     reason: new FormControl('',[Validators.required, Validators.minLength(8), Validators.maxLength(64)]), 
@@ -26,6 +35,55 @@ export class ConsultationComponent {
     prescribedMedication: new FormControl(''), 
     dosagePrecautions: new FormControl('',[Validators.required, Validators.minLength(16), Validators.maxLength(256)]), 
   });
+
+
+  searchPatient() {
+    console.log("Search patient chamado.");
+    console.log(this.patientsList);
+    const nameOrId = this.patientInput.value.nameOrId?.trim();
+    console.log(nameOrId);
+    if (nameOrId) {
+      this.patientService.getPatient().subscribe((patients) => {
+        this.patientsList = patients;
+        this.resultsList = this.patientsList.filter((searchedPatient: { name: string, id: string}) => {   
+          const isNameMatch = searchedPatient.name && searchedPatient.name.toLowerCase().includes(nameOrId.toLowerCase());
+          const isIdMatch = searchedPatient.id && searchedPatient.id.includes(nameOrId);
+          return isNameMatch || isIdMatch;
+        });
+      });
+        console.log(this.resultsList);
+    } else { 
+      this.toastrService.warning("Preencha nome ou identificador no campo de busca.");
+    }
+  };
+
+  // ngOnInit(): void {
+  //   this.patientService.getPatient().subscribe((patients) => {
+  //     this.patientsList = patients;
+  //   });
+  // }
+
+  // searchPatient() {
+  //   console.log("Search patient chamado.");
+  //   console.log(this.patientsList);
+  //   const nameOrId = this.patientInput.value.nameOrId?.trim();
+  //   console.log(nameOrId);
+  //   if (nameOrId) {
+  //       this.resultsList = this.patientsList.filter((searchedPatient: { name: string, id: string}) => {   
+  //         const isNameMatch = searchedPatient.name && searchedPatient.name.toLowerCase().includes(nameOrId.toLowerCase());
+  //         const isIdMatch = searchedPatient.id && searchedPatient.id.includes(nameOrId);
+  //         return isNameMatch || isIdMatch;
+  //       });
+  //       console.log(this.resultsList);
+  //   } else { 
+  //     this.toastrService.warning("Preencha nome ou identificador no campo de busca.");
+  //   }
+  // };
+
+
+  selectPatient() {
+    this.toastrService.info("Você selecionou a pessoa paciente.")
+  }
 
 // Lembrar de incluir as informações da pessoa paciente!
 
