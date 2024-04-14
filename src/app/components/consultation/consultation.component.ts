@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ConsultationService } from '../../services/consultation.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-consultation',
@@ -11,7 +13,10 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class ConsultationComponent {
 
-  constructor () {};
+  constructor (
+    private consultationService: ConsultationService,
+    private toastrService: ToastrService,
+  ) {};
 
   consultationInfo = new FormGroup({
     reason: new FormControl('',[Validators.required, Validators.minLength(8), Validators.maxLength(64)]), 
@@ -22,7 +27,37 @@ export class ConsultationComponent {
     dosagePrecautions: new FormControl('',[Validators.required, Validators.minLength(16), Validators.maxLength(256)]), 
   });
 
-  saveConsultation() {};
+// Lembrar de incluir as informações da pessoa paciente!
+
+  saveConsultation() {
+    // if patient foi selecionado
+
+    if (this.consultationInfo.valid) {
+    const newConsultation = {
+      "patientId": "HERE. HERE. Here.",
+      "reason": this.consultationInfo.value.reason,
+      "date": this.consultationInfo.value.date,
+      "time": this.consultationInfo.value.time,
+      "issueDescription": this.consultationInfo.value.issueDescription,
+      "prescribedMedication": this.consultationInfo.value.prescribedMedication,
+      "dosagePrecautions": this.consultationInfo.value.dosagePrecautions,
+      }
+    this.consultationService.addConsultation(newConsultation).subscribe({
+      next: (response): void => {
+        this.consultationInfo.reset();
+        this.toastrService.success('Nova consulta salva com sucesso!', '');
+      },
+      error: (error) => {
+        this.toastrService.error('Algo deu errado ao tentar salvar a nova consulta.', '');
+      }
+  });
+  } else {
+    this.toastrService.warning("Preencha todos os campos obrigatórios corretamente.");
+  }
+
+  // else: escolha um paciente pelo campo de busca!
+
+  };
 
 
 
