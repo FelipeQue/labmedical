@@ -109,22 +109,62 @@
         "neighborhood": "Jurerê",
         "landmark": ""
       }
+    },
+    {
+      "id": "49e9",
+      "name": "Ursula Kroeber Le Guin",
+      "gender": "female",
+      "birthDate": "21101929",
+      "cpf": "00000000000",
+      "rg": "000000 SSP/PE",
+      "maritalStatus": "other",
+      "phone": "00000000000",
+      "email": "",
+      "birthCity": "Berkeley",
+      "emergencyContact": "00000000000",
+      "allergies": "Amendoim",
+      "specialCare": "",
+      "insuranceCompany": "Unimed",
+      "insuranceNumber": "000000000000",
+      "insuranceExpiration": "22082025",
+      "address": {
+        "cep": "50070-095",
+        "city": "Recife",
+        "state": "PE",
+        "street": "Rua do Progresso",
+        "number": "",
+        "complement": "",
+        "neighborhood": "Soledade",
+        "landmark": ""
+      }
     }
   ],
   "consultations": [
     {
-      "id": "consultation1",
+      "id": "xxxx",
+      "patientId": "6522",
       "reason": "Dor de cabeça persistente",
       "date": "2024-04-12",
       "time": "14:30",
-      "problemDescription": "Paciente relata dores intensas na região frontal.",
+      "issueDescription": "Paciente relata dores intensas na região frontal.",
       "prescribedMedication": "Analgésico",
       "dosagePrecautions": "Tomar 1 comprimido a cada 6 horas."
+    },
+    {
+      "id": "c228",
+      "patientId": "49e9",
+      "reason": "Dor abdominal persistente",
+      "date": "2024-04-12",
+      "time": "10:00",
+      "issueDescription": "Paciente relata dores intensas na região abdominal, com desconforto e inchaço.",
+      "prescribedMedication": "Antiespasmódico",
+      "dosagePrecautions": "Tomar 1 comprimido após as refeições."
     }
   ],
   "exams": [
     {
       "id": "exam1",
+      "patientId": "6522",
       "name": "Hemograma completo",
       "date": "2024-04-15",
       "time": "08:00",
