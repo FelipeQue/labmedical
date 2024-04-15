@@ -3,6 +3,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { PatientComponent } from './components/patient/patient.component';
 import { ConsultationComponent } from './components/consultation/consultation.component';
+import { ExamComponent } from './components/exam/exam.component';
 
 export const routes: Routes = [
     {
@@ -25,5 +26,9 @@ export const routes: Routes = [
     {
         path: "register-consultation",
         component: ConsultationComponent
+    },
+    {
+        path: "register-exam",
+        component: ExamComponent
     },
 ];
