@@ -2,27 +2,36 @@
 
 
     <div id="patient-search">
-        <p>Busque aqui o paciente</p>
+        <label for="patient-input">Busque a pessoa paciente:</label>
         <form id="patient-search-form" (ngSubmit)="searchPatient()" [formGroup]="patientInput">
-        <input type="text" formControlName="nameOrId">
-        <button type="submit">Pesquisar</button>
+        <input id="patient-input" type="text" formControlName="nameOrId">
+        <button type="submit" class="primary-button">Pesquisar</button>
         </form>
     </div>
 
-    <div *ngIf="resultsList" class="patient-results">
-        <div *ngFor="let patient of resultsList" (click)="selectPatient()">
-            <div class="patient-card">
+    <div *ngIf="resultsList" id="patient-results">
+        <div *ngFor="let patient of resultsList">
+            <div class="patient-card" (click)="selectPatient(patient.name, patient.id)">
                 <div class="card-header">
-                <h2 class="card-name">{{patient}}</h2>    
+                <h2 class="card-name">{{patient.name}}</h2>
+                <p>Registro: {{patient.id}}</p>
+                <p>Convênio: {{patient.insuranceCompany}}
+                <span *ngIf="!patient.insuranceCompany">Não possui convênio.</span>
+                </p>  
+                </div>
             </div>
+        </div>
     </div>
 
 
     <form id="consultation-form" (ngSubmit)="saveConsultation()" [formGroup]="consultationInfo">
+        <div id="consultation-header">
+        <div *ngIf="selectedPatientName" id="selected-patient">Paciente: {{selectedPatientName}}</div>
         <div class="consultation-buttons">
             <button class="secondary-button" [disabled]="true">Editar</button>
             <button class="danger-button" [disabled]="true">Deletar</button>
             <button class="primary-button" type="submit">Salvar</button>
+        </div>
         </div>
         <div>
             <section class="consultation-section">

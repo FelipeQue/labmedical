@@ -29,8 +29,6 @@
     }
 }
 
-
-
 #consultation-container {
     margin-left: 12em;
     margin-top: 3em;
@@ -38,13 +36,66 @@
     padding: 1em;
 }
 
+#patient-search {
+    input {
+        width: 60%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        &:focus {
+            border: 2px solid $buttonActive;
+            outline: none;
+        }
+    }
+    button {
+        margin-left: 10px;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+        font-size: 1em;
+        cursor: pointer;
+        &:disabled {
+            color: lightgray;
+            background-color: #f0f0f0;
+        }
+    }
+}
+
+#patient-search-form {
+    gap: 10px;
+}
+
+#patient-results {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.patient-card {
+    border-radius: 8px;
+    background-color: white;
+    padding: 1em;
+
+}
+
 #consultation-form {
-    @include flex-column-center;
+    margin-top: 1em;
     width: 100%;
     border-radius: 8px;
     padding: 1em;
     background-color: white;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#consultation-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#selected-patient {
+    width: 100%;
 }
 
 .consultation-buttons {

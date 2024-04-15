@@ -113,7 +113,7 @@
   ],
   "consultations": [
     {
-      "id": "consultation1",
+      "id": "xxxx",
       "patientId": "6522",
       "reason": "Dor de cabeça persistente",
       "date": "2024-04-12",
@@ -121,6 +121,16 @@
       "issueDescription": "Paciente relata dores intensas na região frontal.",
       "prescribedMedication": "Analgésico",
       "dosagePrecautions": "Tomar 1 comprimido a cada 6 horas."
+    },
+    {
+      "id": "6206",
+      "patientId": "HERE. HERE. Here.",
+      "reason": "Dor de cabeça",
+      "date": "2024-04-17",
+      "time": "17:00",
+      "issueDescription": "Dores de cabeça debilitandes há 5 semanas.",
+      "prescribedMedication": "Paracetamol.",
+      "dosagePrecautions": "Sempre que necessário até o limite de 600mg/dia."
     }
   ],
   "exams": [

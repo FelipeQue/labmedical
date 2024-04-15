@@ -27,6 +27,9 @@ export class ConsultationComponent {
   patientsList: any = [];
   resultsList: any = [];
 
+  selectedPatientName: string = "";
+  selectedPatientId: string = "";
+
   consultationInfo = new FormGroup({
     reason: new FormControl('',[Validators.required, Validators.minLength(8), Validators.maxLength(64)]), 
     date: new FormControl('',[Validators.required]), 
@@ -39,60 +42,37 @@ export class ConsultationComponent {
 
   searchPatient() {
     console.log("Search patient chamado.");
-    console.log(this.patientsList);
     const nameOrId = this.patientInput.value.nameOrId?.trim();
     console.log(nameOrId);
     if (nameOrId) {
       this.patientService.getPatient().subscribe((patients) => {
         this.patientsList = patients;
+        console.log(this.patientsList);
         this.resultsList = this.patientsList.filter((searchedPatient: { name: string, id: string}) => {   
           const isNameMatch = searchedPatient.name && searchedPatient.name.toLowerCase().includes(nameOrId.toLowerCase());
           const isIdMatch = searchedPatient.id && searchedPatient.id.includes(nameOrId);
           return isNameMatch || isIdMatch;
         });
-      });
         console.log(this.resultsList);
+      });
     } else { 
       this.toastrService.warning("Preencha nome ou identificador no campo de busca.");
     }
   };
 
-  // ngOnInit(): void {
-  //   this.patientService.getPatient().subscribe((patients) => {
-  //     this.patientsList = patients;
-  //   });
-  // }
-
-  // searchPatient() {
-  //   console.log("Search patient chamado.");
-  //   console.log(this.patientsList);
-  //   const nameOrId = this.patientInput.value.nameOrId?.trim();
-  //   console.log(nameOrId);
-  //   if (nameOrId) {
-  //       this.resultsList = this.patientsList.filter((searchedPatient: { name: string, id: string}) => {   
-  //         const isNameMatch = searchedPatient.name && searchedPatient.name.toLowerCase().includes(nameOrId.toLowerCase());
-  //         const isIdMatch = searchedPatient.id && searchedPatient.id.includes(nameOrId);
-  //         return isNameMatch || isIdMatch;
-  //       });
-  //       console.log(this.resultsList);
-  //   } else { 
-  //     this.toastrService.warning("Preencha nome ou identificador no campo de busca.");
-  //   }
-  // };
-
-
-  selectPatient() {
-    this.toastrService.info("Você selecionou a pessoa paciente.")
+  selectPatient(name: string, id: string) {
+    this.toastrService.info("Você selecionou " + name);
+    this.selectedPatientName = name;
+    this.selectedPatientId = id;
   }
 
 // Lembrar de incluir as informações da pessoa paciente!
 
   saveConsultation() {
-    // if patient foi selecionado
-
+    if (!!this.selectedPatientId) {
     if (this.consultationInfo.valid) {
     const newConsultation = {
-      "patientId": "HERE. HERE. Here.",
+      "patientId": this.selectedPatientId,
       "reason": this.consultationInfo.value.reason,
       "date": this.consultationInfo.value.date,
       "time": this.consultationInfo.value.time,
@@ -112,6 +92,9 @@ export class ConsultationComponent {
   } else {
     this.toastrService.warning("Preencha todos os campos obrigatórios corretamente.");
   }
+} else {
+  this.toastrService.warning("Selecione um registro de paciente — para vincular a esta consulta — através do campo de busca.");
+}
 
   // else: escolha um paciente pelo campo de busca!
 
