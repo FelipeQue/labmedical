@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatDate } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -33,8 +33,8 @@ export class ExamComponent {
 
   examInfo = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]),
-    date: new FormControl('', [Validators.required]),
-    time: new FormControl('', [Validators.required]),
+    date: new FormControl(formatDate(new Date(), 'yyyy-MM-dd', "en"), [Validators.required]),
+    time: new FormControl(formatDate(new Date(), 'HH:mm', "en"), [Validators.required]),
     type: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(32)]),
     laboratory: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(32)]),
     documentUrl: new FormControl(''),

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatDate } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ConsultationService } from '../../services/consultation.service';
@@ -33,13 +33,12 @@ export class ConsultationComponent {
 
   consultationInfo = new FormGroup({
     reason: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]),
-    date: new FormControl('', [Validators.required]),
-    time: new FormControl('', [Validators.required]),
+    date: new FormControl(formatDate(new Date(), 'yyyy-MM-dd', "en"), [Validators.required]),
+    time: new FormControl(formatDate(new Date(), 'HH:mm', "en"), [Validators.required]),
     issueDescription: new FormControl('', [Validators.required, Validators.minLength(16), Validators.maxLength(1024)]),
     prescribedMedication: new FormControl(''),
     dosagePrecautions: new FormControl('', [Validators.required, Validators.minLength(16), Validators.maxLength(256)]),
   });
-
 
   searchPatient() {
     const nameOrId = this.patientInput.value.nameOrId?.trim();
