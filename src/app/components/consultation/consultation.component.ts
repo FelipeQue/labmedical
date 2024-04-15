@@ -8,17 +8,17 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-consultation',
   standalone: true,
-  imports: [ ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './consultation.component.html',
   styleUrl: './consultation.component.scss'
 })
 export class ConsultationComponent {
 
-  constructor (
+  constructor(
     private consultationService: ConsultationService,
     private toastrService: ToastrService,
     private patientService: PatientService,
-  ) {};
+  ) { };
 
   patientInput = new FormGroup({
     nameOrId: new FormControl('')
@@ -31,12 +31,12 @@ export class ConsultationComponent {
   selectedPatientId: string = "";
 
   consultationInfo = new FormGroup({
-    reason: new FormControl('',[Validators.required, Validators.minLength(8), Validators.maxLength(64)]), 
-    date: new FormControl('',[Validators.required]), 
-    time: new FormControl('',[Validators.required]), 
-    issueDescription: new FormControl('',[Validators.required, Validators.minLength(16), Validators.maxLength(1024)]), 
-    prescribedMedication: new FormControl(''), 
-    dosagePrecautions: new FormControl('',[Validators.required, Validators.minLength(16), Validators.maxLength(256)]), 
+    reason: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]),
+    date: new FormControl('', [Validators.required]),
+    time: new FormControl('', [Validators.required]),
+    issueDescription: new FormControl('', [Validators.required, Validators.minLength(16), Validators.maxLength(1024)]),
+    prescribedMedication: new FormControl(''),
+    dosagePrecautions: new FormControl('', [Validators.required, Validators.minLength(16), Validators.maxLength(256)]),
   });
 
 
@@ -48,14 +48,14 @@ export class ConsultationComponent {
       this.patientService.getPatient().subscribe((patients) => {
         this.patientsList = patients;
         console.log(this.patientsList);
-        this.resultsList = this.patientsList.filter((searchedPatient: { name: string, id: string}) => {   
+        this.resultsList = this.patientsList.filter((searchedPatient: { name: string, id: string }) => {
           const isNameMatch = searchedPatient.name && searchedPatient.name.toLowerCase().includes(nameOrId.toLowerCase());
           const isIdMatch = searchedPatient.id && searchedPatient.id.includes(nameOrId);
           return isNameMatch || isIdMatch;
         });
         console.log(this.resultsList);
       });
-    } else { 
+    } else {
       this.toastrService.warning("Preencha nome ou identificador no campo de busca.");
     }
   };
@@ -66,38 +66,33 @@ export class ConsultationComponent {
     this.selectedPatientId = id;
   }
 
-// Lembrar de incluir as informações da pessoa paciente!
-
   saveConsultation() {
     if (!!this.selectedPatientId) {
-    if (this.consultationInfo.valid) {
-    const newConsultation = {
-      "patientId": this.selectedPatientId,
-      "reason": this.consultationInfo.value.reason,
-      "date": this.consultationInfo.value.date,
-      "time": this.consultationInfo.value.time,
-      "issueDescription": this.consultationInfo.value.issueDescription,
-      "prescribedMedication": this.consultationInfo.value.prescribedMedication,
-      "dosagePrecautions": this.consultationInfo.value.dosagePrecautions,
+      if (this.consultationInfo.valid) {
+        const newConsultation = {
+          "patientId": this.selectedPatientId,
+          "reason": this.consultationInfo.value.reason,
+          "date": this.consultationInfo.value.date,
+          "time": this.consultationInfo.value.time,
+          "issueDescription": this.consultationInfo.value.issueDescription,
+          "prescribedMedication": this.consultationInfo.value.prescribedMedication,
+          "dosagePrecautions": this.consultationInfo.value.dosagePrecautions,
+        }
+        this.consultationService.addConsultation(newConsultation).subscribe({
+          next: (response): void => {
+            this.consultationInfo.reset();
+            this.toastrService.success('Nova consulta salva com sucesso!', '');
+          },
+          error: (error) => {
+            this.toastrService.error('Algo deu errado ao tentar salvar a nova consulta.', '');
+          }
+        });
+      } else {
+        this.toastrService.warning("Preencha todos os campos obrigatórios corretamente.");
       }
-    this.consultationService.addConsultation(newConsultation).subscribe({
-      next: (response): void => {
-        this.consultationInfo.reset();
-        this.toastrService.success('Nova consulta salva com sucesso!', '');
-      },
-      error: (error) => {
-        this.toastrService.error('Algo deu errado ao tentar salvar a nova consulta.', '');
-      }
-  });
-  } else {
-    this.toastrService.warning("Preencha todos os campos obrigatórios corretamente.");
-  }
-} else {
-  this.toastrService.warning("Selecione um registro de paciente — para vincular a esta consulta — através do campo de busca.");
-}
-
-  // else: escolha um paciente pelo campo de busca!
-
+    } else {
+      this.toastrService.warning("Selecione um registro de paciente — para vincular a esta consulta — através do campo de busca.");
+    }
   };
 
 
