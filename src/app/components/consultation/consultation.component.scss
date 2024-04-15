@@ -92,10 +92,13 @@
 #consultation-header {
     display: flex;
     justify-content: space-between;
+    margin-right: 1em;
+    margin-bottom: 2em;
 }
 
 #selected-patient {
     width: 100%;
+    align-content: center;
 }
 
 .consultation-buttons {
@@ -103,8 +106,6 @@
     justify-content: flex-end;
     width: 100%;
     gap: 0.8em;
-    margin-right: 2em;
-    margin-bottom: 2em;
     button {
         color: #ffffff;
         border: none;

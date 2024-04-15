@@ -41,19 +41,15 @@ export class ConsultationComponent {
 
 
   searchPatient() {
-    console.log("Search patient chamado.");
     const nameOrId = this.patientInput.value.nameOrId?.trim();
-    console.log(nameOrId);
     if (nameOrId) {
       this.patientService.getPatient().subscribe((patients) => {
         this.patientsList = patients;
-        console.log(this.patientsList);
         this.resultsList = this.patientsList.filter((searchedPatient: { name: string, id: string }) => {
           const isNameMatch = searchedPatient.name && searchedPatient.name.toLowerCase().includes(nameOrId.toLowerCase());
           const isIdMatch = searchedPatient.id && searchedPatient.id.includes(nameOrId);
           return isNameMatch || isIdMatch;
         });
-        console.log(this.resultsList);
       });
     } else {
       this.toastrService.warning("Preencha nome ou identificador no campo de busca.");
