@@ -151,14 +151,14 @@
       "dosagePrecautions": "Tomar 1 comprimido a cada 6 horas."
     },
     {
-      "id": "6206",
-      "patientId": "HERE. HERE. Here.",
-      "reason": "Dor de cabeça",
-      "date": "2024-04-17",
-      "time": "17:00",
-      "issueDescription": "Dores de cabeça debilitandes há 5 semanas.",
-      "prescribedMedication": "Paracetamol.",
-      "dosagePrecautions": "Sempre que necessário até o limite de 600mg/dia."
+      "id": "c228",
+      "patientId": "49e9",
+      "reason": "Dor abdominal persistente",
+      "date": "2024-04-12",
+      "time": "10:00",
+      "issueDescription": "Paciente relata dores intensas na região abdominal, com desconforto e inchaço.",
+      "prescribedMedication": "Antiespasmódico",
+      "dosagePrecautions": "Tomar 1 comprimido após as refeições."
     }
   ],
   "exams": [
