@@ -109,6 +109,34 @@
         "neighborhood": "Jurerê",
         "landmark": ""
       }
+    },
+    {
+      "id": "49e9",
+      "name": "Ursula Kroeber Le Guin",
+      "gender": "female",
+      "birthDate": "21101929",
+      "cpf": "00000000000",
+      "rg": "000000 SSP/PE",
+      "maritalStatus": "other",
+      "phone": "00000000000",
+      "email": "",
+      "birthCity": "Berkeley",
+      "emergencyContact": "00000000000",
+      "allergies": "Amendoim",
+      "specialCare": "",
+      "insuranceCompany": "Unimed",
+      "insuranceNumber": "000000000000",
+      "insuranceExpiration": "22082025",
+      "address": {
+        "cep": "50070-095",
+        "city": "Recife",
+        "state": "PE",
+        "street": "Rua do Progresso",
+        "number": "",
+        "complement": "",
+        "neighborhood": "Soledade",
+        "landmark": ""
+      }
     }
   ],
   "consultations": [

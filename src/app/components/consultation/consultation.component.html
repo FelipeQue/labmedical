@@ -15,6 +15,7 @@
                 <div class="card-header">
                 <h3 class="card-name">{{patient.name}}</h3>
                 <p>Registro: {{patient.id}}</p>
+                <p>Data de nascimento: {{patient.birthDate | birthDate}}</p>
                 <p>Convênio: {{patient.insuranceCompany}}
                 <span *ngIf="!patient.insuranceCompany">Não possui convênio.</span>
                 </p>  
@@ -28,9 +29,9 @@
         <div id="consultation-header">
             <div *ngIf="selectedPatientName" id="selected-patient"><h2>Paciente: {{selectedPatientName}}</h2></div>
             <div class="consultation-buttons">
-            <button class="secondary-button" [disabled]="true">Editar</button>
-            <button class="danger-button" [disabled]="true">Deletar</button>
-            <button class="primary-button" type="submit">Salvar</button>
+                <button class="secondary-button" [disabled]="true">Editar</button>
+                <button class="danger-button" [disabled]="true">Deletar</button>
+                <button class="primary-button" type="submit">Salvar</button>
             </div>
             </div>
         <div>

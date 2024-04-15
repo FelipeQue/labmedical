@@ -4,13 +4,14 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ConsultationService } from '../../services/consultation.service';
 import { PatientService } from '../../services/patient.service';
 import { ToastrService } from 'ngx-toastr';
+import { BirthDatePipe } from '../../pipes/birth-date.pipe';
 
 @Component({
-  selector: 'app-consultation',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './consultation.component.html',
-  styleUrl: './consultation.component.scss'
+    selector: 'app-consultation',
+    standalone: true,
+    templateUrl: './consultation.component.html',
+    styleUrl: './consultation.component.scss',
+    imports: [ReactiveFormsModule, CommonModule, BirthDatePipe]
 })
 export class ConsultationComponent {
 
@@ -87,7 +88,7 @@ export class ConsultationComponent {
         this.toastrService.warning("Preencha todos os campos obrigatórios corretamente.");
       }
     } else {
-      this.toastrService.warning("Selecione um registro de paciente — para vincular a esta consulta — através do campo de busca.");
+      this.toastrService.warning("Selecione um registro de paciente para vincular a esta consulta.");
     }
   };
 
