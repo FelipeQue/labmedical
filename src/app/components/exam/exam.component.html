@@ -1,0 +1,189 @@
+<div id="exam-container">
+
+
+    <div id="patient-search">
+        <label for="patient-input">Busca de paciente:</label>
+        <form id="patient-search-form" (ngSubmit)="searchPatient()" [formGroup]="patientInput">
+        <input id="patient-input" type="text" formControlName="nameOrId">
+        <button type="submit" class="primary-button">Pesquisar</button>
+        </form>
+    </div>
+
+    <div *ngIf="resultsList" id="patient-results">
+        <div *ngFor="let patient of resultsList">
+            <div class="patient-card" (click)="selectPatient(patient.name, patient.id)">
+                <div class="card-header">
+                <h3 class="card-name">{{patient.name}}</h3>
+                <p>Registro: {{patient.id}}</p>
+                <p>Data de nascimento: {{patient.birthDate | birthDate}}</p>
+                <p>Convênio: {{patient.insuranceCompany}}
+                <span *ngIf="!patient.insuranceCompany">Não possui convênio.</span>
+                </p>  
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <form id="exam-form" (ngSubmit)="saveExam()" [formGroup]="examInfo">
+        <div id="exam-header">
+            <div *ngIf="selectedPatientName" id="selected-patient"><h2>Paciente: {{selectedPatientName}}</h2></div>
+            <div class="exam-buttons">
+                <button class="secondary-button" [disabled]="true">Editar</button>
+                <button class="danger-button" [disabled]="true">Deletar</button>
+                <button class="primary-button" type="submit">Salvar</button>
+            </div>
+            </div>
+        <div>
+            <section class="exam-section">
+                <div id="exam-first-line">
+                    <div class="form-unit" id="exam-first-field">
+                        <label for="exam-name">Nome do exame:</label>
+                        <input id="exam-name" name="exam-name" type="text" formControlName="name"
+                            required [ngClass]="{'error-border': (
+                        examInfo.controls.name.dirty ||
+                        examInfo.controls.name.touched) &&
+                        examInfo.controls.name.errors}" />
+                        <span class="error-message" *ngIf="(
+                        examInfo.controls.name.dirty ||
+                        examInfo.controls.name.touched) &&
+                        examInfo.controls.name.errors &&
+                        examInfo.controls.name.errors['required']">Campo obrigatório</span>
+                        <span class="error-message" *ngIf="(
+                        examInfo.controls.name.dirty &&
+                    examInfo.controls.name.touched) &&
+                    examInfo.controls.name.errors &&
+                    examInfo.controls.name.errors['minlength']">Este campo precisa de pelo menos 8
+                            caracteres</span>
+                        <span class="error-message" *ngIf="(
+                        examInfo.controls.name.dirty ||
+                        examInfo.controls.name.touched) &&
+                        examInfo.controls.name.errors &&
+                        examInfo.controls.name.errors['maxlength']">Este campo não pode ultrapassar 64
+                            caracteres</span>
+                    </div>
+
+                    <div>
+                        <div class="form-unit">
+                            <label for="exam-date">Data da Consulta:</label>
+                            <input id="exam-date" name="exam-date" type="date" formControlName="date"
+                                required [ngClass]="{'error-border': (
+                        examInfo.controls.date.dirty ||
+                        examInfo.controls.date.touched) &&
+                        examInfo.controls.date.errors}" />
+                            <span class="error-message" *ngIf="(
+                            examInfo.controls.date.dirty ||
+                            examInfo.controls.date.touched) &&
+                            examInfo.controls.date.errors &&
+                            examInfo.controls.date.errors['required']">Campo obrigatório</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="form-unit">
+                            <label for="exam-time">Horário da Consulta:</label>
+                            <input id="exam-time" name="exam-time" type="time" formControlName="time"
+                                required [ngClass]="{'error-border': (
+                        examInfo.controls.time.dirty ||
+                        examInfo.controls.time.touched) &&
+                        examInfo.controls.time.errors}" />
+                            <span class="error-message" *ngIf="(
+                            examInfo.controls.time.dirty ||
+                            examInfo.controls.time.touched) &&
+                            examInfo.controls.time.errors &&
+                            examInfo.controls.time.errors['required']">Campo obrigatório</span>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="form-unit">
+                    <label for="exam-type">Tipo do exame:</label>
+                    <input id="exam-type" name="exam-type" type="text" formControlName="type"
+                        required [ngClass]="{'error-border': (
+                    examInfo.controls.type.dirty ||
+                    examInfo.controls.type.touched) &&
+                    examInfo.controls.type.errors}" />
+                    <span class="error-message" *ngIf="(
+                    examInfo.controls.type.dirty ||
+                    examInfo.controls.type.touched) &&
+                    examInfo.controls.type.errors &&
+                    examInfo.controls.type.errors['required']">Campo obrigatório</span>
+                    <span class="error-message" *ngIf="(
+                    examInfo.controls.type.dirty &&
+                examInfo.controls.type.touched) &&
+                examInfo.controls.type.errors &&
+                examInfo.controls.type.errors['minlength']">Este campo precisa de pelo menos 4
+                        caracteres</span>
+                    <span class="error-message" *ngIf="(
+                    examInfo.controls.type.dirty ||
+                    examInfo.controls.type.touched) &&
+                    examInfo.controls.type.errors &&
+                    examInfo.controls.type.errors['maxlength']">Este campo não pode ultrapassar 32
+                        caracteres</span>
+                </div>  
+
+                <div class="form-unit">
+                    <label for="exam-laboratory">Laboratório:</label>
+                    <input id="exam-laboratory" name="exam-laboratory" type="text" formControlName="laboratory"
+                        required [ngClass]="{'error-border': (
+                    examInfo.controls.laboratory.dirty ||
+                    examInfo.controls.laboratory.touched) &&
+                    examInfo.controls.laboratory.errors}" />
+                    <span class="error-message" *ngIf="(
+                    examInfo.controls.laboratory.dirty ||
+                    examInfo.controls.laboratory.touched) &&
+                    examInfo.controls.laboratory.errors &&
+                    examInfo.controls.laboratory.errors['required']">Campo obrigatório</span>
+                    <span class="error-message" *ngIf="(
+                    examInfo.controls.laboratory.dirty &&
+                examInfo.controls.laboratory.touched) &&
+                examInfo.controls.laboratory.errors &&
+                examInfo.controls.laboratory.errors['minlength']">Este campo precisa de pelo menos 4
+                        caracteres</span>
+                    <span class="error-message" *ngIf="(
+                    examInfo.controls.laboratory.dirty ||
+                    examInfo.controls.laboratory.touched) &&
+                    examInfo.controls.laboratory.errors &&
+                    examInfo.controls.laboratory.errors['maxlength']">Este campo não pode ultrapassar 32
+                        caracteres</span>
+                </div> 
+
+                
+
+                <div class="form-unit">
+                    <label for="document-url">URL do documento:</label>
+                    <input id="document-url" name="prescribed-medication" type="text"
+                        formControlName="documentUrl" />
+                </div>
+
+                <div class="form-unit">
+                    <label for="issue-description">Resultados:</label>
+                    <textarea id="issue-description" name="issue-description" type="text"
+                        formControlName="results" class="largest-field" [ngClass]="{'error-border': (
+                            examInfo.controls.results.dirty ||
+                            examInfo.controls.results.touched) &&
+                            examInfo.controls.results.errors}"></textarea>
+                            <span class="error-message" *ngIf="(
+                            examInfo.controls.results.dirty ||
+                            examInfo.controls.results.touched) &&
+                            examInfo.controls.results.errors &&
+                            examInfo.controls.results.errors['required']">Campo obrigatório</span>
+                            <span class="error-message" *ngIf="(
+                            examInfo.controls.results.dirty &&
+                            examInfo.controls.results.touched) &&
+                            examInfo.controls.results.errors &&
+                            examInfo.controls.results.errors['minlength']">Este campo precisa de pelo menos 16 caracteres</span>
+                            <span class="error-message" *ngIf="(
+                            examInfo.controls.results.dirty ||
+                            examInfo.controls.results.touched) &&
+                            examInfo.controls.results.errors &&
+                            examInfo.controls.results.errors['maxlength']">Este campo não pode ultrapassar 1024 caracteres</span>
+                </div>
+            </section>
+        </div>
+    </form>
+
+
+</div>
