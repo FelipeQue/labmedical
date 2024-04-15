@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ToastrService } from 'ngx-toastr';
 import { PatientService } from '../../services/patient.service';
 import { BirthDatePipe } from '../../pipes/birth-date.pipe';
+import { ExamService } from '../../services/exam.service';
 
 @Component({
   selector: 'app-exam',
@@ -17,6 +18,7 @@ export class ExamComponent {
   constructor (
     private toastrService: ToastrService,
     private patientService: PatientService,
+    private examService: ExamService,
   ) {}
 
   patientInput = new FormGroup({
@@ -62,7 +64,33 @@ export class ExamComponent {
   }
 
   saveExam() {
-    console.log("Save Exam button clicked.")
+    if (!!this.selectedPatientId) {
+      if (this.examInfo.valid) {
+        const newExam = {
+          "patientId": this.selectedPatientId,
+          "name": this.examInfo.value.name,
+          "date": this.examInfo.value.date,
+          "time": this.examInfo.value.time,
+          "type": this.examInfo.value.type,
+          "laboratory": this.examInfo.value.laboratory,
+          "documentUrl": this.examInfo.value.documentUrl,
+          "results": this.examInfo.value.results,
+        }
+        this.examService.addExam(newExam).subscribe({
+          next: (response): void => {
+            this.examInfo.reset();
+            this.toastrService.success('Novo exame salvo com sucesso!', '');
+          },
+          error: (error) => {
+            this.toastrService.error('Algo deu errado ao tentar salvar o novo exame.', '');
+          }
+        });
+      } else {
+        this.toastrService.warning("Preencha todos os campos obrigatórios corretamente.");
+      }
+    } else {
+      this.toastrService.warning("Selecione um registro de paciente para vincular a este exame.");
+    }
   }
 
 }
