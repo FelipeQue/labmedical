@@ -67,10 +67,15 @@ export class PatientComponent {
           addressCity: this.address.localidade,
           addressState: this.address.uf}
         );
-        this.toastrService.success('Dados de endereço encontrados.', '', {progressBar: true});
+        if (this.address.logradouro) {
+          this.toastrService.success('Dados de endereço encontrados.', '');
+        }
+        else {
+          this.toastrService.error('Informações de endereço não encontradas.', '');
+        };
         },
         error: (error) => {
-          this.toastrService.error('Informações de endereço não encontradas.', '');
+          this.toastrService.error('CEP Inválido.', '');
         }
       }
     );
