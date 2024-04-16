@@ -4,20 +4,21 @@ import { HomeComponent } from './components/home/home.component';
 import { PatientComponent } from './components/patient/patient.component';
 import { ConsultationComponent } from './components/consultation/consultation.component';
 import { ExamComponent } from './components/exam/exam.component';
+import { RecordsComponent } from './components/records/records.component';
 
 export const routes: Routes = [
     {
         path: "",
         redirectTo: "/home",
-        pathMatch: "full"
+        pathMatch: "full",
     },
     {
         path: "home",
-        component: HomeComponent
+        component: HomeComponent,
     },
     {
         path: "login",
-        component: LoginComponent
+        component: LoginComponent,
     },
     {
         path: "register-patient",
@@ -25,10 +26,14 @@ export const routes: Routes = [
     },
     {
         path: "register-consultation",
-        component: ConsultationComponent
+        component: ConsultationComponent,
     },
     {
         path: "register-exam",
-        component: ExamComponent
+        component: ExamComponent,
+    },
+    {
+        path: "medical-records",
+        component: RecordsComponent,
     },
 ];
