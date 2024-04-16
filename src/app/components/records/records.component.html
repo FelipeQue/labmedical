@@ -9,7 +9,7 @@
     </div>
 
     <div *ngIf="resultsList" id="patient-results">
-        <div *ngFor="let patient of resultsList" (click)="redirectToDetai(patient.id)">
+        <div *ngFor="let patient of resultsList" (click)="redirectToDetail(patient.id)">
             <div class="patient-card">
                 <div class="card-header">
                 <h3 class="card-name">{{patient.name}}</h3>

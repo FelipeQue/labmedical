@@ -5,6 +5,7 @@ import { PatientComponent } from './components/patient/patient.component';
 import { ConsultationComponent } from './components/consultation/consultation.component';
 import { ExamComponent } from './components/exam/exam.component';
 import { RecordsComponent } from './components/records/records.component';
+import { RecordsDetailComponent } from './components/records/records-detail/records-detail.component';
 
 export const routes: Routes = [
     {
@@ -34,6 +35,9 @@ export const routes: Routes = [
     },
     {
         path: "medical-records",
-        component: RecordsComponent,
+        children: [
+            { path: "",component: RecordsComponent },
+            { path: ":id", component: RecordsDetailComponent },
+        ],
     },
 ];
