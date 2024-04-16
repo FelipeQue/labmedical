@@ -6,6 +6,7 @@ import { ConsultationComponent } from './components/consultation/consultation.co
 import { ExamComponent } from './components/exam/exam.component';
 import { RecordsComponent } from './components/records/records.component';
 import { RecordsDetailComponent } from './components/records/records-detail/records-detail.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -16,6 +17,7 @@ export const routes: Routes = [
     {
         path: "home",
         component: HomeComponent,
+        canActivate: [authGuard],
     },
     {
         path: "login",
@@ -23,15 +25,18 @@ export const routes: Routes = [
     },
     {
         path: "register-patient",
-        component: PatientComponent
+        component: PatientComponent,
+        canActivate: [authGuard],
     },
     {
         path: "register-consultation",
         component: ConsultationComponent,
+        canActivate: [authGuard],
     },
     {
         path: "register-exam",
         component: ExamComponent,
+        canActivate: [authGuard],
     },
     {
         path: "medical-records",
@@ -39,5 +44,6 @@ export const routes: Routes = [
             { path: "",component: RecordsComponent },
             { path: ":id", component: RecordsDetailComponent },
         ],
+        canActivate: [authGuard],
     },
 ];
