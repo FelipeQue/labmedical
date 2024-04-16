@@ -137,6 +137,90 @@
         "neighborhood": "Soledade",
         "landmark": ""
       }
+    },
+    {
+      "id": "920c",
+      "name": "Isaac Asimov",
+      "gender": "male",
+      "birthDate": "02011920",
+      "cpf": "11111111111",
+      "rg": "123456 SSP/NY",
+      "maritalStatus": "male",
+      "phone": "11922222222",
+      "email": "isaac.asimov@example.com",
+      "birthCity": "Petrovichi",
+      "emergencyContact": "11333333333",
+      "allergies": "Nenhuma",
+      "specialCare": "",
+      "insuranceCompany": "Galaxy Health",
+      "insuranceNumber": "987654321",
+      "insuranceExpiration": "15122024",
+      "address": {
+        "cep": "69918-080",
+        "city": "Rio Branco",
+        "state": "AC",
+        "street": "Rua Veterano Manoel de Barros",
+        "number": "123",
+        "complement": "Apto 4B",
+        "neighborhood": "Jardim Nazle",
+        "landmark": "Empire State Building (no Acre)"
+      }
+    },
+    {
+      "id": "9bcd",
+      "name": "Arthur C. Clarke",
+      "gender": "male",
+      "birthDate": "16121917",
+      "cpf": "22222222222",
+      "rg": "654321 SSP/LON",
+      "maritalStatus": "prefer-not",
+      "phone": "44555555555",
+      "email": "arthur.clarke@example.com",
+      "birthCity": "Minehead",
+      "emergencyContact": "44666666666",
+      "allergies": "Pólen",
+      "specialCare": null,
+      "insuranceCompany": "StarMed",
+      "insuranceNumber": "543210987",
+      "insuranceExpiration": "30062025",
+      "address": {
+        "cep": "57052-861",
+        "city": "Maceió",
+        "state": "AL",
+        "street": "Travessa Dona Antônia",
+        "number": "10",
+        "complement": null,
+        "neighborhood": "Gruta de Lourdes",
+        "landmark": null
+      }
+    },
+    {
+      "id": "e352",
+      "name": "Octavia E. Butler",
+      "gender": "female",
+      "birthDate": "22061947",
+      "cpf": "44444444444",
+      "rg": "765432 SSP/LA",
+      "maritalStatus": "male",
+      "phone": "33777777777",
+      "email": "octavia.butler@example.com",
+      "birthCity": "Pasadena",
+      "emergencyContact": "33888888888",
+      "allergies": "Flores",
+      "specialCare": null,
+      "insuranceCompany": "FutureHealth",
+      "insuranceNumber": "9876543210",
+      "insuranceExpiration": "05092024",
+      "address": {
+        "cep": "68904-812",
+        "city": "Macapá",
+        "state": "AP",
+        "street": "Rua Antônio Pinheiro Sampaio",
+        "number": "1234",
+        "complement": "Apto 102",
+        "neighborhood": "Novo Buritizal",
+        "landmark": null
+      }
     }
   ],
   "consultations": [
@@ -156,6 +240,16 @@
       "reason": "Dor abdominal persistente",
       "date": "2024-04-12",
       "time": "10:00",
+      "issueDescription": "Paciente relata dores intensas na região abdominal, com desconforto e inchaço.",
+      "prescribedMedication": "Antiespasmódico",
+      "dosagePrecautions": "Tomar 1 comprimido após as refeições."
+    },
+    {
+      "id": "d733",
+      "patientId": "e352",
+      "reason": "Dor abdominal persistente",
+      "date": "2024-04-15",
+      "time": "20:59",
       "issueDescription": "Paciente relata dores intensas na região abdominal, com desconforto e inchaço.",
       "prescribedMedication": "Antiespasmódico",
       "dosagePrecautions": "Tomar 1 comprimido após as refeições."
@@ -183,6 +277,17 @@
       "laboratory": "Laboratório XYZ",
       "documentUrl": "",
       "results": "Cultura de Urina: Nenhuma bactéria patogênica detectada.\nLeucócitos: 2 células por campo."
+    },
+    {
+      "id": "e04e",
+      "patientId": "9bcd",
+      "name": "Hemograma completo\"",
+      "date": "2024-04-15",
+      "time": "21:01",
+      "type": "Sangue",
+      "laboratory": "Laboratório XYZ",
+      "documentUrl": "",
+      "results": "Hemoglobina: 13 g/dL, Leucócitos: 7000/mm³"
     }
   ]
 }
