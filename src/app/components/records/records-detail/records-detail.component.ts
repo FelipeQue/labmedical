@@ -5,11 +5,12 @@ import { ConsultationService } from '../../../services/consultation.service';
 import { ExamService } from '../../../services/exam.service';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
+import { PhonePipe } from '../../../pipes/phone.pipe';
 
 @Component({
   selector: 'app-records-detail',
   standalone: true,
-  imports: [CommonModule, DatePipe],
+  imports: [CommonModule, DatePipe, PhonePipe],
   templateUrl: './records-detail.component.html',
   styleUrl: './records-detail.component.scss'
 })

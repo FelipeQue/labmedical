@@ -8,10 +8,10 @@
 {{patient.name}}
 </div>
 <div id="patient-data-body">
-    <p>convênio: {{patient.insuranceCompany}}</p>
-    <p>contato de emergência: {{patient.emergencyContact}}</p> COLOCAR UM PIPE AQUI.
-    <p>lista de alergias: {{patient.allergies}}</p>
-    <p>lista de cuidados específicos: {{patient.specialCare}}</p>
+    <p>Convênio: {{patient.insuranceCompany}}</p>
+    <p>Contato de emergência: {{patient.emergencyContact | phone}}</p>
+    <p>Lista de alergias: {{patient.allergies}}</p>
+    <p>Lista de cuidados específicos: {{patient.specialCare}}</p>
 </div>
 </div>
 
@@ -34,7 +34,7 @@
             <li>{{event.date | date: "dd/MM/YYYY"}}</li>
             <li>{{event.time}}</li>
             <li>{{event.laboratory}}</li>
-            <li>{{event.documentUrl}}</li>
+            <li *ngIf="event.documentUrl">{{event.documentUrl}}</li>
             <li>{{event.type}}</li>
             <li>{{event.name}}</li>
             <li>{{event.results}}</li>
