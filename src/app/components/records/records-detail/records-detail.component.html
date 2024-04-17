@@ -1,1 +1,59 @@
-<p>records-detail works!</p>
+
+<div id="records-detail-container">
+
+
+
+<div id="patient-data">
+<div id="patient-data-header">
+{{patient.name}}
+</div>
+<div id="patient-data-body">
+    <p>convênio: {{patient.insuranceCompany}}</p>
+    <p>contato de emergência: {{patient.emergencyContact}}</p> COLOCAR UM PIPE AQUI.
+    <p>lista de alergias: {{patient.allergies}}</p>
+    <p>lista de cuidados específicos: {{patient.specialCare}}</p>
+</div>
+</div>
+
+<div id="events-container">
+
+<div class="patient-event" *ngFor="let event of patientEvents">
+    <div class="event-consultation" *ngIf="event.reason">
+    <ul>
+        <li>{{event.date | brDatePipe}}</li>
+        <li>{{event.time}}</li>
+        <li>{{event.reason}}</li>
+        <li>{{event.issueDescription}}</li>
+        <li>{{event.prescribedMedication}}</li>
+        <li>{{event.dosagePrecautions}}</li>
+    </ul>
+    </div>
+
+    <div class="event-exam" *ngIf="event.type">
+        <ul>
+            <li>{{event.date | brDatePipe}}</li>
+            <li>{{event.time}}</li>
+            <li>{{event.laboratory}}</li>
+            <li>{{event.documentUrl}}</li>
+            <li>{{event.type}}</li>
+            <li>{{event.name}}</li>
+            <li>{{event.results}}</li>
+        </ul>
+    </div>
+</div>
+
+
+</div>
+
+
+Nas consultas, deve haver todas as informações cadastradas, dando destaque ao motivo, data e hora.
+
+Também deve haver um botão de editar, que quando clicado, abrirá a página de cadastro da consulta, com os botões de edição, deleção e salvamento ativados. Nesta página, o usuário (médico) poderá editar as informações ou deletar uma consulta.
+
+Nos exames, deve haver todas as informações cadastradas, dando destaque ao nome, laboratório, data, hora e anexo. Também deve haver um botão de editar, que quando clicado, abrirá a página de cadastro de exame, com os botões de edição, deleção e salvamento ativados. Nesta página, o usuário (médico) poderá editar as informações ou deletar um exame.
+
+Dica: Você pode utilizar uma tabela com todas as informações, categorizada por consulta ou exame.
+
+
+
+</div>
