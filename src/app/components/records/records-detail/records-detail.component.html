@@ -1,59 +1,114 @@
-
 <div id="records-detail-container">
 
 
 
-<div id="patient-data">
-<div id="patient-data-header">
-{{patient.name}}
-</div>
-<div id="patient-data-body">
-    <p>Convênio: {{patient.insuranceCompany}}</p>
-    <p>Contato de emergência: {{patient.emergencyContact | phone}}</p>
-    <p>Lista de alergias: {{patient.allergies}}</p>
-    <p>Lista de cuidados específicos: {{patient.specialCare}}</p>
-</div>
-</div>
-
-<div id="events-container">
-
-<div class="patient-event" *ngFor="let event of patientEvents">
-    <div class="event-consultation" *ngIf="event.reason">
-    <ul>
-        <li>{{event.date | date: "dd/MM/YYYY"}}</li>
-        <li>{{event.time}}</li>
-        <li>{{event.reason}}</li>
-        <li>{{event.issueDescription}}</li>
-        <li>{{event.prescribedMedication}}</li>
-        <li>{{event.dosagePrecautions}}</li>
-    </ul>
+    <div id="patient-data">
+        <div id="patient-data-header">
+            <div id="patient-portrait"><img src="../../../../assets/images/portrait-patient.png"></div>
+            <div id="patient-name">{{patient.name}}</div>
+        </div>
+        <div id="patient-data-body">
+            <h4>Convênio</h4>
+            <p>{{patient.insuranceCompany}}</p>
+            <h4>Contato de emergência</h4>
+            <p>{{patient.emergencyContact | phone}}</p>
+            <h4>Lista de alergias</h4>
+            <p>{{patient.allergies}}</p>
+            <h4 *ngIf="patient.specialCare">Lista de cuidados específicos</h4><p *ngIf="patient.specialCare">{{patient.specialCare}}</p>
+        </div>
     </div>
 
-    <div class="event-exam" *ngIf="event.type">
-        <ul>
-            <li>{{event.date | date: "dd/MM/YYYY"}}</li>
-            <li>{{event.time}}</li>
-            <li>{{event.laboratory}}</li>
-            <li *ngIf="event.documentUrl">{{event.documentUrl}}</li>
-            <li>{{event.type}}</li>
-            <li>{{event.name}}</li>
-            <li>{{event.results}}</li>
-        </ul>
+    <div id="events-container">
+
+        <div class="patient-event" *ngFor="let event of patientEvents">
+            <div class="event-consultation" *ngIf="event.reason">
+                <div class="event-header">
+                    <div>
+                        <h3>Consulta</h3>
+                    </div>
+                    <div class="event-header-secondrow">
+                        <div class="header-unit">
+                            <fa-icon [icon]="faStethoscope"></fa-icon>
+                            <h2>{{event.reason}}</h2>
+                        </div>
+                        <div class="event-header-datetime">
+                            <div class="header-unit">
+                                <fa-icon [icon]="faCalendarDay"></fa-icon>
+                                <h2>{{event.date | date: "dd/MM/YYYY"}}</h2>
+                            </div>
+                            <div class="header-unit">
+                                <div><fa-icon [icon]="faClock"></fa-icon></div>
+                                <div>
+                                    <h2>{{event.time}}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-body">
+                    <h4>Descrição do problema </h4>
+                    <p>{{event.issueDescription}}</p>
+
+                    <h4>Medicação Receitada </h4>
+                    <p>{{event.prescribedMedication}}</p>
+
+                    <h4>Dosagem e Precauções </h4>
+                    <p>{{event.dosagePrecautions}}</p>
+                </div>
+                <div class="event-button">
+                    <button>Editar</button>
+                </div>
+            </div>
+
+            <div class="event-exam" *ngIf="event.type">
+                <div class="event-header">
+                    <div>
+                        <h3>Exame</h3>
+                    </div>
+                    <div class="event-header-secondrow">
+                        <div class="header-unit">
+                            <fa-icon [icon]="faMicroscope"></fa-icon>
+                            <h2>{{event.name}}</h2>
+                        </div>
+                        <div class="event-header-datetime">
+                            <div class="header-unit">
+                                <fa-icon [icon]="faCalendarDay"></fa-icon>
+                                <h2>{{event.date | date: "dd/MM/YYYY"}}</h2>
+                            </div>
+                            <div class="header-unit">
+                                <div><fa-icon [icon]="faClock"></fa-icon></div>
+                                <div>
+                                    <h2>{{event.time}}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-body">
+                    <div class="event-body-firstrow">
+                        <div class="exam-lab">
+                            <h4>Laboratório </h4>
+                            <p>{{event.laboratory}}</p>
+                        </div>
+                        <div class="exam-type">
+                            <h4>Tipo </h4>
+                            <p>{{event.type}}</p>
+                        </div>
+                    </div>
+                    <h4 *ngIf="event.documentUrl">Anexo</h4>
+                    <a *ngIf="event.documentUrl" class="attachment" href="{{event.documentUrl}}"
+                        target="_blank"><fa-icon [icon]="faPaperclip"></fa-icon></a>
+                    <h4>Resultados </h4>
+                    <p>{{event.results}}</p>
+                </div>
+                <div class="event-button">
+                    <button>Editar</button>
+                </div>
+            </div>
+        </div>
+
+
     </div>
-</div>
-
-
-</div>
-
-
-Nas consultas, deve haver todas as informações cadastradas, dando destaque ao motivo, data e hora.
-
-Também deve haver um botão de editar, que quando clicado, abrirá a página de cadastro da consulta, com os botões de edição, deleção e salvamento ativados. Nesta página, o usuário (médico) poderá editar as informações ou deletar uma consulta.
-
-Nos exames, deve haver todas as informações cadastradas, dando destaque ao nome, laboratório, data, hora e anexo. Também deve haver um botão de editar, que quando clicado, abrirá a página de cadastro de exame, com os botões de edição, deleção e salvamento ativados. Nesta página, o usuário (médico) poderá editar as informações ou deletar um exame.
-
-Dica: Você pode utilizar uma tabela com todas as informações, categorizada por consulta ou exame.
-
 
 
 </div>

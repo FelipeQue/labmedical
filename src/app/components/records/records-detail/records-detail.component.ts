@@ -6,11 +6,17 @@ import { ExamService } from '../../../services/exam.service';
 import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { PhonePipe } from '../../../pipes/phone.pipe';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCalendarDay } from '@fortawesome/free-solid-svg-icons';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
+import { faStethoscope } from '@fortawesome/free-solid-svg-icons';
+import { faMicroscope } from '@fortawesome/free-solid-svg-icons';
+import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-records-detail',
   standalone: true,
-  imports: [CommonModule, DatePipe, PhonePipe],
+  imports: [CommonModule, DatePipe, PhonePipe, FontAwesomeModule],
   templateUrl: './records-detail.component.html',
   styleUrl: './records-detail.component.scss'
 })
@@ -26,6 +32,13 @@ export class RecordsDetailComponent {
   patientId: string = "";
   patient: any = {};
   patientEvents: any = [];
+
+  faCalendarDay = faCalendarDay;
+  faClock = faClock;
+  faStethoscope = faStethoscope;
+  faMicroscope = faMicroscope;
+  faPaperclip = faPaperclip;
+
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((parameters) => {
