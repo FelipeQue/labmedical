@@ -20,7 +20,7 @@
 <div class="patient-event" *ngFor="let event of patientEvents">
     <div class="event-consultation" *ngIf="event.reason">
     <ul>
-        <li>{{event.date | brDatePipe}}</li>
+        <li>{{event.date | date: "dd/MM/YYYY"}}</li>
         <li>{{event.time}}</li>
         <li>{{event.reason}}</li>
         <li>{{event.issueDescription}}</li>
@@ -31,7 +31,7 @@
 
     <div class="event-exam" *ngIf="event.type">
         <ul>
-            <li>{{event.date | brDatePipe}}</li>
+            <li>{{event.date | date: "dd/MM/YYYY"}}</li>
             <li>{{event.time}}</li>
             <li>{{event.laboratory}}</li>
             <li>{{event.documentUrl}}</li>
