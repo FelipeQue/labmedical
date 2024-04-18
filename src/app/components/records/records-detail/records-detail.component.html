@@ -8,13 +8,14 @@
             <div id="patient-name">{{patient.name}}</div>
         </div>
         <div id="patient-data-body">
-            <h4>Convênio</h4>
-            <p>{{patient.insuranceCompany}}</p>
+            <h4 *ngIf="patient.insuranceCompany">Convênio</h4>
+            <p *ngIf="patient.insuranceCompany">{{patient.insuranceCompany}}</p>
             <h4>Contato de emergência</h4>
             <p>{{patient.emergencyContact | phone}}</p>
-            <h4>Lista de alergias</h4>
-            <p>{{patient.allergies}}</p>
-            <h4 *ngIf="patient.specialCare">Lista de cuidados específicos</h4><p *ngIf="patient.specialCare">{{patient.specialCare}}</p>
+            <h4 *ngIf="patient.allergies">Lista de alergias</h4>
+            <p *ngIf="patient.allergies">{{patient.allergies}}</p>
+            <h4 *ngIf="patient.specialCare">Lista de cuidados específicos</h4>
+            <p *ngIf="patient.specialCare">{{patient.specialCare}}</p>
         </div>
     </div>
 
