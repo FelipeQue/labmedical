@@ -2,21 +2,39 @@
 
     <div id="stats">
         <div class="stats-unit">
-            Número de pacientes: {{patientsAmount}}
+            <div class="stats-icon">
+                <fa-icon [icon]="faPeopleGroup"></fa-icon>
+            </div>
+            <div class="stats-text">
+                <div class="stats-number">{{patientsAmount}}</div>
+                <div>pacientes</div>
+            </div> 
         </div>
         <div class="stats-unit">
-            Número de consultas: {{consultationsAmount}}
+            <div class="stats-icon">
+                <fa-icon [icon]="faStethoscope"></fa-icon>
+            </div>
+            <div class="stats-text">
+                <div class="stats-number">{{consultationsAmount}}</div>
+                <div>consultas</div>
+            </div>
         </div>
         <div class="stats-unit">
-            Número de exames: {{examsAmount}}
+            <div class="stats-icon">
+                <fa-icon [icon]="faMicroscope"></fa-icon>
+            </div>
+            <div class="stats-text">
+                <div class="stats-number">{{examsAmount}}</div>
+                <div>exames</div>
+            </div>
         </div>
 
     </div>
 
     <div id="patient-search">
         <label for="patient-input">Busca de paciente:</label>
-        <form id="patient-search-form" (ngSubmit)="searchPatient()" [formGroup]="patientInput">
-            <input id="patient-input" type="text" formControlName="nameOrId">
+        <form id="patient-search-form" (ngSubmit)="searchPatient()" [formGroup]="patientSearch">
+            <input id="patient-input" type="text" formControlName="searchInput">
             <button type="submit" class="primary-button">Pesquisar</button>
         </form>
     </div>

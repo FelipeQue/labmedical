@@ -6,11 +6,15 @@ import { BirthDatePipe } from '../../pipes/birth-date.pipe';
 import { ToastrService } from 'ngx-toastr';
 import { ConsultationService } from '../../services/consultation.service';
 import { ExamService } from '../../services/exam.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faStethoscope } from '@fortawesome/free-solid-svg-icons';
+import { faMicroscope } from '@fortawesome/free-solid-svg-icons';
+import { faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, BirthDatePipe],
+  imports: [CommonModule, ReactiveFormsModule, BirthDatePipe, FontAwesomeModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -24,8 +28,8 @@ export class HomeComponent {
   ) {
   }
 
-  patientInput = new FormGroup({
-    nameOrId: new FormControl('')
+  patientSearch = new FormGroup({
+    searchInput: new FormControl('')
   });
 
   resultsList: any = [];
@@ -34,6 +38,10 @@ export class HomeComponent {
   patientsAmount: number = 0;
   examsAmount: number = 0;
   consultationsAmount: number = 0;
+
+  faStethoscope = faStethoscope;
+  faMicroscope = faMicroscope;
+  faPeopleGroup = faPeopleGroup;
 
   ngOnInit() {
     this.patientService.getPatient().subscribe((patients) => {
@@ -51,14 +59,15 @@ export class HomeComponent {
   }
 
   searchPatient() {
-    const nameOrId = this.patientInput.value.nameOrId?.trim();
-    if (nameOrId) {
+    const searchInput = this.patientSearch.value.searchInput?.trim();
+    if (searchInput) {
       this.patientService.getPatient().subscribe((patients) => {
         this.patientsList = patients;
-        this.resultsList = this.patientsList.filter((searchedPatient: { name: string, id: string }) => {
-          const isNameMatch = searchedPatient.name && searchedPatient.name.toLowerCase().includes(nameOrId.toLowerCase());
-          const isIdMatch = searchedPatient.id && searchedPatient.id.includes(nameOrId);
-          return isNameMatch || isIdMatch;
+        this.resultsList = this.patientsList.filter((searchedPatient: { name: string, phone: string, email: string, }) => {
+          const isNameMatch = searchedPatient.name && searchedPatient.name.toLowerCase().includes(searchInput.toLowerCase());
+          const isPhoneMatch = searchedPatient.phone && searchedPatient.phone.includes(searchInput);
+          const isEmailMatch = searchedPatient.email && searchedPatient.email.includes(searchInput);
+          return isNameMatch || isPhoneMatch || isEmailMatch;
         });
       });
     } else {
