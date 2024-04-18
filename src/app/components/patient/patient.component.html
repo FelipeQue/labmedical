@@ -30,10 +30,10 @@
                     <select id="patient-gender" name="patient-gender" formControlName="gender" required [ngClass]="{'error-border': (patientInfo.controls.gender.dirty ||
 patientInfo.controls.gender.touched) &&
 patientInfo.controls.gender.errors}">
-                        <option value="male">Masculino</option>
-                        <option value="female">Feminino</option>
-                        <option value="other">Outro</option>
-                        <option value="prefer-not">Preferiu não informar</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Feminino">Feminino</option>
+                        <option value="Outro">Outro</option>
+                        <option value="Preferiu não informar">Preferiu não informar</option>
                     </select>
                     <span class="error-message" *ngIf="(patientInfo.controls.gender.dirty ||
         patientInfo.controls.gender.touched) &&
@@ -96,11 +96,11 @@ patientInfo.controls.gender.errors}">
                         required [ngClass]="{'error-border': (patientInfo.controls.maritalStatus.dirty ||
 patientInfo.controls.maritalStatus.touched) &&
 patientInfo.controls.maritalStatus.errors}">
-                        <option value="male">Nunca casou</option>
-                        <option value="female">Casou</option>
-                        <option value="other">Separou</option>
-                        <option value="prefer-not">Divorciou</option>
-                        <option value="prefer-not">Viuvou</option>
+                        <option value="Nunca casou">Nunca casou</option>
+                        <option value="Casou">Casou</option>
+                        <option value="Separou">Separou</option>
+                        <option value="Divorciou">Divorciou</option>
+                        <option value="Viuvou">Viuvou</option>
                     </select>
                     <span class="error-message" *ngIf="(patientInfo.controls.maritalStatus.dirty ||
         patientInfo.controls.maritalStatus.touched) &&
