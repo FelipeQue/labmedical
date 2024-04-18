@@ -1,3 +1,7 @@
-<app-toolbar *ngIf="!isLoginPage"></app-toolbar>
-<app-sidemenu *ngIf="!isLoginPage"></app-sidemenu>
-<router-outlet />
+<div class="joana">
+    <app-sidemenu *ngIf="!isLoginPage"></app-sidemenu>
+    <div class="maria-body">
+        <app-toolbar *ngIf="!isLoginPage"></app-toolbar>
+        <div class="claudia"><router-outlet /></div>
+    </div>
+</div>

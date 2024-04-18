@@ -6,6 +6,8 @@ import { faStethoscope } from '@fortawesome/free-solid-svg-icons';
 import { faMicroscope } from '@fortawesome/free-solid-svg-icons';
 import { faClipboardUser } from '@fortawesome/free-solid-svg-icons';
 import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
+import { faSquareCaretLeft } from '@fortawesome/free-solid-svg-icons';
+import { faSquareCaretRight } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -20,13 +22,16 @@ export class SidemenuComponent {
     private toastrService: ToastrService,
   ) {};
 
+  expanded = true;
+
   faCircleInfo = faCircleInfo;
   faUserPlus = faUserPlus;
   faStethoscope = faStethoscope;
   faMicroscope = faMicroscope;
   faClipboardUser = faClipboardUser;
   faDoorOpen = faDoorOpen;
-
+  faSquareCaretLeft = faSquareCaretLeft;
+  faSquareCaretRight = faSquareCaretRight;
 
   logout(){
     localStorage.setItem("loggedUser", JSON.stringify(""));
