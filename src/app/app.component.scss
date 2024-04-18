@@ -1,11 +1,11 @@
-.joana {
+.everything-container {
     display: flex;
     width: 100%;
     height: 100vh;
     margin: 0;
     padding: 0;
   
-    .maria-body {
+    .almost-everything-container {
       margin: 0;
       padding: 0;
       display: flex;
@@ -13,7 +13,7 @@
       width: 100%;
       height: 100vh;
 
-      .claudia {
+      .router-outlet-container {
         height: 100vh;
         overflow-y: scroll;
       }
