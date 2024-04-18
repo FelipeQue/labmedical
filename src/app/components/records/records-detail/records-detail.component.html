@@ -57,7 +57,7 @@
                     <p>{{event.dosagePrecautions}}</p>
                 </div>
                 <div class="event-button">
-                    <button>Editar</button>
+                    <button (click)="editConsultation(event.id)">Editar</button>
                 </div>
             </div>
 
@@ -103,7 +103,7 @@
                     <p>{{event.results}}</p>
                 </div>
                 <div class="event-button">
-                    <button>Editar</button>
+                    <button (click)="editExam(event.id)">Editar</button>
                 </div>
             </div>
         </div>
