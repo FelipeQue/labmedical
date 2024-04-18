@@ -2,13 +2,31 @@
 
     <div id="stats">
         <div class="stats-unit">
-            Número de pacientes: {{patientsAmount}}
+            <div class="stats-icon">
+                <fa-icon [icon]="faPeopleGroup"></fa-icon>
+            </div>
+            <div class="stats-text">
+                <div class="stats-number">{{patientsAmount}}</div>
+                <div>pacientes</div>
+            </div> 
         </div>
         <div class="stats-unit">
-            Número de consultas: {{consultationsAmount}}
+            <div class="stats-icon">
+                <fa-icon [icon]="faStethoscope"></fa-icon>
+            </div>
+            <div class="stats-text">
+                <div class="stats-number">{{consultationsAmount}}</div>
+                <div>consultas</div>
+            </div>
         </div>
         <div class="stats-unit">
-            Número de exames: {{examsAmount}}
+            <div class="stats-icon">
+                <fa-icon [icon]="faMicroscope"></fa-icon>
+            </div>
+            <div class="stats-text">
+                <div class="stats-number">{{examsAmount}}</div>
+                <div>exames</div>
+            </div>
         </div>
 
     </div>

@@ -6,11 +6,15 @@ import { BirthDatePipe } from '../../pipes/birth-date.pipe';
 import { ToastrService } from 'ngx-toastr';
 import { ConsultationService } from '../../services/consultation.service';
 import { ExamService } from '../../services/exam.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faStethoscope } from '@fortawesome/free-solid-svg-icons';
+import { faMicroscope } from '@fortawesome/free-solid-svg-icons';
+import { faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, BirthDatePipe],
+  imports: [CommonModule, ReactiveFormsModule, BirthDatePipe, FontAwesomeModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -34,6 +38,10 @@ export class HomeComponent {
   patientsAmount: number = 0;
   examsAmount: number = 0;
   consultationsAmount: number = 0;
+
+  faStethoscope = faStethoscope;
+  faMicroscope = faMicroscope;
+  faPeopleGroup = faPeopleGroup;
 
   ngOnInit() {
     this.patientService.getPatient().subscribe((patients) => {
