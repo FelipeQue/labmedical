@@ -1,22 +1,40 @@
-<div id="home-page" [ngClass]="{'sidemenu': true}">
-    
-    <div class="white-box">home worksss!</div>
-    
+<div id="home-page">
+
+    <div id="stats">
+        <div class="stats-unit">
+            Número de pacientes: {{patientsAmount}}
+        </div>
+        <div class="stats-unit">
+            Número de consultas: {{consultationsAmount}}
+        </div>
+        <div class="stats-unit">
+            Número de exames: {{examsAmount}}
+        </div>
+
+    </div>
+
+    <div id="patient-search">
+        <label for="patient-input">Busca de paciente:</label>
+        <form id="patient-search-form" (ngSubmit)="searchPatient()" [formGroup]="patientInput">
+            <input id="patient-input" type="text" formControlName="nameOrId">
+            <button type="submit" class="primary-button">Pesquisar</button>
+        </form>
+    </div>
+
+    <div *ngIf="resultsList" id="patient-results">
+        <div *ngFor="let patient of resultsList">
+            <div class="patient-card">
+                <div class="card-header">
+                    <h3 class="card-name">{{patient.name}}</h3>
+                    <p>Registro: {{patient.id}}</p>
+                    <p>Data de nascimento: {{patient.birthDate | birthDate}}</p>
+                    <p>Convênio: {{patient.insuranceCompany}}
+                        <span *ngIf="!patient.insuranceCompany">Não possui convênio.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
 
 
-    {{patients}}
 
-    <p>====</p>
-
-    <div>
-    @for (patient of patients; track patient.name) {
-        {{patient.name}}
-    }
 </div>
-
-
-
-</div>
-
-
-
