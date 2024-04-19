@@ -159,7 +159,7 @@ export class ConsultationComponent {
   };  
 
   deleteConsultation() {
-    this.confirmDialogService.confirm('Confirmar', 'Você deseja realmente apagar esta consulta? Esta ação é irreversível.')
+    this.confirmDialogService.confirm('Confirmar', 'Você deseja realmente apagar esta consulta? Esta ação é irreversível.', "Sim", "Cancelar")
     .then((confirmed) => {
       if (confirmed) {
         this.consultationService.deleteConsultation(this.consultationToEdit.id).subscribe({
