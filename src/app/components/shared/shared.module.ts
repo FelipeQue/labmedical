@@ -4,10 +4,11 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { RouterLink } from '@angular/router';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
-  declarations: [ToolbarComponent,SidemenuComponent],
+  declarations: [ToolbarComponent,SidemenuComponent, ConfirmDialogComponent],
   imports: [CommonModule, FontAwesomeModule, RouterLink],
-  exports: [ToolbarComponent,SidemenuComponent],
+  exports: [ToolbarComponent,SidemenuComponent, ConfirmDialogComponent],
 })
 export class SharedModule { }

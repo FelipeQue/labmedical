@@ -1,6 +1,6 @@
 import { Component, TemplateRef, inject, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgbModal, NgbAlert, NgbToast } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { CustomValidatorService } from '../../services/custom-validator.service';
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, NgbAlert, NgbToast],
+  imports: [ReactiveFormsModule, CommonModule, NgbAlert],
   providers: [CustomValidatorService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
