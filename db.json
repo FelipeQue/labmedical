@@ -197,17 +197,17 @@
     {
       "id": "e352",
       "name": "Octavia Estelle Butler",
-      "gender": "female",
+      "gender": "Feminino",
       "birthDate": "22061947",
       "cpf": "44444444444",
       "rg": "765432 SSP/LA",
-      "maritalStatus": "male",
+      "maritalStatus": "Nunca casou",
       "phone": "33777777777",
       "email": "octavia.butler@example.com",
       "birthCity": "Pasadena",
       "emergencyContact": "33888888888",
       "allergies": "Flores",
-      "specialCare": null,
+      "specialCare": "Diabética",
       "insuranceCompany": "FutureHealth",
       "insuranceNumber": "9876543210",
       "insuranceExpiration": "05092024",
@@ -219,7 +219,7 @@
         "number": "1234",
         "complement": "Apto 102",
         "neighborhood": "Novo Buritizal",
-        "landmark": null
+        "landmark": "Perto da praça"
       }
     }
   ],
@@ -311,6 +311,39 @@
       "documentUrl": "",
       "results": "Arrasou muitíssimo.",
       "id": "4ac3"
+    },
+    {
+      "id": "fadb",
+      "patientId": "00d0",
+      "name": "Urocultura",
+      "date": "2024-04-19",
+      "time": "01:03",
+      "type": "Urina",
+      "laboratory": "Laboratório XYZ",
+      "documentUrl": "",
+      "results": "Muito bons resultados."
+    },
+    {
+      "patientId": "00d0",
+      "name": "BBBBBBBBB",
+      "date": "2024-04-17",
+      "time": "05:04",
+      "type": "Lalalaalalasadfsf",
+      "laboratory": "Lalalaalala",
+      "documentUrl": null,
+      "results": "Lalalaalala Lalalaalala",
+      "id": "ca0e"
+    },
+    {
+      "id": "83ea",
+      "patientId": "fb65",
+      "name": "Hemograma completinho",
+      "date": "2024-04-19",
+      "time": "01:07",
+      "type": "Sangue",
+      "laboratory": "Laboratório XYZ",
+      "documentUrl": "",
+      "results": "Maravilhoso, genial, muito bom."
     }
   ]
 }

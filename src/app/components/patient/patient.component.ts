@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { AddressService } from '../../services/address.service';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { PatientService } from '../../services/patient.service';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
+import { ConfirmDialogService } from '../../services/confirm-dialog.service';
+import { ExamService } from '../../services/exam.service';
+import { ConsultationService } from '../../services/consultation.service';
 
 @Component({
   selector: 'app-patient',
@@ -19,14 +23,17 @@ export class PatientComponent {
     private addressService: AddressService,
     private patientService: PatientService,
     private toastrService: ToastrService,
+    private activatedRoute: ActivatedRoute,
+    private location: Location,
+    private confirmDialogService: ConfirmDialogService,
+    private examService: ExamService,
+    private consultationService: ConsultationService,
   ) {};
 
-  registerMode: boolean = true;
   editingMode: boolean = false;
-
-
-  // datePattern = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/\d{4}$/;
-  datePattern = /^(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])\d{4}$/; //Este pattern não inclui separação por /, isso se dá porque a validação de data via ngx-mask não funcionou. Então criei uma validação por pattern, mas daí o [hiddenInput]="false" da máscara não funcionou. Então usei um pattern de apenas números e apliquei [hiddenInput]="true".
+  patientToEdit: any = {};
+  address: any | undefined;
+  datePattern = /^(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[012])\d{4}$/;
 
   patientInfo = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(64)]),
@@ -54,7 +61,50 @@ export class PatientComponent {
     addressLandmark: new FormControl(''),
   });
 
-  address: any | undefined;
+  ngOnInit() {
+    this.activatedRoute.params.subscribe((parameters) => {
+      let patientId = parameters['id'];
+      if (patientId) {
+        this.editingMode = true;
+        console.log(this.editingMode);
+        this.getPatient(patientId);
+      }
+      else {
+        this.editingMode = false;
+      }
+    });
+  };
+
+  getPatient(patientId: string) {
+    this.patientService.getPatient().subscribe((patients) => {
+      this.patientToEdit = patients.find((patient: { id: string; }) => patient.id == patientId);
+      this.patientInfo.patchValue({
+        name: this.patientToEdit.name,
+        gender: this.patientToEdit.gender,
+        birthDate: this.patientToEdit.birthDate,
+        cpf: this.patientToEdit.cpf,
+        rg: this.patientToEdit.rg,
+        maritalStatus: this.patientToEdit.maritalStatus,
+        phone: this.patientToEdit.phone,
+        email: this.patientToEdit.email,
+        birthCity: this.patientToEdit.birthCity,
+        emergencyContact: this.patientToEdit.emergencyContact,
+        allergies: this.patientToEdit.allergies,
+        specialCare: this.patientToEdit.specialCare,
+        insuranceCompany: this.patientToEdit.insuranceCompany,
+        insuranceNumber: this.patientToEdit.insuranceNumber,
+        insuranceExpiration: this.patientToEdit.insuranceExpiration,
+        cep: this.patientToEdit.address.cep,
+        addressStreet: this.patientToEdit.address.street,
+        addressNumber: this.patientToEdit.address.number,
+        addressComplement: this.patientToEdit.address.complement,
+        addressNeighborhood: this.patientToEdit.address.neighborhood,
+        addressCity: this.patientToEdit.address.city,
+        addressState: this.patientToEdit.address.state,
+        addressLandmark: this.patientToEdit.address.landmark,
+        });
+      })
+  };
 
   searchAddress() {
     this.addressService.getAddress(this.patientInfo.value.cep).subscribe(
@@ -122,6 +172,74 @@ export class PatientComponent {
     } else {
       this.toastrService.warning("Preencha todos os campos obrigatórios corretamente");
     }
-  }
+  };
+
+  editExam() {
+    if (this.patientInfo.valid) {
+      const editedPatient = {
+        "name": this.examInfo.value.name,
+      }
+      this.examService.editExam(this.patientToEdit.id, editedExam).subscribe({
+        next: (response): void => {
+          this.toastrService.success('Registro de paciente atualizado com sucesso!', '');
+          this.location.back();
+        },
+        error: (error) => {
+          this.toastrService.error('Algo deu errado ao tentar editar este registro.', '');
+        }
+      });
+    } else {
+      this.toastrService.warning("Preencha todos os campos obrigatórios corretamente.");
+    }
+};  
+
+deletePatient() {
+  this.confirmDialogService.confirm('Confirmar', 'Você deseja realmente apagar este registro de paciente? Esta ação é irreversível.', "Sim", "Cancelar")
+  .then((confirmed) => {
+    if (confirmed) {
+
+      if (isDeletable(this.patientToEdit.id)) {
+
+      }
+
+      this.patientService.deletePatient(this.patientToEdit.id).subscribe({
+        next: (response): void => {
+          this.toastrService.success('Registro de paciente apagado com sucesso!', '');
+          this.location.back();
+        },
+        error: (error) => {
+          this.toastrService.error('Algo deu errado ao tentar apagar o registro.', '');
+        }
+      })
+    };
+
+  })
+  .catch((error) => {});
+};
+
+  patientEvents: any[] = [];
+  isDeletable(id: string) {
+    let patientConsultations: any[] = [];
+      this.consultationService.getConsultation().subscribe((consultations) => {
+        patientConsultations = consultations.filter((consultation: { patientId: string; }) => consultation.patientId == this.patientToEdit.Id);
+        let patientExams  = [];
+        this.examService.getExam().subscribe((exams) => {
+          patientExams = exams.filter((exam: { patientId: string; }) => exam.patientId == this.patientToEdit.id);
+          this.patientEvents = patientConsultations.concat(patientExams);
+          console.log("Existem eventos associados a esse paciente?" + (this.patientEvents.length > 0));
+          if (this.patientEvents.length > 0) {
+            return true;
+          } else { 
+            return false;
+          };
+        });
+      });
+  };
+
+  goBack() {
+    this.location.back();
+    };
+
+
 
 }
