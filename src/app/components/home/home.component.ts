@@ -12,6 +12,7 @@ import { faMicroscope } from '@fortawesome/free-solid-svg-icons';
 import { faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
 import { AgePipe } from '../../pipes/age.pipe';
 import { PhonePipe } from '../../pipes/phone.pipe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +24,7 @@ import { PhonePipe } from '../../pipes/phone.pipe';
 export class HomeComponent {
 
   constructor (
+    private router: Router,
     private patientService: PatientService,
     private toastrService: ToastrService,
     private examService: ExamService,
@@ -79,5 +81,8 @@ export class HomeComponent {
   };
 
 
+  editPatient(id: string) {
+    this.router.navigate(["edit-patient", id]);
+  }
 
 }

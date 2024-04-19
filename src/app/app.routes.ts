@@ -50,7 +50,10 @@ export const routes: Routes = [
     },
     {
         path: "edit-patient",
-        component: PatientComponent,
+        children: [
+            { path: "",component: PatientComponent },
+            { path: ":id", component: PatientComponent },
+        ],
         canActivate: [authGuard],
     },
     {
