@@ -253,6 +253,16 @@
       "issueDescription": "Paciente relata dores intensas na região abdominal, com desconforto e inchaço.",
       "prescribedMedication": "Antiespasmódico",
       "dosagePrecautions": "Tomar 1 comprimido após as refeições."
+    },
+    {
+      "id": "2ecd",
+      "patientId": "e352",
+      "reason": "Dor abdominal persistente",
+      "date": "2024-04-13",
+      "time": "20:59",
+      "issueDescription": "Paciente relata dores intensas na região abdominal, com desconforto e inchaço.",
+      "prescribedMedication": "Antiespasmódico",
+      "dosagePrecautions": "Tomar 1 comprimido após as refeições."
     }
   ],
   "exams": [

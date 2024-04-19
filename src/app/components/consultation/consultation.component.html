@@ -1,7 +1,7 @@
 <div id="consultation-container">
 
 
-    <div id="patient-search">
+    <div *ngIf="editingMode == false" id="patient-search">
         <label for="patient-input">Busca de paciente:</label>
         <form id="patient-search-form" (ngSubmit)="searchPatient()" [formGroup]="patientInput">
         <input id="patient-input" type="text" formControlName="nameOrId">
@@ -9,7 +9,7 @@
         </form>
     </div>
 
-    <div *ngIf="resultsList" id="patient-results">
+    <div *ngIf="editingMode == false && resultsList" id="patient-results">
         <div *ngFor="let patient of resultsList">
             <div class="patient-card" (click)="selectPatient(patient.name, patient.id)">
                 <div class="card-header">
@@ -25,13 +25,15 @@
     </div>
 
 
-    <form id="consultation-form" (ngSubmit)="saveConsultation()" [formGroup]="consultationInfo">
+    <form id="consultation-form" [formGroup]="consultationInfo">
         <div id="consultation-header">
             <div *ngIf="selectedPatientName" id="selected-patient"><h2>Paciente: {{selectedPatientName}}</h2></div>
             <div class="consultation-buttons">
-                <button class="secondary-button" [disabled]="true">Editar</button>
-                <button class="danger-button" [disabled]="true">Deletar</button>
-                <button class="primary-button" type="submit">Salvar</button>
+                <button  *ngIf="editingMode == true" class="secondary-button" (click)="goBack()">Voltar</button>
+                <button class="secondary-button" [disabled]="!editingMode">Editar</button>
+                <button (click)="deleteConsultation()" class="danger-button" [disabled]="!editingMode">Deletar</button>
+                <button *ngIf="editingMode == true" (click)="editConsultation()" class="primary-button" type="submit">Salvar</button>
+                <button *ngIf="editingMode == false" (click)="saveConsultation()" class="primary-button" type="submit">Salvar</button>
             </div>
             </div>
         <div>

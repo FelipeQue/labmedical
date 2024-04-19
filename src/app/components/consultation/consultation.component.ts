@@ -1,17 +1,18 @@
-import { CommonModule, formatDate } from '@angular/common';
+import { CommonModule, formatDate, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ConsultationService } from '../../services/consultation.service';
 import { PatientService } from '../../services/patient.service';
 import { ToastrService } from 'ngx-toastr';
 import { BirthDatePipe } from '../../pipes/birth-date.pipe';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'app-consultation',
-    standalone: true,
-    templateUrl: './consultation.component.html',
-    styleUrl: './consultation.component.scss',
-    imports: [ReactiveFormsModule, CommonModule, BirthDatePipe]
+  selector: 'app-consultation',
+  standalone: true,
+  templateUrl: './consultation.component.html',
+  styleUrl: './consultation.component.scss',
+  imports: [ReactiveFormsModule, CommonModule, BirthDatePipe]
 })
 export class ConsultationComponent {
 
@@ -19,6 +20,8 @@ export class ConsultationComponent {
     private consultationService: ConsultationService,
     private toastrService: ToastrService,
     private patientService: PatientService,
+    private activatedRoute: ActivatedRoute,
+    private location: Location,
   ) { };
 
   patientInput = new FormGroup({
@@ -39,6 +42,38 @@ export class ConsultationComponent {
     prescribedMedication: new FormControl(''),
     dosagePrecautions: new FormControl('', [Validators.required, Validators.minLength(16), Validators.maxLength(256)]),
   });
+
+  editingMode = false;
+  consultationToEdit: any = {};
+
+  ngOnInit() {
+    this.activatedRoute.params.subscribe((parameters) => {
+      let consultationId = parameters['id'];
+      if (consultationId) {
+        console.log(consultationId);
+        this.editingMode = true;
+        this.getConsultation(consultationId);
+      }
+      else {
+        this.editingMode = false;
+      }
+    });
+  };
+
+  getConsultation(consultationId: string) {
+    this.consultationService.getConsultation().subscribe((consultations) => {
+      this.consultationToEdit = consultations.find((consultation: { id: string; }) => consultation.id == consultationId);
+      this.consultationInfo.patchValue({
+        reason: this.consultationToEdit.reason,
+        date: this.consultationToEdit.date,
+        time: this.consultationToEdit.time,
+        issueDescription: this.consultationToEdit.issueDescription,
+        prescribedMedication: this.consultationToEdit.prescribedMedication,
+        dosagePrecautions: this.consultationToEdit.dosagePrecautions,
+        });
+      this.selectedPatientId = this.consultationToEdit.patientId;
+    });
+  };
 
   searchPatient() {
     const nameOrId = this.patientInput.value.nameOrId?.trim();
@@ -63,6 +98,7 @@ export class ConsultationComponent {
   }
 
   saveConsultation() {
+    console.log("Chamou save.")
     if (!!this.selectedPatientId) {
       if (this.consultationInfo.valid) {
         const newConsultation = {
@@ -91,7 +127,50 @@ export class ConsultationComponent {
     }
   };
 
+  editConsultation() {
+    console.log("Chamou edit.");
+      if (this.consultationInfo.valid) {
+        const editedConsultation = {
+          "patientId": this.selectedPatientId,
+          "reason": this.consultationInfo.value.reason,
+          "date": this.consultationInfo.value.date,
+          "time": this.consultationInfo.value.time,
+          "issueDescription": this.consultationInfo.value.issueDescription,
+          "prescribedMedication": this.consultationInfo.value.prescribedMedication,
+          "dosagePrecautions": this.consultationInfo.value.dosagePrecautions,
+        }
+        this.consultationService.editConsultation(this.consultationToEdit.id, editedConsultation).subscribe({
+          next: (response): void => {
+            this.consultationInfo.reset();
+            this.toastrService.success('Consulta alterada com sucesso!', '');
+          },
+          error: (error) => {
+            this.toastrService.error('Algo deu errado ao tentar editar a consulta.', '');
+          }
+        });
+      } else {
+        this.toastrService.warning("Preencha todos os campos obrigatórios corretamente.");
+      }
+  };  
 
+  deleteConsultation() {
+    console.log(this.consultationToEdit.id);
+    this.consultationService.deleteConsultation(this.consultationToEdit.id).subscribe({
+      next: (response): void => {
+        this.toastrService.success('Consulta apagada com sucesso!', '');
+        this.location.back();
+      },
+      error: (error) => {
+        this.toastrService.error('Algo deu errado ao tentar editar a consulta.', '');
+      }
+    })
+
+  }
+
+
+  goBack() {
+    this.location.back();
+    }
 
 
 }
