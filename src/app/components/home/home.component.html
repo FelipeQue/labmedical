@@ -8,7 +8,7 @@
             <div class="stats-text">
                 <div class="stats-number">{{patientsAmount}}</div>
                 <div>pacientes</div>
-            </div> 
+            </div>
         </div>
         <div class="stats-unit">
             <div class="stats-icon">
@@ -43,21 +43,21 @@
         <div *ngFor="let patient of resultsList">
             <div class="patient-card">
                 <div class="card-header">
-
-                    portrait.
-
-                    <h3 class="card-name">{{patient.name}}</h3>
-                    <p class="record-id">Registro: {{patient.id}}</p>
+                    <div id="patient-portrait"><img src="../../../../assets/images/portrait-patient.png"></div>
+                    <div>
+                        <h3 class="card-name">{{patient.name}}</h3>
+                        <div class="record-id">Registro: {{patient.id}}</div>
+                    </div>
                 </div>
                 <div class="card-body">
-                    <p>{{patient.birthDate | age}} anos</p>
-                    <p><label>Convênio:</label> {{patient.insuranceCompany}}
+                    <div>{{patient.birthDate | age}} anos</div>
+                    <div><label>Convênio:</label> {{patient.insuranceCompany}}
                         <span *ngIf="!patient.insuranceCompany">Não possui convênio.</span>
-                    </p>
-                    <p><label>Contato: </label>
-                        <span> {{patient.phone}}</span>
+                    </div>
+                    <div><label>Contato: </label>
+                        <span> {{patient.phone | phone}}</span>
                         <span *ngIf="patient.email"> {{patient.email}}</span>
-                    </p>
+                    </div>
                 </div>
                 <div class="card-footer">
                     <button>Atualizar cadastro</button>
@@ -70,4 +70,4 @@
         contato (telefone ou e-mail), plano de saúde e botão para ver mais informações.
 
 
-</div>
+    </div>

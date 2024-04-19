@@ -10,11 +10,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faStethoscope } from '@fortawesome/free-solid-svg-icons';
 import { faMicroscope } from '@fortawesome/free-solid-svg-icons';
 import { faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
+import { AgePipe } from '../../pipes/age.pipe';
+import { PhonePipe } from '../../pipes/phone.pipe';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, BirthDatePipe, FontAwesomeModule],
+  imports: [CommonModule, ReactiveFormsModule, BirthDatePipe, FontAwesomeModule, AgePipe, PhonePipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -46,6 +48,7 @@ export class HomeComponent {
   ngOnInit() {
     this.patientService.getPatient().subscribe((patients) => {
       this.patientsList = patients;
+      this.resultsList = this.patientsList;
       this.patientsAmount = this.patientsList.length;
     });
     this.examService.getExam().subscribe((exams) => {
