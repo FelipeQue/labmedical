@@ -1,11 +1,12 @@
 import { CommonModule, formatDate, Location } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ConsultationService } from '../../services/consultation.service';
 import { PatientService } from '../../services/patient.service';
 import { ToastrService } from 'ngx-toastr';
 import { BirthDatePipe } from '../../pipes/birth-date.pipe';
 import { ActivatedRoute } from '@angular/router';
+import { ConfirmDialogService } from '../../services/confirm-dialog.service';
 
 @Component({
   selector: 'app-consultation',
@@ -22,6 +23,7 @@ export class ConsultationComponent {
     private patientService: PatientService,
     private activatedRoute: ActivatedRoute,
     private location: Location,
+    private confirmDialogService: ConfirmDialogService,
   ) { };
 
   patientInput = new FormGroup({
@@ -157,16 +159,21 @@ export class ConsultationComponent {
   };  
 
   deleteConsultation() {
-    // this.toastrService.confirm.
-    this.consultationService.deleteConsultation(this.consultationToEdit.id).subscribe({
-      next: (response): void => {
-        this.toastrService.success('Consulta apagada com sucesso!', '');
-        this.location.back();
-      },
-      error: (error) => {
-        this.toastrService.error('Algo deu errado ao tentar editar a consulta.', '');
-      }
+    this.confirmDialogService.confirm('Confirmar', 'Você deseja realmente apagar esta consulta? Esta ação é irreversível.')
+    .then((confirmed) => {
+      if (confirmed) {
+        this.consultationService.deleteConsultation(this.consultationToEdit.id).subscribe({
+          next: (response): void => {
+            this.toastrService.success('Consulta apagada com sucesso!', '');
+            this.location.back();
+          },
+          error: (error) => {
+            this.toastrService.error('Algo deu errado ao tentar editar a consulta.', '');
+          }
+        })
+      };
     })
+    .catch((error) => {});
   };
 
   goBack() {
