@@ -174,51 +174,50 @@ export class PatientComponent {
     }
   };
 
-  editExam() {
-    if (this.patientInfo.valid) {
-      const editedPatient = {
-        "name": this.examInfo.value.name,
-      }
-      this.examService.editExam(this.patientToEdit.id, editedExam).subscribe({
-        next: (response): void => {
-          this.toastrService.success('Registro de paciente atualizado com sucesso!', '');
-          this.location.back();
-        },
-        error: (error) => {
-          this.toastrService.error('Algo deu errado ao tentar editar este registro.', '');
-        }
-      });
-    } else {
-      this.toastrService.warning("Preencha todos os campos obrigatórios corretamente.");
-    }
-};  
+//   editExam() {
+//     if (this.patientInfo.valid) {
+//       const editedPatient = {
+//         "name": this.examInfo.value.name,
+//       }
+//       this.examService.editExam(this.patientToEdit.id, editedExam).subscribe({
+//         next: (response): void => {
+//           this.toastrService.success('Registro de paciente atualizado com sucesso!', '');
+//           this.location.back();
+//         },
+//         error: (error) => {
+//           this.toastrService.error('Algo deu errado ao tentar editar este registro.', '');
+//         }
+//       });
+//     } else {
+//       this.toastrService.warning("Preencha todos os campos obrigatórios corretamente.");
+//     }
+// };  
 
 deletePatient() {
   this.confirmDialogService.confirm('Confirmar', 'Você deseja realmente apagar este registro de paciente? Esta ação é irreversível.', "Sim", "Cancelar")
   .then((confirmed) => {
     if (confirmed) {
 
-      if (isDeletable(this.patientToEdit.id)) {
-
+      if (this.isDeletable(this.patientToEdit.id)) {
+        this.patientService.deletePatient(this.patientToEdit.id).subscribe({
+          next: (response): void => {
+            this.toastrService.success('Registro de paciente apagado com sucesso!', '');
+            this.location.back();
+          },
+          error: (error) => {
+            this.toastrService.error('Algo deu errado ao tentar apagar o registro.', '');
+          }
+        })
+      };
+      } else {
+        this.toastrService.warning('Não é possível apagar um registro de paciente que esteja associado a exames ou consultas.', '');
       }
-
-      this.patientService.deletePatient(this.patientToEdit.id).subscribe({
-        next: (response): void => {
-          this.toastrService.success('Registro de paciente apagado com sucesso!', '');
-          this.location.back();
-        },
-        error: (error) => {
-          this.toastrService.error('Algo deu errado ao tentar apagar o registro.', '');
-        }
-      })
-    };
-
   })
   .catch((error) => {});
 };
 
   patientEvents: any[] = [];
-  isDeletable(id: string) {
+  isDeletable(id: string): boolean {
     let patientConsultations: any[] = [];
       this.consultationService.getConsultation().subscribe((consultations) => {
         patientConsultations = consultations.filter((consultation: { patientId: string; }) => consultation.patientId == this.patientToEdit.Id);
@@ -234,6 +233,7 @@ deletePatient() {
           };
         });
       });
+      return false;
   };
 
   goBack() {
