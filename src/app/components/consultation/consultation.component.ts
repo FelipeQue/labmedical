@@ -1,5 +1,5 @@
 import { CommonModule, formatDate, Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ConsultationService } from '../../services/consultation.service';
 import { PatientService } from '../../services/patient.service';
@@ -167,13 +167,11 @@ export class ConsultationComponent {
         this.toastrService.error('Algo deu errado ao tentar editar a consulta.', '');
       }
     })
-
-  }
-
+  };
 
   goBack() {
     this.location.back();
-    }
+    };
 
 
 }
