@@ -50,7 +50,6 @@ export class ConsultationComponent {
     this.activatedRoute.params.subscribe((parameters) => {
       let consultationId = parameters['id'];
       if (consultationId) {
-        console.log(consultationId);
         this.editingMode = true;
         this.getConsultation(consultationId);
       }
@@ -72,6 +71,11 @@ export class ConsultationComponent {
         dosagePrecautions: this.consultationToEdit.dosagePrecautions,
         });
       this.selectedPatientId = this.consultationToEdit.patientId;
+      this.patientService.getPatient().subscribe((patients) => {
+        let patient
+        patient = patients.find((patient: { id: string; }) => patient.id == this.selectedPatientId);
+        this.selectedPatientName = patient.name;
+      })
     });
   };
 
@@ -98,7 +102,6 @@ export class ConsultationComponent {
   }
 
   saveConsultation() {
-    console.log("Chamou save.")
     if (!!this.selectedPatientId) {
       if (this.consultationInfo.valid) {
         const newConsultation = {
@@ -128,7 +131,6 @@ export class ConsultationComponent {
   };
 
   editConsultation() {
-    console.log("Chamou edit.");
       if (this.consultationInfo.valid) {
         const editedConsultation = {
           "patientId": this.selectedPatientId,
@@ -143,6 +145,7 @@ export class ConsultationComponent {
           next: (response): void => {
             this.consultationInfo.reset();
             this.toastrService.success('Consulta alterada com sucesso!', '');
+            this.location.back();
           },
           error: (error) => {
             this.toastrService.error('Algo deu errado ao tentar editar a consulta.', '');
@@ -154,7 +157,7 @@ export class ConsultationComponent {
   };  
 
   deleteConsultation() {
-    console.log(this.consultationToEdit.id);
+    // this.toastrService.confirm.
     this.consultationService.deleteConsultation(this.consultationToEdit.id).subscribe({
       next: (response): void => {
         this.toastrService.success('Consulta apagada com sucesso!', '');
