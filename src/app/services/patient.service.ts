@@ -9,32 +9,28 @@ export class PatientService {
 
   constructor(private httpClient: HttpClient) { }
 
+  url: string = '/api/patients';
+
   getPatient() {
-    let url = '/api/patients';
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.httpClient.get<any>(url, {headers: headers});
+    return this.httpClient.get<any>(this.url, {headers: headers});
   };
 
   addPatient(newPatientData: any) {
-    let url = '/api/patients';
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.httpClient.post<any>(url, newPatientData, { headers: headers });
-  }
+    return this.httpClient.post<any>(this.url, newPatientData, { headers: headers });
+  };
 
+  editPatient(patientId: string, editedPatientData: any) {
+    let updateUrl = `${this.url}/${patientId}`;
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.httpClient.put<any>(updateUrl, editedPatientData, { headers: headers });
+  };
 
-  // Estou pensando em migrar o searchPatient para cá, mas fico encontrando um erro. Se der tempo, perguntarei à prof como corrigir. Eis a função:
-  // searchPatient(input: string): Observable<any[]> {
-  //   const nameOrId = input.trim();
-  //     this.getPatient().subscribe((patients) => {
-  //       const patientsList = patients;
-  //       let resultsList = patientsList.filter((searchedPatient: { name: string, id: string }) => {
-  //         const isNameMatch = searchedPatient.name && searchedPatient.name.toLowerCase().includes(nameOrId.toLowerCase());
-  //         const isIdMatch = searchedPatient.id && searchedPatient.id.includes(nameOrId);
-  //         return isNameMatch || isIdMatch;
-  //       });
-  //       return resultsList;
-  //     });
-  // };
+  deletePatient(patientId: string) {
+    const url = `${this.url}/${patientId}`;
+    return this.httpClient.delete<any>(url);
+  };
 
 
 }
