@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PatientService } from '../../../services/patient.service';
 import { ConsultationService } from '../../../services/consultation.service';
 import { ExamService } from '../../../services/exam.service';
@@ -23,6 +23,7 @@ import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
 export class RecordsDetailComponent {
 
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private patientService: PatientService,
     private consultationService: ConsultationService,
@@ -60,16 +61,17 @@ export class RecordsDetailComponent {
 
           this.patientEvents.sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime());
         });
-
       });
-
     });
-
-
-
-
   };
 
+  editConsultation(id: string) {
+    this.router.navigate(["edit-consultation", id]);
+  }
+
+  editExam(id: string) {
+    this.router.navigate(["edit-exam", id]);
+  }
 
 
 

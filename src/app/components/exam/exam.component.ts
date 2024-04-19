@@ -1,10 +1,12 @@
-import { CommonModule, formatDate } from '@angular/common';
+import { CommonModule, formatDate, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { PatientService } from '../../services/patient.service';
 import { BirthDatePipe } from '../../pipes/birth-date.pipe';
 import { ExamService } from '../../services/exam.service';
+import { ActivatedRoute } from '@angular/router';
+import { ConfirmDialogService } from '../../services/confirm-dialog.service';
 
 @Component({
   selector: 'app-exam',
@@ -19,6 +21,9 @@ export class ExamComponent {
     private toastrService: ToastrService,
     private patientService: PatientService,
     private examService: ExamService,
+    private activatedRoute: ActivatedRoute,
+    private location: Location,
+    private confirmDialogService: ConfirmDialogService,
   ) {}
 
   patientInput = new FormGroup({
@@ -40,6 +45,43 @@ export class ExamComponent {
     documentUrl: new FormControl(''),
     results: new FormControl('', [Validators.required, Validators.minLength(16), Validators.maxLength(1024)]),
   });
+
+  editingMode = false;
+  examToEdit: any = {};
+
+  ngOnInit() {
+    this.activatedRoute.params.subscribe((parameters) => {
+      let examId = parameters['id'];
+      if (examId) {
+        this.editingMode = true;
+        this.getExam(examId);
+      }
+      else {
+        this.editingMode = false;
+      }
+    });
+  };
+
+  getExam(examId: string) {
+    this.examService.getExam().subscribe((exams) => {
+      this.examToEdit = exams.find((exam: { id: string; }) => exam.id == examId);
+      this.examInfo.patchValue({
+        name: this.examToEdit.name,
+        date: this.examToEdit.date,
+        time: this.examToEdit.time,
+        type: this.examToEdit.type,
+        laboratory: this.examToEdit.laboratory,
+        documentUrl: this.examToEdit.documentUrl,
+        results: this.examToEdit.results,
+        });
+      this.selectedPatientId = this.examToEdit.patientId;
+      this.patientService.getPatient().subscribe((patients) => {
+        let patient
+        patient = patients.find((patient: { id: string; }) => patient.id == this.selectedPatientId);
+        this.selectedPatientName = patient.name;
+      })
+    });
+  };
 
   searchPatient() {
     const nameOrId = this.patientInput.value.nameOrId?.trim();
@@ -64,6 +106,7 @@ export class ExamComponent {
   }
 
   saveExam() {
+    console.log("chamou salvar pra salvar");
     if (!!this.selectedPatientId) {
       if (this.examInfo.valid) {
         const newExam = {
@@ -91,6 +134,58 @@ export class ExamComponent {
     } else {
       this.toastrService.warning("Selecione um registro de paciente para vincular a este exame.");
     }
-  }
+  };
+
+  editExam() {
+
+    console.log("chamou salvar pra editar.")
+    if (this.examInfo.valid) {
+      const editedExam = {
+        "patientId": this.selectedPatientId,
+        "name": this.examInfo.value.name,
+        "date": this.examInfo.value.date,
+        "time": this.examInfo.value.time,
+        "type": this.examInfo.value.type,
+        "laboratory": this.examInfo.value.laboratory,
+        "documentUrl": this.examInfo.value.documentUrl,
+        "results": this.examInfo.value.results,
+      }
+      this.examService.editExam(this.examToEdit.id, editedExam).subscribe({
+        next: (response): void => {
+          this.examInfo.reset();
+          this.toastrService.success('Exame alterado com sucesso!', '');
+          this.location.back();
+        },
+        error: (error) => {
+          this.toastrService.error('Algo deu errado ao tentar editar o exame.', '');
+        }
+      });
+    } else {
+      this.toastrService.warning("Preencha todos os campos obrigatórios corretamente.");
+    }
+};  
+
+deleteExam() {
+  this.confirmDialogService.confirm('Confirmar', 'Você deseja realmente apagar este exame? Esta ação é irreversível.', "Sim", "Cancelar")
+  .then((confirmed) => {
+    if (confirmed) {
+      this.examService.deleteExam(this.examToEdit.id).subscribe({
+        next: (response): void => {
+          this.toastrService.success('Exame apagado com sucesso!', '');
+          this.location.back();
+        },
+        error: (error) => {
+          this.toastrService.error('Algo deu errado ao tentar editar o exame.', '');
+        }
+      })
+    };
+  })
+  .catch((error) => {});
+};
+
+
+  goBack() {
+    this.location.back();
+    };
 
 }

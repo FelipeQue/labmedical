@@ -9,16 +9,27 @@ export class ConsultationService {
 
   constructor(private httpClient: HttpClient) { }
 
+  url: string = '/api/consultations'
+
   getConsultation() {
-    let url = '/api/consultations';
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.httpClient.get<any>(url, {headers: headers});
+    return this.httpClient.get<any>(this.url, {headers: headers});
   };
 
   addConsultation(newConsultationData: any) {
-    let url = '/api/consultations';
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.httpClient.post<any>(url, newConsultationData, { headers: headers });
-  }
+    return this.httpClient.post<any>(this.url, newConsultationData, { headers: headers });
+  };
+
+  editConsultation(consultationId: string, editedConsultationData: any) {
+    let updateUrl = `${this.url}/${consultationId}`;
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.httpClient.put<any>(updateUrl, editedConsultationData, { headers: headers });
+  };
+
+  deleteConsultation(consultationId: string) {
+    const url = `${this.url}/${consultationId}`;
+    return this.httpClient.delete<any>(url);
+  };
 
 }

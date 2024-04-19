@@ -48,4 +48,25 @@ export const routes: Routes = [
         ],
         canActivate: [authGuard],
     },
+    {
+        path: "edit-patient",
+        component: PatientComponent,
+        canActivate: [authGuard],
+    },
+    {
+        path: "edit-consultation",
+        children: [
+            { path: "",component: ConsultationComponent },
+            { path: ":id", component: ConsultationComponent },
+        ],
+        canActivate: [authGuard],
+    },
+    {
+        path: "edit-exam",
+        children: [
+            { path: "",component: ExamComponent },
+            { path: ":id", component: ExamComponent },
+        ],
+        canActivate: [authGuard],
+    },
 ];

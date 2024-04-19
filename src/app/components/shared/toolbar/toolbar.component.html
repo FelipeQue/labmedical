@@ -23,6 +23,15 @@
         <div *ngIf="getCurrentUrl().includes('/medical-records/')">
             Prontuário de Paciente
         </div>
+        <div *ngIf="getCurrentUrl().includes('/edit-consultation/')">
+            Editar Consulta
+        </div>
+        <div *ngIf="getCurrentUrl().includes('/edit-exam/')">
+            Editar Exame
+        </div>
+        <div *ngIf="getCurrentUrl().includes('/edit-patient/')">
+            Editar Cadastro de Paciente
+        </div>
     </div>
     <div id="toolbar-user">
         <div id="toolbar-name">{{loggedUserName}}</div>

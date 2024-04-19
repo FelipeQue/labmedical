@@ -225,16 +225,6 @@
   ],
   "consultations": [
     {
-      "id": "xxxx",
-      "patientId": "6522",
-      "reason": "Dor de cabeça persistente",
-      "date": "2024-04-12",
-      "time": "14:30",
-      "issueDescription": "Paciente relata dores intensas na região frontal.",
-      "prescribedMedication": "Analgésico",
-      "dosagePrecautions": "Tomar 1 comprimido a cada 6 horas."
-    },
-    {
       "id": "c228",
       "patientId": "49e9",
       "reason": "Dor abdominal persistente",
@@ -245,7 +235,7 @@
       "dosagePrecautions": "Tomar 1 comprimido após as refeições."
     },
     {
-      "id": "9bcd",
+      "id": "2ecd",
       "patientId": "e352",
       "reason": "Dor abdominal persistente",
       "date": "2024-04-13",
@@ -257,7 +247,6 @@
   ],
   "exams": [
     {
-      "id": "lala",
       "patientId": "e352",
       "name": "Hemograma completo",
       "date": "2024-04-15",
@@ -265,7 +254,8 @@
       "type": "Sangue",
       "laboratory": "Laboratório ABC",
       "documentUrl": "https://cdn.vectorstock.com/i/2000v/21/58/medical-lab-blood-test-from-sample-tube-in-human-vector-43292158.avif",
-      "results": "Hemoglobina: 12 g/dL, Leucócitos: 8000/mm³"
+      "results": "Hemoglobina: 12 g/dL, Leucócitos: 8000/mm³",
+      "id": "lala"
     },
     {
       "id": "coco",
@@ -279,15 +269,48 @@
       "results": "Cultura de Urina: Nenhuma bactéria patogênica detectada.\nLeucócitos: 2 células por campo."
     },
     {
-      "id": "e04e",
       "patientId": "9bcd",
-      "name": "Hemograma completo\"",
+      "name": "Hemograma completo",
       "date": "2024-04-15",
       "time": "21:01",
       "type": "Sangue",
       "laboratory": "Laboratório XYZ",
       "documentUrl": "https://cdn.vectorstock.com/i/2000v/21/58/medical-lab-blood-test-from-sample-tube-in-human-vector-43292158.avif",
-      "results": "Hemoglobina: 13 g/dL, Leucócitos: 7000/mm³"
+      "results": "Hemoglobina: 13 g/dL, Leucócitos: 7000/mm³",
+      "id": "e04e"
+    },
+    {
+      "patientId": "920c",
+      "name": "Hemograma CCC",
+      "date": "2024-04-15",
+      "time": "21:01",
+      "type": "Sangue",
+      "laboratory": "Laboratório XYZ",
+      "documentUrl": "https://cdn.vectorstock.com/i/2000v/21/58/medical-lab-blood-test-from-sample-tube-in-human-vector-43292158.avif",
+      "results": "Hemoglobina: 13 g/dL, Leucócitos: 7000/mm³",
+      "id": "bubu"
+    },
+    {
+      "patientId": "920c",
+      "name": "Hemograma AAA",
+      "date": "2024-04-15",
+      "time": "21:01",
+      "type": "Sangue",
+      "laboratory": "Laboratório XYZ",
+      "documentUrl": "https://cdn.vectorstock.com/i/2000v/21/58/medical-lab-blood-test-from-sample-tube-in-human-vector-43292158.avif",
+      "results": "Hemoglobina: 13 g/dL, Leucócitos: 7000/mm³",
+      "id": "lili"
+    },
+    {
+      "patientId": "920c",
+      "name": "Hemograma completinho editado",
+      "date": "2024-04-19",
+      "time": "00:04",
+      "type": "Sangue",
+      "laboratory": "Laboratório XYZ",
+      "documentUrl": "",
+      "results": "Arrasou muitíssimo.",
+      "id": "4ac3"
     }
   ]
 }
