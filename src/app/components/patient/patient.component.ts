@@ -174,7 +174,7 @@ export class PatientComponent {
     }
   };
 
-//   editExam() {
+  editPatient() {
 //     if (this.patientInfo.valid) {
 //       const editedPatient = {
 //         "name": this.examInfo.value.name,
@@ -191,14 +191,13 @@ export class PatientComponent {
 //     } else {
 //       this.toastrService.warning("Preencha todos os campos obrigatórios corretamente.");
 //     }
-// };  
+};  
 
 deletePatient() {
   this.confirmDialogService.confirm('Confirmar', 'Você deseja realmente apagar este registro de paciente? Esta ação é irreversível.', "Sim", "Cancelar")
-  .then((confirmed) => {
+  .then(async (confirmed) => {
     if (confirmed) {
-
-      if (this.isDeletable(this.patientToEdit.id)) {
+      if (await this.isDeletable(this.patientToEdit.id)) {
         this.patientService.deletePatient(this.patientToEdit.id).subscribe({
           next: (response): void => {
             this.toastrService.success('Registro de paciente apagado com sucesso!', '');
@@ -208,16 +207,17 @@ deletePatient() {
             this.toastrService.error('Algo deu errado ao tentar apagar o registro.', '');
           }
         })
-      };
       } else {
         this.toastrService.warning('Não é possível apagar um registro de paciente que esteja associado a exames ou consultas.', '');
-      }
+      }}
   })
   .catch((error) => {});
 };
 
   patientEvents: any[] = [];
-  isDeletable(id: string): boolean {
+  
+  isDeletable(id: string): Promise<boolean> {
+    return new Promise((resolve, reject) => {
     let patientConsultations: any[] = [];
       this.consultationService.getConsultation().subscribe((consultations) => {
         patientConsultations = consultations.filter((consultation: { patientId: string; }) => consultation.patientId == this.patientToEdit.Id);
@@ -225,15 +225,14 @@ deletePatient() {
         this.examService.getExam().subscribe((exams) => {
           patientExams = exams.filter((exam: { patientId: string; }) => exam.patientId == this.patientToEdit.id);
           this.patientEvents = patientConsultations.concat(patientExams);
-          console.log("Existem eventos associados a esse paciente?" + (this.patientEvents.length > 0));
           if (this.patientEvents.length > 0) {
-            return true;
+            resolve(false);
           } else { 
-            return false;
+            resolve(true);
           };
         });
       });
-      return false;
+    });
   };
 
   goBack() {

@@ -1,10 +1,14 @@
 <div id="patient-container">
-    <form id="patient-form" (ngSubmit)="savePatient()" [formGroup]="patientInfo">
+    <form id="patient-form" [formGroup]="patientInfo">
         <div>Modo edição</div>
         <div class="patient-buttons">
             <button *ngIf="editingMode == true" class="secondary-button" (click)="goBack()">Voltar</button>
-            <button class="danger-button" [disabled]="!editingMode">Deletar</button>
-            <button class="primary-button" type="submit">Salvar</button>
+            <button (click)="deletePatient()" class="danger-button" [disabled]="!editingMode">Deletar</button>
+            <button *ngIf="editingMode == true" (click)="editPatient()" class="primary-button"
+                type="submit">Salvar</button>
+            <button *ngIf="editingMode == false" (click)="savePatient()" class="primary-button" type="submit">Salvar</button>
+
+
         </div>
         <div>
             <section class="patient-section">
