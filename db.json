@@ -1,39 +1,12 @@
 {
   "patients": [
     {
-      "id": "fb65",
-      "name": "Felipe José",
-      "gender": "other",
-      "birthDate": "21101983",
-      "cpf": "00000000000",
-      "rg": "000000 SSP/PE",
-      "maritalStatus": "male",
-      "phone": "00000000000",
-      "email": "",
-      "birthCity": "Recife",
-      "emergencyContact": "00000000000",
-      "allergies": "",
-      "specialCare": "",
-      "insuranceCompany": "",
-      "insuranceNumber": "",
-      "insuranceExpiration": "",
-      "cep": "88053655",
-      "addressStreet": "Rua das Tainhotas",
-      "addressNumber": "",
-      "addressComplement": "",
-      "addressNeighborhood": "Jurerê",
-      "addressCity": "Florianópolis",
-      "addressState": "SC",
-      "addressLandmark": ""
-    },
-    {
-      "id": "00d0",
       "name": "Felipe José José",
-      "gender": "prefer-not",
-      "birthDate": "01011900",
+      "gender": "Masculino",
+      "birthDate": "01011983",
       "cpf": "00000000000",
       "rg": "000000 SSP/PE",
-      "maritalStatus": "other",
+      "maritalStatus": "Nunca casou",
       "phone": "00000000000",
       "email": "",
       "birthCity": "Olinda",
@@ -51,17 +24,17 @@
         "number": "",
         "complement": "",
         "neighborhood": "Soledade",
-        "landmark": ""
-      }
+        "landmark": "Perto do mercadinho"
+      },
+      "id": "00d0"
     },
     {
-      "id": "774c",
       "name": "Lucas Arrais",
-      "gender": "prefer-not",
+      "gender": "Preferiu não informar",
       "birthDate": "29041993",
       "cpf": "00000000000",
       "rg": "000000 SSP/PE",
-      "maritalStatus": "prefer-not",
+      "maritalStatus": "Divorciou",
       "phone": "00000000000",
       "email": "",
       "birthCity": "Brasília",
@@ -80,35 +53,8 @@
         "complement": "",
         "neighborhood": "Jurerê",
         "landmark": ""
-      }
-    },
-    {
-      "id": "6522",
-      "name": "Felipe José Maria",
-      "gender": "male",
-      "birthDate": "21101983",
-      "cpf": "00000000000",
-      "rg": "000000 SSP/PE",
-      "maritalStatus": "other",
-      "phone": "00000000000",
-      "email": "",
-      "birthCity": "Recife",
-      "emergencyContact": "00000000000",
-      "allergies": "",
-      "specialCare": "",
-      "insuranceCompany": "",
-      "insuranceNumber": "",
-      "insuranceExpiration": "",
-      "address": {
-        "cep": "88053655",
-        "city": "Florianópolis",
-        "state": "SC",
-        "street": "Rua das Tainhotas",
-        "number": "",
-        "complement": "",
-        "neighborhood": "Jurerê",
-        "landmark": ""
-      }
+      },
+      "id": "774c"
     },
     {
       "id": "49e9",
@@ -197,17 +143,17 @@
     {
       "id": "e352",
       "name": "Octavia Estelle Butler",
-      "gender": "female",
+      "gender": "Feminino",
       "birthDate": "22061947",
       "cpf": "44444444444",
       "rg": "765432 SSP/LA",
-      "maritalStatus": "male",
+      "maritalStatus": "Nunca casou",
       "phone": "33777777777",
       "email": "octavia.butler@example.com",
       "birthCity": "Pasadena",
       "emergencyContact": "33888888888",
       "allergies": "Flores",
-      "specialCare": null,
+      "specialCare": "Diabética",
       "insuranceCompany": "FutureHealth",
       "insuranceNumber": "9876543210",
       "insuranceExpiration": "05092024",
@@ -219,7 +165,7 @@
         "number": "1234",
         "complement": "Apto 102",
         "neighborhood": "Novo Buritizal",
-        "landmark": null
+        "landmark": "Perto da praça"
       }
     }
   ],
@@ -311,6 +257,28 @@
       "documentUrl": "",
       "results": "Arrasou muitíssimo.",
       "id": "4ac3"
+    },
+    {
+      "id": "fadb",
+      "patientId": "00d0",
+      "name": "Urocultura",
+      "date": "2024-04-19",
+      "time": "01:03",
+      "type": "Urina",
+      "laboratory": "Laboratório XYZ",
+      "documentUrl": "",
+      "results": "Muito bons resultados."
+    },
+    {
+      "patientId": "00d0",
+      "name": "BBBBBBBBB",
+      "date": "2024-04-17",
+      "time": "05:04",
+      "type": "Lalalaalalasadfsf",
+      "laboratory": "Lalalaalala",
+      "documentUrl": null,
+      "results": "Lalalaalala Lalalaalala",
+      "id": "ca0e"
     }
   ]
 }

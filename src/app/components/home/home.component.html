@@ -8,7 +8,7 @@
             <div class="stats-text">
                 <div class="stats-number">{{patientsAmount}}</div>
                 <div>pacientes</div>
-            </div> 
+            </div>
         </div>
         <div class="stats-unit">
             <div class="stats-icon">
@@ -43,16 +43,25 @@
         <div *ngFor="let patient of resultsList">
             <div class="patient-card">
                 <div class="card-header">
-                    <h3 class="card-name">{{patient.name}}</h3>
-                    <p>Registro: {{patient.id}}</p>
-                    <p>Data de nascimento: {{patient.birthDate | birthDate}}</p>
-                    <p>Convênio: {{patient.insuranceCompany}}
+                    <div id="patient-portrait"><img src="../../../../assets/images/portrait-patient.png"></div>
+                    <div>
+                        <h3 class="card-name">{{patient.name}}</h3>
+                        <div class="record-id">Registro: {{patient.id}}</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div>{{patient.birthDate | age}} anos</div>
+                    <div><label>Convênio:</label> {{patient.insuranceCompany}}
                         <span *ngIf="!patient.insuranceCompany">Não possui convênio.</span>
-                    </p>
+                    </div>
+                    <div><label>Contato: </label>
+                        <span> {{patient.phone | phone}}</span>
+                        <span *ngIf="patient.email"> {{patient.email}}</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button (click)="editPatient(patient.id)">Atualizar cadastro</button>
                 </div>
             </div>
         </div>
-
-
-
-</div>
+    </div>

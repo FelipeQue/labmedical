@@ -19,10 +19,9 @@
 }
 
 #stats {
-    background-color: white;
-    border-radius: 8px;
+    // background-color: white;
+    // border-radius: 8px;
     padding: 1em;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 1em;
     display: flex;
     flex-direction: row;
@@ -98,4 +97,81 @@
 
 #patient-search-form {
     gap: 10px;
+}
+
+#patient-results {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.patient-card {
+    border-radius: 8px;
+    // background-image: linear-gradient(150deg, $secondColor, #FFEFF1);
+    background-color: rgba($secondColor, 0.4);
+    padding: 1em;
+    width: 300px;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+    h3 {
+        font-size: 1.6em;
+        font-weight: 300;
+    }
+    label {
+        font-weight: 600;
+    }
+}
+
+#patient-portrait {
+    border-radius: 50%;
+    border: 3px solid white;
+    width: fit-content;
+    height: fit-content;
+    img {
+        border: 2px solid $mainColor;
+        width: 100px;
+        max-height: 100px;
+        border-radius: 50%;
+    }
+}
+
+.record-id {
+    text-transform: uppercase;
+    font-size: 0.8em;
+    color: gray;
+}
+
+.card-header {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;   
+}
+
+.card-body {
+    padding-top: 0.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;   
+    padding-bottom: 0.5em;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: center;
+    padding-right: 1em;
+    button {
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        padding: 6px 15px;
+        font-size: 1em;
+        cursor: pointer;
+        background-color: $buttonColor;
+        &:hover {
+            background-color: $buttonHover;
+        }
+        &:active {
+            background-color: $buttonActive;
+        }
+    }
 }
