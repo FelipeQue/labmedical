@@ -118,6 +118,8 @@ export class ConsultationComponent {
         this.consultationService.addConsultation(newConsultation).subscribe({
           next: (response): void => {
             this.consultationInfo.reset();
+            this.consultationInfo.get('date')?.setValue(formatDate(new Date(), 'yyyy-MM-dd', 'en'));
+            this.consultationInfo.get('time')?.setValue(formatDate(new Date(), 'HH:mm', 'en'));
             this.toastrService.success('Nova consulta salva com sucesso!', '');
           },
           error: (error) => {
@@ -145,7 +147,6 @@ export class ConsultationComponent {
         }
         this.consultationService.editConsultation(this.consultationToEdit.id, editedConsultation).subscribe({
           next: (response): void => {
-            this.consultationInfo.reset();
             this.toastrService.success('Consulta alterada com sucesso!', '');
             this.location.back();
           },
