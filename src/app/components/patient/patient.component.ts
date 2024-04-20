@@ -66,7 +66,6 @@ export class PatientComponent {
       let patientId = parameters['id'];
       if (patientId) {
         this.editingMode = true;
-        console.log(this.editingMode);
         this.getPatient(patientId);
       }
       else {
@@ -175,22 +174,46 @@ export class PatientComponent {
   };
 
   editPatient() {
-//     if (this.patientInfo.valid) {
-//       const editedPatient = {
-//         "name": this.examInfo.value.name,
-//       }
-//       this.examService.editExam(this.patientToEdit.id, editedExam).subscribe({
-//         next: (response): void => {
-//           this.toastrService.success('Registro de paciente atualizado com sucesso!', '');
-//           this.location.back();
-//         },
-//         error: (error) => {
-//           this.toastrService.error('Algo deu errado ao tentar editar este registro.', '');
-//         }
-//       });
-//     } else {
-//       this.toastrService.warning("Preencha todos os campos obrigatórios corretamente.");
-//     }
+    if (this.patientInfo.valid) {
+      const editedPatient = {
+        "name": this.patientInfo.value.name,
+        "gender": this.patientInfo.value.gender,
+        "birthDate": this.patientInfo.value.birthDate,
+        "cpf": this.patientInfo.value.cpf,
+        "rg": this.patientInfo.value.rg,
+        "maritalStatus": this.patientInfo.value.maritalStatus,
+        "phone": this.patientInfo.value.phone,
+        "email": this.patientInfo.value.email,
+        "birthCity": this.patientInfo.value.birthCity,
+        "emergencyContact": this.patientInfo.value.emergencyContact,
+        "allergies": this.patientInfo.value.allergies,
+        "specialCare": this.patientInfo.value.specialCare,
+        "insuranceCompany": this.patientInfo.value.insuranceCompany,
+        "insuranceNumber": this.patientInfo.value.insuranceNumber,
+        "insuranceExpiration": this.patientInfo.value.insuranceExpiration,
+        "address": {
+          "cep": this.patientInfo.value.cep,
+          "city": this.patientInfo.value.addressCity,
+          "state": this.patientInfo.value.addressState,
+          "street": this.patientInfo.value.addressStreet,
+          "number": this.patientInfo.value.addressNumber,
+          "complement": this.patientInfo.value.addressComplement,
+          "neighborhood": this.patientInfo.value.addressNeighborhood,
+          "landmark": this.patientInfo.value.addressLandmark,
+        }
+      }
+      this.patientService.editPatient(this.patientToEdit.id, editedPatient).subscribe({
+        next: (response): void => {
+          this.toastrService.success('Registro de paciente atualizado com sucesso!', '');
+          this.location.back();
+        },
+        error: (error) => {
+          this.toastrService.error('Algo deu errado ao tentar editar este registro.', '');
+        }
+      });
+    } else {
+      this.toastrService.warning("Preencha todos os campos obrigatórios corretamente.");
+    }
 };  
 
 deletePatient() {
@@ -215,7 +238,7 @@ deletePatient() {
 };
 
   patientEvents: any[] = [];
-  
+
   isDeletable(id: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
     let patientConsultations: any[] = [];

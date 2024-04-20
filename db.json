@@ -1,13 +1,12 @@
 {
   "patients": [
     {
-      "id": "00d0",
       "name": "Felipe José José",
-      "gender": "prefer-not",
-      "birthDate": "01011900",
+      "gender": "Masculino",
+      "birthDate": "01011983",
       "cpf": "00000000000",
       "rg": "000000 SSP/PE",
-      "maritalStatus": "other",
+      "maritalStatus": "Nunca casou",
       "phone": "00000000000",
       "email": "",
       "birthCity": "Olinda",
@@ -25,17 +24,17 @@
         "number": "",
         "complement": "",
         "neighborhood": "Soledade",
-        "landmark": ""
-      }
+        "landmark": "Perto do mercadinho"
+      },
+      "id": "00d0"
     },
     {
-      "id": "774c",
       "name": "Lucas Arrais",
-      "gender": "prefer-not",
+      "gender": "Preferiu não informar",
       "birthDate": "29041993",
       "cpf": "00000000000",
       "rg": "000000 SSP/PE",
-      "maritalStatus": "prefer-not",
+      "maritalStatus": "Divorciou",
       "phone": "00000000000",
       "email": "",
       "birthCity": "Brasília",
@@ -54,7 +53,8 @@
         "complement": "",
         "neighborhood": "Jurerê",
         "landmark": ""
-      }
+      },
+      "id": "774c"
     },
     {
       "id": "49e9",
