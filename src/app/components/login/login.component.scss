@@ -111,13 +111,8 @@
 }
 
 .login-button button {
+    @include basic-button;
     background-color: $buttonColor;
-    color: #ffffff;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
     margin-top: 10px;
     margin-bottom: 5px;
     &:hover {

@@ -1,4 +1,5 @@
 @import '../../../assets/styles/variables';
+@import '../../../assets/styles/mixins';
 
 #home-page {
     padding: 1em;
@@ -68,23 +69,14 @@
         }
     }
     button {
+        @include basic-button;
         margin-left: 10px;
-        color: #ffffff;
-        border: none;
-        border-radius: 4px;
-        padding: 10px 20px;
-        font-size: 1em;
-        cursor: pointer;
         background-color: $buttonColor;
         &:hover {
             background-color: $buttonHover;
         }
         &:active {
             background-color: $buttonActive;
-        }
-        &:disabled {
-            color: lightgray;
-            background-color: #f0f0f0;
         }
     }
 }
