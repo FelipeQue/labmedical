@@ -15,7 +15,7 @@
         border: 1px solid #ccc;
         border-radius: 4px;
         &:focus {
-            border: 2px solid $buttonActive;
+            border: 2px solid $mainColor;
             outline: none;
         }
     }
@@ -50,15 +50,47 @@
 
 #patient-results {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1em;
+    flex-direction: column;
+    gap: 0.8em;
     margin-top: 1em;
 }
 
-.patient-card {
+.patient-strip {
+    cursor: pointer;
+    width: 100%;
     border-radius: 8px;
-    background-image: linear-gradient(150deg, #FFD3D9, #FFEFF1);
-    background-color: #FFD3D9;
-    padding: 1em;
+    background-color: $thirdColor;
+    padding: 0.8em;
     box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .strip-main {
+        margin-left: 0.8em;
+        flex: 1;
+        h3 {
+            font-size: 1.6em;
+            font-weight: 300;
+        }
+    }
+    .strip-secondary {
+        align-items: center;
+        width: 60%;
+        display: flex;
+        flex-direction: row;
+        .strip-unit {
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+            .strip-code {
+                text-transform: uppercase;
+                font-size: 0.8em;
+                color: gray;
+            }
+            .strip-label {
+                font-size: 0.8em;
+                font-weight: 700;
+            }
+        }
+    }
 }
