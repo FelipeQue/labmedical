@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
-import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import { faStethoscope } from '@fortawesome/free-solid-svg-icons';
-import { faMicroscope } from '@fortawesome/free-solid-svg-icons';
-import { faClipboardUser } from '@fortawesome/free-solid-svg-icons';
-import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
-import { faSquareCaretLeft } from '@fortawesome/free-solid-svg-icons';
-import { faSquareCaretRight } from '@fortawesome/free-solid-svg-icons';
+import { faCircleInfo, faUserPlus, faStethoscope, faMicroscope, faClipboardUser, faDoorOpen, faSquareCaretLeft, faSquareCaretRight } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
