@@ -96,6 +96,9 @@ export class ConsultationComponent {
           const isIdMatch = searchedPatient.id && searchedPatient.id.includes(nameOrId);
           return isNameMatch || isIdMatch;
         });
+      if (this.resultsList.length === 0) {
+        this.toastrService.error("Não foram encontrados registros de paciente com este nome ou código de registro.");
+      }
       });
     } else {
       this.toastrService.warning("Preencha nome ou identificador no campo de busca.");
