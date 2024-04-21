@@ -31,22 +31,26 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 The following libraries were installed *and recruited* in the development of LABMedical:
 
-- **FontAwesome**
+- **FontAwesome**  
 @fortawesome/angular-fontawesome@0.14.1  
 @fortawesome/free-solid-svg-icons@6.5.2
 
-- **NG Bootstrap**
+- **NG Bootstrap**  
 @ng-bootstrap/ng-bootstrap@16.0.0
 
-- **NGX Mask**
+- **NGX Mask**  
 ngx-mask@17.0.7
 
-- **NGX Toastr**
+- **NGX Toastr**  
 ngx-toastr@18.0.0
 
-- **JSON Server**
+- **JSON Server**  
 json-server@1.0.0-alpha.23
 
+## Development process
+
+This project was developed using a Kanban board in Trello.
+https://trello.com/b/xZyCobjC/projeto-labmedical
 
 ## Angular tips
 
