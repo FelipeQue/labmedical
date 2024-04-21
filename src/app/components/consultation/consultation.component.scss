@@ -31,8 +31,9 @@
 
 #consultation-container {
     width: 100%;
-    background-color: #f5f5f5; 
+    background-color: $pageBackground; 
     padding: 1em;
+    min-height: 100%;
 }
 
 #patient-search {
