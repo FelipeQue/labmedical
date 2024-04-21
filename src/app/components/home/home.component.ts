@@ -76,7 +76,11 @@ export class HomeComponent {
         });
       });
     } else {
-      this.toastrService.warning("Preencha nome ou identificador no campo de busca.");
+      this.patientService.getPatient().subscribe((patients) => {
+        this.patientsList = patients;
+        this.resultsList = this.patientsList;
+      });
+      this.toastrService.info("A lista de pacientes foi recarregada.");
     }
   };
 
