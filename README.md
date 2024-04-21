@@ -47,10 +47,10 @@ ngx-toastr@18.0.0
 - **JSON Server**  
 json-server@1.0.0-alpha.23
 
-## Development process
+## Development process :building_construction:
 
-This project was developed using a Kanban board in Trello.
-https://trello.com/b/xZyCobjC/projeto-labmedical
+This project was developed using a Kanban board in Trello.  
+https://trello.com/b/xZyCobjC/projeto-labmedical (in Portuguese)
 
 ## Angular tips
 
