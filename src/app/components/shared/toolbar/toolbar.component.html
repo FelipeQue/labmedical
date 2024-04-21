@@ -1,4 +1,4 @@
-<div id="toolbar">
+<div id="toolbar" ngbDropdown>
 
     <div id="toolbar-title">
 
@@ -33,9 +33,12 @@
             Editar Cadastro de Paciente
         </div>
     </div>
-    <div id="toolbar-user">
+    <div id="toolbar-user" ngbDropdownToggle>
         <div id="toolbar-name">{{loggedUserName}}</div>
         <div id="toolbar-avatar"><img src="../../../../assets/images/portrait-avatar.png"></div>
+    </div>
+    <div ngbDropdownMenu aria-labelledby="toolbar-user">
+        <button ngbDropdownItem (click)="logout()" class="dropdown-link">Sair</button>
     </div>
 
 </div>

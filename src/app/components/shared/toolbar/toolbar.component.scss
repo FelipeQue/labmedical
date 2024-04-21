@@ -56,3 +56,15 @@
         width: 100%;
     }
 }
+
+.dropdown-link {
+    color: $linkColor;
+    font-weight: 650;
+    &:hover {
+        color: $linkHover; 
+    } 
+    &:active {
+        color: $linkActive;
+        background-color: white;
+    }
+}
