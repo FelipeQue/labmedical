@@ -5,7 +5,7 @@ import { AddressService } from '../../services/address.service';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 import { PatientService } from '../../services/patient.service';
 import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmDialogService } from '../../services/confirm-dialog.service';
 import { ExamService } from '../../services/exam.service';
 import { ConsultationService } from '../../services/consultation.service';
@@ -27,6 +27,7 @@ export class PatientComponent {
     private toastrService: ToastrService,
     private activatedRoute: ActivatedRoute,
     private location: Location,
+    private router: Router,
     private confirmDialogService: ConfirmDialogService,
     private examService: ExamService,
     private consultationService: ConsultationService,
@@ -229,7 +230,7 @@ deletePatient() {
         this.patientService.deletePatient(this.patientToEdit.id).subscribe({
           next: (response): void => {
             this.toastrService.success('Registro de paciente apagado com sucesso!', '');
-            this.location.back();
+            this.router.navigate(["home"]);
           },
           error: (error) => {
             this.toastrService.error('Algo deu errado ao tentar apagar o registro.', '');

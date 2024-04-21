@@ -6,7 +6,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './confirm-dialog.component.html',
   styleUrl: './confirm-dialog.component.scss'
 })
-export class ConfirmDialogComponent implements OnInit {
+export class ConfirmDialogComponent {
 
   @Input() title: string = '';
   @Input() message: string = '';
@@ -14,9 +14,6 @@ export class ConfirmDialogComponent implements OnInit {
   @Input() btnCancelText: string = '';
 
   constructor(private activeModal: NgbActiveModal) { }
-
-  ngOnInit() {
-  }
 
   public decline() {
     this.activeModal.close(false);
