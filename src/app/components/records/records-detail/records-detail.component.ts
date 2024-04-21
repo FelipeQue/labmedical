@@ -36,25 +36,19 @@ export class RecordsDetailComponent {
   faMicroscope = faMicroscope;
   faPaperclip = faPaperclip;
 
-
   ngOnInit() {
     this.activatedRoute.params.subscribe((parameters) => {
       this.patientId = parameters['id'];
-
       this.patientService.getPatient().subscribe((patients) => {
         this.patient = patients.find((patient: { id: string; }) => patient.id == this.patientId);
       });
-      
       let patientConsultations: any[] = [];
       this.consultationService.getConsultation().subscribe((consultations) => {
         patientConsultations = consultations.filter((consultation: { patientId: string; }) => consultation.patientId == this.patientId);
-
-        let patientExams  = [];
+        let patientExams = [];
         this.examService.getExam().subscribe((exams) => {
           patientExams = exams.filter((exam: { patientId: string; }) => exam.patientId == this.patientId);
-
           this.patientEvents = patientConsultations.concat(patientExams);
-
           this.patientEvents.sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime());
         });
       });
@@ -63,15 +57,15 @@ export class RecordsDetailComponent {
 
   editConsultation(id: string) {
     this.router.navigate(["edit-consultation", id]);
-  }
+  };
 
   editExam(id: string) {
     this.router.navigate(["edit-exam", id]);
-  }
+  };
 
   editPatient(id: string) {
     this.router.navigate(["edit-patient", id]);
-  }
-  
+  };
+
 
 }
