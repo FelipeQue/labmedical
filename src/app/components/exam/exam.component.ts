@@ -7,11 +7,13 @@ import { BirthDatePipe } from '../../pipes/birth-date.pipe';
 import { ExamService } from '../../services/exam.service';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmDialogService } from '../../services/confirm-dialog.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCircleChevronLeft, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-exam',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, BirthDatePipe],
+  imports: [ReactiveFormsModule, CommonModule, BirthDatePipe, FontAwesomeModule],
   templateUrl: './exam.component.html',
   styleUrl: './exam.component.scss'
 })
@@ -48,6 +50,9 @@ export class ExamComponent {
 
   editingMode = false;
   examToEdit: any = {};
+
+  faCircleChevronLeft = faCircleChevronLeft;
+  faPenToSquare = faPenToSquare;
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((parameters) => {

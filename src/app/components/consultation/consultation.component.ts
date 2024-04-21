@@ -7,13 +7,15 @@ import { ToastrService } from 'ngx-toastr';
 import { BirthDatePipe } from '../../pipes/birth-date.pipe';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmDialogService } from '../../services/confirm-dialog.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCircleChevronLeft, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-consultation',
   standalone: true,
   templateUrl: './consultation.component.html',
   styleUrl: './consultation.component.scss',
-  imports: [ReactiveFormsModule, CommonModule, BirthDatePipe]
+  imports: [ReactiveFormsModule, CommonModule, BirthDatePipe, FontAwesomeModule]
 })
 export class ConsultationComponent {
 
@@ -47,6 +49,9 @@ export class ConsultationComponent {
 
   editingMode = false;
   consultationToEdit: any = {};
+
+  faCircleChevronLeft = faCircleChevronLeft;
+  faPenToSquare = faPenToSquare;
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((parameters) => {

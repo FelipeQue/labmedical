@@ -10,8 +10,7 @@ import { ConfirmDialogService } from '../../services/confirm-dialog.service';
 import { ExamService } from '../../services/exam.service';
 import { ConsultationService } from '../../services/consultation.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCircleChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faCircleChevronLeft, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-patient',
