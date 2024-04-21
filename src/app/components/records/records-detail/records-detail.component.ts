@@ -7,11 +7,7 @@ import { CommonModule } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { PhonePipe } from '../../../pipes/phone.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCalendarDay } from '@fortawesome/free-solid-svg-icons';
-import { faClock } from '@fortawesome/free-solid-svg-icons';
-import { faStethoscope } from '@fortawesome/free-solid-svg-icons';
-import { faMicroscope } from '@fortawesome/free-solid-svg-icons';
-import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarDay, faClock, faStethoscope, faMicroscope, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-records-detail',
