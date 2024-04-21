@@ -7,13 +7,15 @@ import { ToastrService } from 'ngx-toastr';
 import { BirthDatePipe } from '../../pipes/birth-date.pipe';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmDialogService } from '../../services/confirm-dialog.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCircleChevronLeft, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-consultation',
   standalone: true,
   templateUrl: './consultation.component.html',
   styleUrl: './consultation.component.scss',
-  imports: [ReactiveFormsModule, CommonModule, BirthDatePipe]
+  imports: [ReactiveFormsModule, CommonModule, BirthDatePipe, FontAwesomeModule]
 })
 export class ConsultationComponent {
 
@@ -47,6 +49,9 @@ export class ConsultationComponent {
 
   editingMode = false;
   consultationToEdit: any = {};
+
+  faCircleChevronLeft = faCircleChevronLeft;
+  faPenToSquare = faPenToSquare;
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((parameters) => {
@@ -91,6 +96,10 @@ export class ConsultationComponent {
           const isIdMatch = searchedPatient.id && searchedPatient.id.includes(nameOrId);
           return isNameMatch || isIdMatch;
         });
+        this.resultsList.sort((a: any,b: any) => a.name.localeCompare(b.name));
+        if (this.resultsList.length === 0) {
+        this.toastrService.error("Não foram encontrados registros de paciente com este nome ou código de registro.");
+      }
       });
     } else {
       this.toastrService.warning("Preencha nome ou identificador no campo de busca.");
@@ -101,6 +110,7 @@ export class ConsultationComponent {
     this.toastrService.info("Você selecionou " + name);
     this.selectedPatientName = name;
     this.selectedPatientId = id;
+    this.resultsList = [];
   }
 
   saveConsultation() {
@@ -118,6 +128,8 @@ export class ConsultationComponent {
         this.consultationService.addConsultation(newConsultation).subscribe({
           next: (response): void => {
             this.consultationInfo.reset();
+            this.consultationInfo.get('date')?.setValue(formatDate(new Date(), 'yyyy-MM-dd', 'en'));
+            this.consultationInfo.get('time')?.setValue(formatDate(new Date(), 'HH:mm', 'en'));
             this.toastrService.success('Nova consulta salva com sucesso!', '');
           },
           error: (error) => {
@@ -145,7 +157,6 @@ export class ConsultationComponent {
         }
         this.consultationService.editConsultation(this.consultationToEdit.id, editedConsultation).subscribe({
           next: (response): void => {
-            this.consultationInfo.reset();
             this.toastrService.success('Consulta alterada com sucesso!', '');
             this.location.back();
           },

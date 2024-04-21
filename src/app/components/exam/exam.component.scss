@@ -31,8 +31,9 @@
 
 #exam-container {
     width: 100%;
-    background-color: #f5f5f5; 
+    background-color: $pageBackground; 
     padding: 1em;
+    min-height: 100%;
 }
 
 #patient-search {
@@ -42,7 +43,7 @@
         border: 1px solid #ccc;
         border-radius: 4px;
         &:focus {
-            border: 2px solid $buttonActive;
+            border: 2px solid $mainColor;
             outline: none;
         }
     }
@@ -67,20 +68,51 @@
 
 #patient-results {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1em;
+    flex-direction: column;
+    gap: 0.8em;
     margin-top: 1em;
 }
 
-.patient-card {
+.patient-strip {
+    cursor: pointer;
+    width: 100%;
     border-radius: 8px;
-    // border: 1px solid white;
-    // background-image: linear-gradient(180deg, #FFB6C1, #FFEFF1);
-    background-image: linear-gradient(150deg, #FFD3D9, #FFEFF1);
-    background-color: #FFD3D9;
-    padding: 1em;
+    background-color: $thirdColor;
+    padding: 0.8em;
     box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .strip-main {
+        margin-left: 0.8em;
+        flex: 1;
+        h3 {
+            font-size: 1.6em;
+            font-weight: 300;
+        }
+    }
+    .strip-secondary {
+        align-items: center;
+        width: 60%;
+        display: flex;
+        flex-direction: row;
+        .strip-unit {
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+            .strip-code {
+                text-transform: uppercase;
+                font-size: 0.8em;
+                color: gray;
+            }
+            .strip-label {
+                font-size: 0.8em;
+                font-weight: 700;
+            }
+        }
+    }
 }
+
 
 #exam-form {
     margin-top: 1em;
@@ -92,26 +124,43 @@
     color: $softBlack;
 }
 
-#exam-header {
-    display: flex;
-    justify-content: space-between;
-    margin-right: 1em;
-    margin-bottom: 2em;
-    height: auto;
-}
-
 #selected-patient {
     width: 100%;
     align-content: center;
 }
 
-.exam-buttons {
+.exam-header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     flex-wrap: wrap;
     width: 100%;
-    max-height: 2.8em;
     gap: 0.8em;
+    margin-right: 1em;
+    margin-bottom: 2em;
+    height: auto;
+    .header-left-side {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.8em;
+        button {
+            display: flex;
+            flex-direction: row;
+        }
+        h2 {
+            font-size: 1.8em;
+            font-weight: 300;
+        }
+    }
+    .header-right-side {
+        display: flex;
+        flex-direction: row;
+        gap: 0.8em;
+        align-items: center;
+    }
+    fa-icon {
+        margin-right: 0.5em;
+    }
     button {
         color: #ffffff;
         border: none;
@@ -146,6 +195,28 @@
 }
 .danger-button {
     background-color: $dangerButton;
+}
+
+.edit-mode {
+    align-self: center;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    margin-right: 0.8em;
+    fa-icon {
+        margin-left: 0.2em;
+    }
+}
+
+#edit-mode-off {
+    color: lightgray;
+    text-decoration: line-through;
+}
+
+#edit-mode-on {
+    color: $softBlack;
+    fa-icon {
+        color: green;
+    }
 }
 
 .form-unit {

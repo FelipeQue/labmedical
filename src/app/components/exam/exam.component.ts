@@ -7,11 +7,13 @@ import { BirthDatePipe } from '../../pipes/birth-date.pipe';
 import { ExamService } from '../../services/exam.service';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmDialogService } from '../../services/confirm-dialog.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCircleChevronLeft, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-exam',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, BirthDatePipe],
+  imports: [ReactiveFormsModule, CommonModule, BirthDatePipe, FontAwesomeModule],
   templateUrl: './exam.component.html',
   styleUrl: './exam.component.scss'
 })
@@ -48,6 +50,9 @@ export class ExamComponent {
 
   editingMode = false;
   examToEdit: any = {};
+
+  faCircleChevronLeft = faCircleChevronLeft;
+  faPenToSquare = faPenToSquare;
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((parameters) => {
@@ -93,6 +98,10 @@ export class ExamComponent {
           const isIdMatch = searchedPatient.id && searchedPatient.id.includes(nameOrId);
           return isNameMatch || isIdMatch;
         });
+        this.resultsList.sort((a: any,b: any) => a.name.localeCompare(b.name));
+        if (this.resultsList.length === 0) {
+          this.toastrService.error("Não foram encontrados registros de paciente com este nome ou código de registro.");
+        }
       });
     } else {
       this.toastrService.warning("Preencha nome ou identificador no campo de busca.");
@@ -103,10 +112,10 @@ export class ExamComponent {
     this.toastrService.info("Você selecionou " + name);
     this.selectedPatientName = name;
     this.selectedPatientId = id;
+    this.resultsList = [];
   }
 
   saveExam() {
-    console.log("chamou salvar pra salvar");
     if (!!this.selectedPatientId) {
       if (this.examInfo.valid) {
         const newExam = {
@@ -122,6 +131,8 @@ export class ExamComponent {
         this.examService.addExam(newExam).subscribe({
           next: (response): void => {
             this.examInfo.reset();
+            this.examInfo.get('date')?.setValue(formatDate(new Date(), 'yyyy-MM-dd', 'en'));
+            this.examInfo.get('time')?.setValue(formatDate(new Date(), 'HH:mm', 'en'));
             this.toastrService.success('Novo exame salvo com sucesso!', '');
           },
           error: (error) => {
@@ -137,8 +148,6 @@ export class ExamComponent {
   };
 
   editExam() {
-
-    console.log("chamou salvar pra editar.")
     if (this.examInfo.valid) {
       const editedExam = {
         "patientId": this.selectedPatientId,
@@ -152,7 +161,6 @@ export class ExamComponent {
       }
       this.examService.editExam(this.examToEdit.id, editedExam).subscribe({
         next: (response): void => {
-          this.examInfo.reset();
           this.toastrService.success('Exame alterado com sucesso!', '');
           this.location.back();
         },
@@ -175,7 +183,7 @@ deleteExam() {
           this.location.back();
         },
         error: (error) => {
-          this.toastrService.error('Algo deu errado ao tentar editar o exame.', '');
+          this.toastrService.error('Algo deu errado ao tentar apagar o exame.', '');
         }
       })
     };

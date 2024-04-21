@@ -1,13 +1,14 @@
 <div id="records-detail-container">
 
-
-
     <div id="patient-data">
         <div id="patient-data-header">
             <div id="patient-portrait"><img src="../../../../assets/images/portrait-patient.png"></div>
-            <div id="patient-name">{{patient.name}}</div>
         </div>
         <div id="patient-data-body">
+            <div id="patient-data-first-line">
+            <div id="patient-name">{{patient.name}}</div>
+            <div class="event-button"><button (click)="editPatient(patient.id)">Atualizar cadastro</button></div>
+            </div>
             <h4 *ngIf="patient.insuranceCompany">Convênio</h4>
             <p *ngIf="patient.insuranceCompany">{{patient.insuranceCompany}}</p>
             <h4>Contato de emergência</h4>

@@ -19,7 +19,8 @@
     color: black;
     z-index: 1;
     top: 0;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+    // box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    // box-shadow: inset gray 0px 0px 10px -5px; 
     font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -53,5 +54,17 @@
         border: 1px solid white;
         border-radius: 50%;
         width: 100%;
+    }
+}
+
+.dropdown-link {
+    color: $linkColor;
+    font-weight: 650;
+    &:hover {
+        color: $linkHover; 
+    } 
+    &:active {
+        color: $linkActive;
+        background-color: white;
     }
 }

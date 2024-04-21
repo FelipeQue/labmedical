@@ -51,6 +51,7 @@ export class HomeComponent {
     this.patientService.getPatient().subscribe((patients) => {
       this.patientsList = patients;
       this.resultsList = this.patientsList;
+      this.resultsList.sort((a: any,b: any) => a.name.localeCompare(b.name));
       this.patientsAmount = this.patientsList.length;
     });
     this.examService.getExam().subscribe((exams) => {
@@ -74,12 +75,17 @@ export class HomeComponent {
           const isEmailMatch = searchedPatient.email && searchedPatient.email.includes(searchInput);
           return isNameMatch || isPhoneMatch || isEmailMatch;
         });
+        this.resultsList.sort((a: any,b: any) => a.name.localeCompare(b.name));
       });
     } else {
-      this.toastrService.warning("Preencha nome ou identificador no campo de busca.");
+      this.patientService.getPatient().subscribe((patients) => {
+        this.patientsList = patients;
+        this.resultsList = this.patientsList;
+        this.resultsList.sort((a: any,b: any) => a.name.localeCompare(b.name));
+      });
+      this.toastrService.info("A lista de pacientes foi recarregada.");
     }
   };
-
 
   editPatient(id: string) {
     this.router.navigate(["edit-patient", id]);

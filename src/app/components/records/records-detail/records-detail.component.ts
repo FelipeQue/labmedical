@@ -73,7 +73,9 @@ export class RecordsDetailComponent {
     this.router.navigate(["edit-exam", id]);
   }
 
-
-
+  editPatient(id: string) {
+    this.router.navigate(["edit-patient", id]);
+  }
+  
 
 }

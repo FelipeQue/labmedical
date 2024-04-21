@@ -2,23 +2,32 @@
 
 
     <div *ngIf="editingMode == false" id="patient-search">
-        <label for="patient-input">Busca de paciente:</label>
+        <label for="patient-input">Busca de paciente (por nome ou código de registro):</label>
         <form id="patient-search-form" (ngSubmit)="searchPatient()" [formGroup]="patientInput">
         <input id="patient-input" type="text" formControlName="nameOrId">
-        <button type="submit" class="primary-button">Pesquisar</button>
+        <button type="submit" class="primary-button" title="Pesquisar">Pesquisar</button>
         </form>
     </div>
 
     <div *ngIf="resultsList && editingMode == false" id="patient-results">
         <div *ngFor="let patient of resultsList">
-            <div class="patient-card" (click)="selectPatient(patient.name, patient.id)">
-                <div class="card-header">
-                <h3 class="card-name">{{patient.name}}</h3>
-                <p>Registro: {{patient.id}}</p>
-                <p>Data de nascimento: {{patient.birthDate | birthDate}}</p>
-                <p>Convênio: {{patient.insuranceCompany}}
-                <span *ngIf="!patient.insuranceCompany">Não possui convênio.</span>
-                </p>  
+            <div class="patient-strip" (click)="selectPatient(patient.name, patient.id)">
+                <div class="strip-main">
+                <h3 class="strip-name">{{patient.name}}</h3>
+                </div>
+                <div class="strip-secondary">
+                <div class="strip-unit">
+                <div class="strip-code">Registro {{patient.id}}</div>
+                </div>
+                <div class="strip-unit">
+                <div class="strip-label">Data de nascimento:</div>
+                <div>{{patient.birthDate | birthDate}}</div>
+                </div>
+                <div class="strip-unit">
+                <div class="strip-label">Convênio:</div>
+                <div>{{patient.insuranceCompany}}
+                <span *ngIf="!patient.insuranceCompany">Não possui convênio.</span></div>
+                </div>
                 </div>
             </div>
         </div>
@@ -26,18 +35,22 @@
 
 
     <form id="exam-form" [formGroup]="examInfo">
-        <div id="exam-header">
-            <div *ngIf="selectedPatientName" id="selected-patient">
-                <h2>Paciente: {{selectedPatientName}}</h2></div>
-            <div class="exam-buttons">
-                <button class="secondary-button" [disabled]="!editingMode">Editar</button>
-                <button *ngIf="editingMode == true" class="secondary-button" (click)="goBack()">Voltar</button>
-                <button (click)="deleteExam()" class="danger-button" [disabled]="!editingMode">Deletar</button>
+        <div class="exam-header">
+            <div class="header-left-side">
+                <button *ngIf="editingMode == true" class="secondary-button" (click)="goBack()" title="Voltar"><fa-icon [icon]="faCircleChevronLeft"></fa-icon>Voltar</button>
+                <div *ngIf="selectedPatientName" id="selected-patient">
+                    <h2>Paciente: {{selectedPatientName}}</h2></div>
+            </div>
+            <div class="header-right-side">
+                <div *ngIf="editingMode == false" class="edit-mode" id="edit-mode-off" title="Modo edição desativado">Modo edição <fa-icon [icon]="faPenToSquare"></fa-icon></div>
+                <div *ngIf="editingMode == true" class="edit-mode" id="edit-mode-on" title="Modo edição ativado">Modo edição <fa-icon [icon]="faPenToSquare"></fa-icon></div>
+                <button (click)="deleteExam()" class="danger-button" [disabled]="!editingMode" title="Deletar">Deletar</button>
                 <button *ngIf="editingMode == true" (click)="editExam()" class="primary-button"
-                type="submit">Salvar</button>
-                <button *ngIf="editingMode == false" (click)="saveExam()" class="primary-button" type="submit">Salvar</button>
+                type="submit" title="Salvar alterações">Salvar</button>
+                <button *ngIf="editingMode == false" (click)="saveExam()" class="primary-button" type="submit" title="Salvar exame">Salvar</button>
             </div>
-            </div>
+        </div>
+
         <div>
             <section class="exam-section">
                 <div id="exam-first-line">
