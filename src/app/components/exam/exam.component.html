@@ -11,14 +11,23 @@
 
     <div *ngIf="resultsList && editingMode == false" id="patient-results">
         <div *ngFor="let patient of resultsList">
-            <div class="patient-card" (click)="selectPatient(patient.name, patient.id)">
-                <div class="card-header">
-                <h3 class="card-name">{{patient.name}}</h3>
-                <p>Registro: {{patient.id}}</p>
-                <p>Data de nascimento: {{patient.birthDate | birthDate}}</p>
-                <p>Convênio: {{patient.insuranceCompany}}
-                <span *ngIf="!patient.insuranceCompany">Não possui convênio.</span>
-                </p>  
+            <div class="patient-strip" (click)="selectPatient(patient.name, patient.id)">
+                <div class="strip-main">
+                <h3 class="strip-name">{{patient.name}}</h3>
+                </div>
+                <div class="strip-secondary">
+                <div class="strip-unit">
+                <div class="strip-code">Registro {{patient.id}}</div>
+                </div>
+                <div class="strip-unit">
+                <div class="strip-label">Data de nascimento:</div>
+                <div>{{patient.birthDate | birthDate}}</div>
+                </div>
+                <div class="strip-unit">
+                <div class="strip-label">Convênio:</div>
+                <div>{{patient.insuranceCompany}}
+                <span *ngIf="!patient.insuranceCompany">Não possui convênio.</span></div>
+                </div>
                 </div>
             </div>
         </div>
