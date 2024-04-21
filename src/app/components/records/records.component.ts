@@ -35,6 +35,7 @@ export class RecordsComponent {
     this.patientService.getPatient().subscribe((patients) => {
     this.patientsList = patients;
     this.resultsList = this.patientsList;
+    this.resultsList.sort((a: any,b: any) => a.name.localeCompare(b.name));
     })
   };
 
@@ -48,11 +49,13 @@ export class RecordsComponent {
           const isIdMatch = searchedPatient.id && searchedPatient.id.includes(nameOrId);
           return isNameMatch || isIdMatch;
         });
+        this.resultsList.sort((a: any,b: any) => a.name.localeCompare(b.name));
       });
     } else {
       this.patientService.getPatient().subscribe((patients) => {
         this.patientsList = patients;
         this.resultsList = this.patientsList;
+        this.resultsList.sort((a: any,b: any) => a.name.localeCompare(b.name));
       });
       this.toastrService.info("A lista de pacientes foi recarregada.");
     }

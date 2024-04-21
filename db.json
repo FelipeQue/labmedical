@@ -167,6 +167,34 @@
         "neighborhood": "Novo Buritizal",
         "landmark": "Perto da praça"
       }
+    },
+    {
+      "id": "8d06",
+      "name": "Susanna Mary Clarke",
+      "gender": "Feminino",
+      "birthDate": "01111959",
+      "cpf": "00000000000",
+      "rg": "000000 SSP/UK",
+      "maritalStatus": "Nunca casou",
+      "phone": "00000000000",
+      "email": "",
+      "birthCity": "Nottingham",
+      "emergencyContact": "00000000000",
+      "allergies": "Amendoim.",
+      "specialCare": "Pressão baixa.",
+      "insuranceCompany": "Norrell & Strange",
+      "insuranceNumber": "111222333",
+      "insuranceExpiration": "21112024",
+      "address": {
+        "cep": "37022-130",
+        "city": "Varginha",
+        "state": "MG",
+        "street": "Rua França Campos",
+        "number": "123",
+        "complement": "Apto 102",
+        "neighborhood": "Vila Barcelona",
+        "landmark": "Ao lado da igreja"
+      }
     }
   ],
   "consultations": [
@@ -181,14 +209,14 @@
       "dosagePrecautions": "Tomar 1 comprimido após as refeições."
     },
     {
-      "id": "2ecd",
       "patientId": "e352",
       "reason": "Dor abdominal persistente",
       "date": "2024-04-13",
       "time": "20:59",
-      "issueDescription": "Paciente relata dores intensas na região abdominal, com desconforto e inchaço.",
+      "issueDescription": "Paciente relata dores intensas na região abdominal, com desconforto e inchaço há 3 dias.",
       "prescribedMedication": "Antiespasmódico",
-      "dosagePrecautions": "Tomar 1 comprimido após as refeições."
+      "dosagePrecautions": "Tomar 1 comprimido após as refeições.",
+      "id": "2ecd"
     }
   ],
   "exams": [
