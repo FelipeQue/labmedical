@@ -1,12 +1,12 @@
 # LABMedical
 
-## Overview
+## Overview :hospital:
 
 LABMedical is a healthcare provider management system. It is designed to streamline the process of patient registration and management of exams and consultations records in a hospital setting. Its primary users are healthcare professionals such as doctors, nurses, and medical administrators. The present project focuses on the front end and makes use of localStorage for login and JSON server to mock the backend.
 
 This project was developed as part of the Floripa Mais Tec fullstack programme, by LAB365/SENAI (Florianópolis, Brasil).
 
-## Features
+## Features :health_worker:
 
 ### Registration
 - **Easy Registration**: On login screen, healthcare professionals can register themselves using a simple form.
@@ -19,7 +19,7 @@ This project was developed as part of the Floripa Mais Tec fullstack programme, 
 - **Record Visualization**: Patients records bring together exams and consultations, displaying them in chronological order.
 - **System information**: On the home screen, the user can see the current system stats, with total number of patients, exams and consultations on record.
 
-## Technologies
+## Technologies 🛠️
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.3. Thus, it's based on:
 
@@ -27,14 +27,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - **SCSS**
 - **Typescript**
 
-## Extra libraries
+## Extra libraries 📔
 
-The following libraries were installed and recruited in the development of LABMedical:
+The following libraries were installed *and recruited* in the development of LABMedical:
 
 - **FontAwesome**
-@fortawesome/angular-fontawesome@0.14.1
-@fortawesome/fontawesome-svg-core@6.5.2
-@fortawesome/free-regular-svg-icons@6.5.2
+@fortawesome/angular-fontawesome@0.14.1  
 @fortawesome/free-solid-svg-icons@6.5.2
 
 - **NG Bootstrap**
@@ -43,7 +41,7 @@ The following libraries were installed and recruited in the development of LABMe
 - **NGX Mask**
 ngx-mask@17.0.7
 
--**NGX Toastr**
+- **NGX Toastr**
 ngx-toastr@18.0.0
 
 - **JSON Server**
