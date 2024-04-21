@@ -109,6 +109,7 @@ export class ConsultationComponent {
     this.toastrService.info("Você selecionou " + name);
     this.selectedPatientName = name;
     this.selectedPatientId = id;
+    this.resultsList = [];
   }
 
   saveConsultation() {

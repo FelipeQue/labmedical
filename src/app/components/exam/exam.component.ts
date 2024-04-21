@@ -111,6 +111,7 @@ export class ExamComponent {
     this.toastrService.info("Você selecionou " + name);
     this.selectedPatientName = name;
     this.selectedPatientId = id;
+    this.resultsList = [];
   }
 
   saveExam() {
