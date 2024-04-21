@@ -1,6 +1,5 @@
 <div id="consultation-container">
 
-
     <div *ngIf="editingMode == false" id="patient-search">
         <label for="patient-input">Busca de paciente (por nome ou código de registro):</label>
         <form id="patient-search-form" (ngSubmit)="searchPatient()" [formGroup]="patientInput">
@@ -32,7 +31,6 @@
             </div>
         </div>
     </div>
-
 
     <form id="consultation-form" [formGroup]="consultationInfo">
         <div class="consultation-header">
@@ -110,11 +108,7 @@
                             consultationInfo.controls.time.errors['required']">Campo obrigatório</span>
                         </div>
                     </div>
-
-
                 </div>
-
-
 
                 <div class="form-unit">
                     <label for="issue-description">Descrição do Problema:</label>
@@ -174,6 +168,5 @@
             </section>
         </div>
     </form>
-
 
 </div>
