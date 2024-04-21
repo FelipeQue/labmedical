@@ -1,0 +1,44 @@
+<div id="toolbar" ngbDropdown>
+
+    <div id="toolbar-title">
+
+        <div *ngIf="getCurrentUrl() == '/'">
+            Estatísticas e Informações
+        </div>
+        <div *ngIf="getCurrentUrl() == '/home'">
+            Estatísticas e Informações
+        </div>
+        <div *ngIf="getCurrentUrl() == '/register-patient'">
+            Cadastrar Paciente
+        </div>
+        <div *ngIf="getCurrentUrl() == '/register-consultation'">
+            Cadastrar Consulta
+        </div>
+        <div *ngIf="getCurrentUrl() == '/register-exam'">
+            Cadastrar Exame
+        </div>
+        <div *ngIf="getCurrentUrl() == '/medical-records'">
+            Listagem de Prontuário
+        </div>
+        <div *ngIf="getCurrentUrl().includes('/medical-records/')">
+            Prontuário de Paciente
+        </div>
+        <div *ngIf="getCurrentUrl().includes('/edit-consultation/')">
+            Editar Consulta
+        </div>
+        <div *ngIf="getCurrentUrl().includes('/edit-exam/')">
+            Editar Exame
+        </div>
+        <div *ngIf="getCurrentUrl().includes('/edit-patient/')">
+            Editar Cadastro de Paciente
+        </div>
+    </div>
+    <div id="toolbar-user">
+        <div id="toolbar-name">{{loggedUserName}}</div>
+        <div id="toolbar-avatar" ngbDropdownToggle><img src="../../../../assets/images/portrait-avatar.png"></div>
+    </div>
+    <div ngbDropdownMenu aria-labelledby="toolbar-user">
+        <button ngbDropdownItem (click)="logout()" class="dropdown-link">Sair</button>
+    </div>
+
+</div>

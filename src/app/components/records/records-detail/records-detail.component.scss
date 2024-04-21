@@ -1,0 +1,195 @@
+@import '../../../../assets/styles/variables';
+
+@media screen and (max-width: 740px) {
+    .event-header-datetime {
+        gap: 0.5em;
+    }
+}
+
+@media screen and (min-width: 741px) {
+    .event-header-datetime {
+        gap: 1em;
+    }
+}
+
+#records-detail-container {
+    background-color: $pageBackground;
+    padding: 1em;
+    min-height: 100%;
+}
+
+#patient-data {
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+#patient-data-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    background-color: $thirdColor;
+    padding: 0.6em;
+}
+
+#patient-portrait {
+    border-radius: 50%;
+    border: 4px solid white;
+    width: fit-content;
+    img {
+        border: 2px solid $mainColor;
+        width: 160px;
+        border-radius: 50%;
+    }
+}
+
+#patient-data-body {
+    background-color: #ffffff;
+    padding-left: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    width: 100%;
+    #patient-data-first-line {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #patient-name {
+        font-size: 1.4em;
+        font-weight: 400;
+        margin-bottom: 0.8em;
+    }
+    h4 {
+        font-weight: 700;
+        font-size: 0.9em;
+    }
+}
+
+.patient-event {
+    margin-top: 1em;
+    width: 100%;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+    h2 {
+        font-size: 1.1em;
+        font-weight: 500;
+        padding-top: 0.35em;
+        margin-left: 0.5em;
+    }
+    h3 {
+        font-size: 0.8em;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    h4 {
+        font-weight: 700;
+        font-size: 0.9em;
+    }
+}
+
+.event-header {
+    padding-top: 0.6em;
+    padding-left: 1em;
+    padding-right: 1.5em;
+    padding-bottom: 0.6em;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-color: $mainColor;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.event-header-secondrow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    padding-bottom: 0;
+    fa-icon {
+        font-size: 1.5em;
+    };
+}
+
+.event-header-datetime {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    padding-bottom: 0;
+    align-items: center;
+    align-content: center;
+}
+
+.header-unit {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    padding-bottom: 0;
+}
+
+.event-body {
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.event-body-firstrow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.exam-lab {
+    width: 50%;
+}
+
+.exam-type {
+    width: 50%;
+}
+
+.attachment {
+    border-radius: 8px;
+    background-color: $mainColor;
+    color: hsl(0, 0%, 100%);
+    width: 2em;
+    height: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+
+.event-button {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 1em;
+    padding-bottom: 1em;
+    button {
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        padding: 6px 15px;
+        font-size: 1em;
+        cursor: pointer;
+        background-color: $buttonColor;
+        &:hover {
+            background-color: $buttonHover;
+        }
+        &:active {
+            background-color: $buttonActive;
+        }
+    }
+}

@@ -1,1 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+    color: currentColor;
+  }
+
+:target {
+    scroll-margin-block: 5ex;
+}
+
+@import 'bootstrap/scss/bootstrap';
+@import '../src/assets/styles/variables';
+
+.error-message {
+    text-transform: uppercase;
+    font-size: .7em;
+    font-weight: 600;
+    color: $errorRed;
+    letter-spacing: 0.02em;
+};
+
+.error-border {
+    border: 1px solid $errorRed !important;
+};

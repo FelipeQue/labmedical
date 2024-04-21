@@ -1,0 +1,296 @@
+@import '../../../assets/styles/mixins';
+@import '../../../assets/styles/variables';
+
+@media screen and (max-width: 740px) {
+    #consultation-first-field {
+        width: 100%;
+    }
+
+    .largest-field {
+        width: 100%;
+    }
+
+    .large-field {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 741px) {
+    #consultation-first-field {
+        width: 50%;
+    }
+
+    .largest-field {
+        width: 70%;
+    }
+
+    .large-field {
+        width: 70%;
+    }
+}
+
+#consultation-container {
+    width: 100%;
+    background-color: $pageBackground;
+    padding: 1em;
+    min-height: 100%;
+}
+
+#patient-search {
+    input {
+        width: 60%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+
+        &:focus {
+            border: 2px solid $mainColor;
+            outline: none;
+        }
+    }
+
+    button {
+        margin-left: 10px;
+        @include basic-button;
+    }
+}
+
+#patient-search-form {
+    gap: 10px;
+}
+
+#patient-results {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+    margin-top: 1em;
+}
+
+.patient-strip {
+    cursor: pointer;
+    width: 100%;
+    border-radius: 8px;
+    background-color: $thirdColor;
+    padding: 0.8em;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .strip-main {
+        margin-left: 0.8em;
+        flex: 1;
+
+        h3 {
+            font-size: 1.6em;
+            font-weight: 300;
+        }
+    }
+
+    .strip-secondary {
+        align-items: center;
+        width: 60%;
+        display: flex;
+        flex-direction: row;
+
+        .strip-unit {
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+
+            .strip-code {
+                text-transform: uppercase;
+                font-size: 0.8em;
+                color: gray;
+            }
+
+            .strip-label {
+                font-size: 0.8em;
+                font-weight: 700;
+            }
+        }
+    }
+}
+
+
+#consultation-form {
+    margin-top: 1em;
+    width: 100%;
+    border-radius: 8px;
+    padding: 1em;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    color: $softBlack;
+}
+
+#selected-patient {
+    width: 100%;
+    align-content: center;
+}
+
+.consultation-header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 0.8em;
+    margin-right: 1em;
+    margin-bottom: 2em;
+    height: auto;
+
+    .header-left-side {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.8em;
+
+        button {
+            display: flex;
+            flex-direction: row;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            font-weight: 300;
+        }
+    }
+
+    .header-right-side {
+        display: flex;
+        flex-direction: row;
+        gap: 0.8em;
+        align-items: center;
+    }
+
+    fa-icon {
+        margin-right: 0.5em;
+    }
+
+    button {
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 20px;
+        font-size: 1em;
+        cursor: pointer;
+
+        &:disabled {
+            color: lightgray;
+            background-color: #f0f0f0;
+        }
+    }
+}
+
+.primary-button {
+    background-color: $buttonColor;
+
+    &:hover {
+        background-color: $buttonHover;
+    }
+
+    &:active {
+        background-color: $buttonActive;
+    }
+}
+
+.secondary-button {
+    background-color: $buttonColor;
+
+    &:hover {
+        background-color: $buttonHover;
+    }
+
+    &:active {
+        background-color: $buttonActive;
+    }
+}
+
+.danger-button {
+    background-color: $dangerButton;
+}
+
+.edit-mode {
+    align-self: center;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    margin-right: 0.8em;
+
+    fa-icon {
+        margin-left: 0.2em;
+    }
+}
+
+#edit-mode-off {
+    color: lightgray;
+    text-decoration: line-through;
+}
+
+#edit-mode-on {
+    color: $softBlack;
+
+    fa-icon {
+        color: green;
+    }
+}
+
+.form-unit {
+    display: flex;
+    flex-direction: column;
+}
+
+.consultation-section {
+    max-width: 100%;
+    margin-bottom: 0.5em;
+    gap: 1em;
+
+    label {
+        text-align: left;
+    }
+
+    input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+
+        &:focus {
+            border: 2px solid $buttonActive;
+            outline: none;
+        }
+    }
+
+    textarea {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+
+        &:focus {
+            border: 2px solid $buttonActive;
+            outline: none;
+        }
+    }
+
+    select {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+
+        &:focus {
+            border: 2px solid $buttonActive;
+            outline: none;
+        }
+    }
+}
+
+#consultation-first-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.largest-field {
+    height: 10em;
+}
+
+.large-field {
+    height: 5em;
+}

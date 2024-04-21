@@ -1,0 +1,35 @@
+<div id="sidemenu" [ngClass]="{expanded: expanded}">
+    <div id="logo-container" routerLink="home"><img id="logo"></div>
+    <div id="nav-container">
+        <nav>
+            <div class="nav-item" routerLink="home" title="Início">
+                <div class="nav-icon"><fa-icon [icon]="faCircleInfo"></fa-icon></div>
+                <div class="nav-text">Início</div>
+            </div>
+            <div class="nav-item" routerLink="medical-records" title="Listar prontuário">
+                <div class="nav-icon"><fa-icon [icon]="faClipboardUser"></fa-icon></div>
+                <div class="nav-text">Listar prontuário</div>
+            </div>
+            <div class="nav-item" routerLink="register-patient" title="Cadastrar paciente">
+                <div class="nav-icon"><fa-icon [icon]="faUserPlus"></fa-icon></div>
+                <div class="nav-text">Cadastrar paciente</div>
+            </div>
+            <div class="nav-item" routerLink="register-consultation" title="Cadastrar consulta">
+                <div class="nav-icon"><fa-icon [icon]="faStethoscope"></fa-icon></div>
+                <div class="nav-text">Cadastrar consulta</div>
+            </div>
+            <div class="nav-item" routerLink="register-exam" title="Cadastrar exame">
+                <div class="nav-icon"><fa-icon [icon]="faMicroscope"></fa-icon></div>
+                <div class="nav-text">Cadastrar exame</div>
+            </div>
+            <div class="nav-item" (click)="logout()" title="Sair">
+                <div class="nav-icon"><fa-icon [icon]="faDoorOpen"></fa-icon></div>
+                <div class="nav-text">Sair</div>
+            </div>
+            
+        </nav>
+    </div>
+    <button id="expandButton" (click)="expanded = !expanded" title="Expandir/contrair menu">
+        <fa-icon [icon]="expanded ? faSquareCaretLeft : faSquareCaretRight"></fa-icon>
+    </button>
+</div>

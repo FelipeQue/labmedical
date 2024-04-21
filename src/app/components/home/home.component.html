@@ -1,0 +1,79 @@
+<div id="home-page">
+
+    <div id="stats">
+        <div class="stats-unit">
+            <div class="stats-icon">
+                <fa-icon [icon]="faPeopleGroup"></fa-icon>
+            </div>
+            <div class="stats-text">
+                <div class="stats-number">{{patientsAmount}}</div>
+                <div>pacientes</div>
+            </div>
+        </div>
+        <div class="stats-unit">
+            <div class="stats-icon">
+                <fa-icon [icon]="faStethoscope"></fa-icon>
+            </div>
+            <div class="stats-text">
+                <div class="stats-number">{{consultationsAmount}}</div>
+                <div>consultas</div>
+            </div>
+        </div>
+        <div class="stats-unit">
+            <div class="stats-icon">
+                <fa-icon [icon]="faMicroscope"></fa-icon>
+            </div>
+            <div class="stats-text">
+                <div class="stats-number">{{examsAmount}}</div>
+                <div>exames</div>
+            </div>
+        </div>
+
+    </div>
+    <div id="patient-search-container">
+        <div id="patient-search">
+            <label for="patient-input">Busca de paciente (por nome, telefone ou e-mail):</label>
+            <form id="patient-search-form" (ngSubmit)="searchPatient()" [formGroup]="patientSearch">
+                <input id="patient-input" type="text" formControlName="searchInput">
+                <button type="submit" class="primary-button" title="Pesquisar">Pesquisar</button>
+            </form>
+        </div>
+    </div>
+
+    <div *ngIf="resultsList" id="patient-results">
+        <div *ngFor="let patient of resultsList">
+            <div class="patient-card">
+                <div class="card-header">
+                    <!-- <div id="patient-portrait"><img src="../../../../assets/images/portrait-patient.png"></div> -->
+                    <div>
+                        <h3 class="card-name">{{patient.name}}</h3>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-body-left">
+                        <div id="patient-portrait"><img src="../../../../assets/images/portrait-patient.png"></div>
+                    </div>
+                    <div class="card-body-right">
+                        <div class="record-id">Registro: {{patient.id}}</div>
+                        <div>{{patient.birthDate | age}} anos</div>
+                        <label>Convênio:</label>
+                        <div>{{patient.insuranceCompany}}
+                            <span *ngIf="!patient.insuranceCompany">Não possui convênio.</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label>Contato: </label>
+                    <div>
+                        <span> {{patient.phone | phone}}</span>
+                        <span *ngIf="patient.email"> {{patient.email}}</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button (click)="editPatient(patient.id)">Atualizar cadastro</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

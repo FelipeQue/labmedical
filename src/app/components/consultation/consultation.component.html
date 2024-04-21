@@ -1,0 +1,172 @@
+<div id="consultation-container">
+
+    <div *ngIf="editingMode == false" id="patient-search">
+        <label for="patient-input">Busca de paciente (por nome ou código de registro):</label>
+        <form id="patient-search-form" (ngSubmit)="searchPatient()" [formGroup]="patientInput">
+            <input id="patient-input" type="text" formControlName="nameOrId">
+            <button type="submit" class="primary-button" title="Pesquisar">Pesquisar</button>
+        </form>
+    </div>
+
+    <div *ngIf="resultsList && editingMode == false" id="patient-results">
+        <div *ngFor="let patient of resultsList">
+            <div class="patient-strip" (click)="selectPatient(patient.name, patient.id)">
+                <div class="strip-main">
+                <h3 class="strip-name">{{patient.name}}</h3>
+                </div>
+                <div class="strip-secondary">
+                <div class="strip-unit">
+                <div class="strip-code">Registro {{patient.id}}</div>
+                </div>
+                <div class="strip-unit">
+                <div class="strip-label">Data de nascimento:</div>
+                <div>{{patient.birthDate | birthDate}}</div>
+                </div>
+                <div class="strip-unit">
+                <div class="strip-label">Convênio:</div>
+                <div>{{patient.insuranceCompany}}
+                <span *ngIf="!patient.insuranceCompany">Não possui convênio.</span></div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form id="consultation-form" [formGroup]="consultationInfo">
+        <div class="consultation-header">
+            <div class="header-left-side">
+                <button *ngIf="editingMode == true" class="secondary-button" (click)="goBack()" title="Voltar"><fa-icon [icon]="faCircleChevronLeft"></fa-icon>Voltar</button>
+                <div *ngIf="selectedPatientName" id="selected-patient">
+                    <h2>Paciente: {{selectedPatientName}}</h2></div>
+            </div>
+            <div class="header-right-side">
+                <div *ngIf="editingMode == false" class="edit-mode" id="edit-mode-off" title="Modo edição desativado">Modo edição <fa-icon [icon]="faPenToSquare"></fa-icon></div>
+                <div *ngIf="editingMode == true" class="edit-mode" id="edit-mode-on" title="Modo edição ativado">Modo edição <fa-icon [icon]="faPenToSquare"></fa-icon></div>
+                <button (click)="deleteConsultation()" class="danger-button" [disabled]="!editingMode" title="Deletar">Deletar</button>
+                <button *ngIf="editingMode == true" (click)="editConsultation()" class="primary-button"
+                type="submit" title="Salvar alterações">Salvar</button>
+                <button *ngIf="editingMode == false" (click)="saveConsultation()" class="primary-button" type="submit" title="Salvar consulta">Salvar</button>
+            </div>
+        </div>
+        <div>
+            <section class="consultation-section">
+                <div id="consultation-first-line">
+                    <div class="form-unit" id="consultation-first-field">
+                        <label for="consultation-reason">Motivo da consulta:</label>
+                        <input id="consultation-reason" name="consultation-reason" type="text" formControlName="reason"
+                            required [ngClass]="{'error-border': (
+                        consultationInfo.controls.reason.dirty ||
+                        consultationInfo.controls.reason.touched) &&
+                        consultationInfo.controls.reason.errors}" />
+                        <span class="error-message" *ngIf="(
+                        consultationInfo.controls.reason.dirty ||
+                        consultationInfo.controls.reason.touched) &&
+                        consultationInfo.controls.reason.errors &&
+                        consultationInfo.controls.reason.errors['required']">Campo obrigatório</span>
+                        <span class="error-message" *ngIf="(
+                        consultationInfo.controls.reason.dirty &&
+                    consultationInfo.controls.reason.touched) &&
+                    consultationInfo.controls.reason.errors &&
+                    consultationInfo.controls.reason.errors['minlength']">Este campo precisa de pelo menos 8
+                            caracteres</span>
+                        <span class="error-message" *ngIf="(
+                        consultationInfo.controls.reason.dirty ||
+                        consultationInfo.controls.reason.touched) &&
+                        consultationInfo.controls.reason.errors &&
+                        consultationInfo.controls.reason.errors['maxlength']">Este campo não pode ultrapassar 64
+                            caracteres</span>
+                    </div>
+
+                    <div>
+                        <div class="form-unit">
+                            <label for="consultation-date">Data da Consulta:</label>
+                            <input id="consultation-date" name="consultation-date" type="date" formControlName="date"
+                                required [ngClass]="{'error-border': (
+                        consultationInfo.controls.date.dirty ||
+                        consultationInfo.controls.date.touched) &&
+                        consultationInfo.controls.date.errors}" />
+                            <span class="error-message" *ngIf="(
+                            consultationInfo.controls.date.dirty ||
+                            consultationInfo.controls.date.touched) &&
+                            consultationInfo.controls.date.errors &&
+                            consultationInfo.controls.date.errors['required']">Campo obrigatório</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="form-unit">
+                            <label for="consultation-time">Horário da Consulta:</label>
+                            <input id="consultation-time" name="consultation-time" type="time" formControlName="time"
+                                required [ngClass]="{'error-border': (
+                        consultationInfo.controls.time.dirty ||
+                        consultationInfo.controls.time.touched) &&
+                        consultationInfo.controls.time.errors}" />
+                            <span class="error-message" *ngIf="(
+                            consultationInfo.controls.time.dirty ||
+                            consultationInfo.controls.time.touched) &&
+                            consultationInfo.controls.time.errors &&
+                            consultationInfo.controls.time.errors['required']">Campo obrigatório</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-unit">
+                    <label for="issue-description">Descrição do Problema:</label>
+                    <textarea id="issue-description" name="issue-description" type="text"
+                        formControlName="issueDescription" class="largest-field" [ngClass]="{'error-border': (
+                            consultationInfo.controls.issueDescription.dirty ||
+                            consultationInfo.controls.issueDescription.touched) &&
+                            consultationInfo.controls.issueDescription.errors}"></textarea>
+                    <span class="error-message" *ngIf="(
+                            consultationInfo.controls.issueDescription.dirty ||
+                            consultationInfo.controls.issueDescription.touched) &&
+                            consultationInfo.controls.issueDescription.errors &&
+                            consultationInfo.controls.issueDescription.errors['required']">Campo obrigatório</span>
+                    <span class="error-message" *ngIf="(
+                            consultationInfo.controls.issueDescription.dirty &&
+                            consultationInfo.controls.issueDescription.touched) &&
+                            consultationInfo.controls.issueDescription.errors &&
+                            consultationInfo.controls.issueDescription.errors['minlength']">Este campo precisa de pelo
+                        menos 16 caracteres</span>
+                    <span class="error-message" *ngIf="(
+                            consultationInfo.controls.issueDescription.dirty ||
+                            consultationInfo.controls.issueDescription.touched) &&
+                            consultationInfo.controls.issueDescription.errors &&
+                            consultationInfo.controls.issueDescription.errors['maxlength']">Este campo não pode
+                        ultrapassar 1024 caracteres</span>
+                </div>
+                <div class="form-unit">
+                    <label for="prescribed-medication">Medicação Receitada:</label>
+                    <textarea id="prescribed-medication" name="prescribed-medication" type="text"
+                        formControlName="prescribedMedication" class="large-field"></textarea>
+                </div>
+                <div class="form-unit">
+                    <label for="dosage-precautions">Dosagem e Precauções:</label>
+                    <textarea id="dosage-precautions" name="dosage-precautions" type="text"
+                        formControlName="dosagePrecautions" class="large-field" [ngClass]="{'error-border': (
+                            consultationInfo.controls.dosagePrecautions.dirty ||
+                            consultationInfo.controls.dosagePrecautions.touched) &&
+                            consultationInfo.controls.dosagePrecautions.errors}"></textarea>
+                    <span class="error-message" *ngIf="(
+                            consultationInfo.controls.dosagePrecautions.dirty ||
+                            consultationInfo.controls.dosagePrecautions.touched) &&
+                            consultationInfo.controls.dosagePrecautions.errors &&
+                            consultationInfo.controls.dosagePrecautions.errors['required']">Campo obrigatório</span>
+                    <span class="error-message" *ngIf="(
+                            consultationInfo.controls.dosagePrecautions.dirty &&
+                            consultationInfo.controls.dosagePrecautions.touched) &&
+                            consultationInfo.controls.dosagePrecautions.errors &&
+                            consultationInfo.controls.dosagePrecautions.errors['minlength']">Este campo precisa de pelo
+                        menos 16 caracteres</span>
+                    <span class="error-message" *ngIf="(
+                            consultationInfo.controls.dosagePrecautions.dirty ||
+                            consultationInfo.controls.dosagePrecautions.touched) &&
+                            consultationInfo.controls.dosagePrecautions.errors &&
+                            consultationInfo.controls.dosagePrecautions.errors['maxlength']">Este campo não pode
+                        ultrapassar 256 caracteres</span>
+                </div>
+            </section>
+        </div>
+    </form>
+
+</div>

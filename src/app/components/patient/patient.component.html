@@ -1,0 +1,302 @@
+<div id="patient-container">
+    <form id="patient-form" [formGroup]="patientInfo">
+        
+        <div class="patient-header">
+            <div>
+            <button *ngIf="editingMode == true" class="secondary-button" (click)="goBack()" title="Voltar"><fa-icon [icon]="faCircleChevronLeft"></fa-icon>Voltar</button>
+            </div>
+            <div class="header-right-side">
+            <div *ngIf="editingMode == false" class="edit-mode" id="edit-mode-off" title="Modo edição desativado">Modo edição <fa-icon [icon]="faPenToSquare"></fa-icon></div>
+            <div *ngIf="editingMode == true" class="edit-mode" id="edit-mode-on" title="Modo edição ativado">Modo edição <fa-icon [icon]="faPenToSquare"></fa-icon></div>
+            <button (click)="deletePatient()" class="danger-button" [disabled]="!editingMode" title="Deletar">Deletar</button>
+            <button *ngIf="editingMode == true" (click)="editPatient()" class="primary-button"
+                type="submit" title="Salvar modificações">Salvar</button>
+            <button *ngIf="editingMode == false" (click)="savePatient()" class="primary-button" type="submit" title="Salvar cadastro">Salvar</button>
+            </div>
+
+        </div>
+        <div>
+            <section class="patient-section">
+                <div class="form-unit">
+                    <label for="patient-name">Nome completo:</label>
+                    <input id="patient-name" name="patient-name" type="text" formControlName="name" required [ngClass]="{'error-border': (patientInfo.controls.name.dirty ||
+        patientInfo.controls.name.touched) &&
+        patientInfo.controls.name.errors}" />
+                    <span class="error-message" *ngIf="(patientInfo.controls.name.dirty ||
+            patientInfo.controls.name.touched) &&
+            patientInfo.controls.name.errors &&
+            patientInfo.controls.name.errors['required']">Campo obrigatório</span>
+                    <span class="error-message" *ngIf="(patientInfo.controls.name.dirty &&
+            patientInfo.controls.name.touched) &&
+            patientInfo.controls.name.errors &&
+            patientInfo.controls.name.errors['minlength']">Preencha o nome completo</span>
+                    <span class="error-message" *ngIf="(patientInfo.controls.name.dirty ||
+            patientInfo.controls.name.touched) &&
+            patientInfo.controls.name.errors &&
+            patientInfo.controls.name.errors['maxlength']">Este campo não pode ultrapassar 64 caracteres</span>
+                </div>
+                <div class="form-unit">
+                    <label for="patient-gender">Gênero:</label>
+                    <select id="patient-gender" name="patient-gender" formControlName="gender" required [ngClass]="{'error-border': (patientInfo.controls.gender.dirty ||
+patientInfo.controls.gender.touched) &&
+patientInfo.controls.gender.errors}">
+                        <option value="Masculino">Masculino</option>
+                        <option value="Feminino">Feminino</option>
+                        <option value="Outro">Outro</option>
+                        <option value="Preferiu não informar">Preferiu não informar</option>
+                    </select>
+                    <span class="error-message" *ngIf="(patientInfo.controls.gender.dirty ||
+        patientInfo.controls.gender.touched) &&
+        patientInfo.controls.gender.errors &&
+        patientInfo.controls.gender.errors['required']">Campo obrigatório</span>
+                </div>
+                <div class="form-unit">
+
+                    <label for="patient-birthdate">Data de nascimento:</label>
+                    <input id="patient-birthdate" name="patient-birthdate" type="text" mask="d0/M0/0000"
+                        formControlName="birthDate" [validation]="false" [hiddenInput]="true" required [ngClass]="{'error-border': (patientInfo.controls.birthDate.dirty ||
+        patientInfo.controls.birthDate.touched) &&
+        patientInfo.controls.birthDate.errors}" />
+                    <span class="error-message" *ngIf="(patientInfo.controls.birthDate.dirty ||
+        patientInfo.controls.birthDate.touched) &&
+        patientInfo.controls.birthDate.errors &&
+        patientInfo.controls.birthDate.errors['required']">Campo obrigatório</span>
+                    <span class="error-message" *ngIf="(patientInfo.controls.birthDate.dirty ||
+        patientInfo.controls.birthDate.touched) &&
+        patientInfo.controls.birthDate.errors &&
+        patientInfo.controls.birthDate.errors['pattern']">Utilize o formato dd/mm/aaaa</span>
+                    <!-- <span class="error-message" *ngIf="(patientInfo.controls.birthDate.dirty &&
+        patientInfo.controls.birthDate.touched) &&
+        patientInfo.controls.birthDate.errors && (patientInfo.valid == false) ">Utilize o formato dd/mm/aaaa</span> -->
+                </div>
+
+                <div class="form-unit">
+                    <label for="patient-cpf">CPF:</label>
+                    <input id="patient-cpf" name="patient-cpf" type="text" mask="000.000.000-00" formControlName="cpf"
+                        required [ngClass]="{'error-border': (patientInfo.controls.cpf.dirty ||
+                    patientInfo.controls.cpf.touched) &&
+                    patientInfo.controls.cpf.errors}" />
+                    <span class="error-message" *ngIf="(patientInfo.controls.cpf.dirty ||
+                    patientInfo.controls.cpf.touched) &&
+                    patientInfo.controls.cpf.errors &&
+                    patientInfo.controls.cpf.errors['required']">Campo obrigatório</span>
+                    <span class="error-message" *ngIf="(patientInfo.controls.cpf.dirty ||
+                     patientInfo.controls.cpf.touched) &&
+                     patientInfo.controls.cpf.errors && (patientInfo.valid == false)">Preencha um CPF válido</span>
+                </div>
+
+                <div class="form-unit">
+                    <label for="patient-rg">RG com órgão expeditor:</label>
+                    <input id="patient-rg" name="patient-rg" type="text" formControlName="rg" required [ngClass]="{'error-border': (patientInfo.controls.rg.dirty ||
+        patientInfo.controls.rg.touched) &&
+        patientInfo.controls.rg.errors}" />
+                    <span class="error-message" *ngIf="(patientInfo.controls.rg.dirty ||
+        patientInfo.controls.rg.touched) &&
+        patientInfo.controls.rg.errors &&
+        patientInfo.controls.rg.errors['required']">Campo obrigatório</span>
+                    <span class="error-message" *ngIf="(patientInfo.controls.rg.dirty ||
+        patientInfo.controls.rg.touched) &&
+        patientInfo.controls.rg.errors &&
+        patientInfo.controls.rg.errors['maxlength']">Este campo não pode ultrapassar 20 caracteres</span>
+                </div>
+                <div class="form-unit">
+
+                    <label for="patient-marital-status">Estado civil:</label>
+                    <select id="patient-marital-status" name="patient-marital-status" formControlName="maritalStatus"
+                        required [ngClass]="{'error-border': (patientInfo.controls.maritalStatus.dirty ||
+patientInfo.controls.maritalStatus.touched) &&
+patientInfo.controls.maritalStatus.errors}">
+                        <option value="Nunca casou">Nunca casou</option>
+                        <option value="Casou">Casou</option>
+                        <option value="Separou">Separou</option>
+                        <option value="Divorciou">Divorciou</option>
+                        <option value="Viuvou">Viuvou</option>
+                    </select>
+                    <span class="error-message" *ngIf="(patientInfo.controls.maritalStatus.dirty ||
+        patientInfo.controls.maritalStatus.touched) &&
+        patientInfo.controls.maritalStatus.errors &&
+        patientInfo.controls.maritalStatus.errors['required']">Campo obrigatório</span>
+                </div>
+                <div class="form-unit">
+                    <label for="patient-phone">Telefone:</label>
+                    <input id="patient-phone" name="patient-phone" type="tel" mask="(00) 0 0000-0000"
+                        formControlName="phone" required
+                        [ngClass]="{'error-border': (patientInfo.controls.phone.dirty || patientInfo.controls.phone.touched) && patientInfo.controls.phone.errors}" />
+                    <span class="error-message"
+                        *ngIf="(patientInfo.controls.phone.dirty || patientInfo.controls.phone.touched) && patientInfo.controls.phone.errors && patientInfo.controls.phone.errors['required']">Campo
+                        obrigatório</span>
+                    <span class="error-message"
+                        *ngIf="(patientInfo.controls.phone.dirty || patientInfo.controls.phone.touched) && patientInfo.controls.phone.errors && (patientInfo.valid == false)">Preencha
+                        um telefone válido</span>
+
+                </div>
+                <div class="form-unit">
+                    <label for="patient-email">E-mail:</label>
+                    <input id="patient-email" name="patient-email" type="text" formControlName="email" [ngClass]="{'error-border': (patientInfo.controls.email.dirty ||
+                patientInfo.controls.email.touched) &&
+                patientInfo.controls.email.errors}" />
+                    <span class="error-message" *ngIf="(patientInfo.controls.email.dirty ||
+                patientInfo.controls.email.touched) &&
+                patientInfo.controls.email.errors &&
+                patientInfo.controls.email.errors['email']">Preencha um e-mail válido</span>
+                </div>
+                <div class="form-unit">
+                    <label for="patient-birth-city">Naturalidade:</label>
+                    <input id="patient-birth-city" name="patient-birth-city" type="text" formControlName="birthCity"
+                        [ngClass]="{'error-border': (patientInfo.controls.birthCity.dirty || patientInfo.controls.birthCity.touched) &&patientInfo.controls.birthCity.errors}" />
+                    <span class="error-message" *ngIf="(patientInfo.controls.birthCity.dirty ||
+  patientInfo.controls.birthCity.touched) &&
+  patientInfo.controls.birthCity.errors &&
+  patientInfo.controls.birthCity.errors['required']">Campo obrigatório</span>
+                    <span class="error-message" *ngIf="(patientInfo.controls.birthCity.dirty ||
+  patientInfo.controls.birthCity.touched) &&
+  patientInfo.controls.birthCity.errors &&
+  patientInfo.controls.birthCity.errors['minlength']">Preencha sem abreviar</span>
+                    <span class="error-message" *ngIf="(patientInfo.controls.birthCity.dirty ||
+  patientInfo.controls.birthCity.touched) &&
+  patientInfo.controls.birthCity.errors &&
+  patientInfo.controls.birthCity.errors['maxlength']">Este campo não pode ultrapassar 64 caracteres</span>
+                </div>
+                <div class="form-unit">
+                    <label for="patient-emergency-contact">Contato de Emergência:</label>
+                    <input id="patient-emergency-contact" name="patient-emergency-contact" type="tel"
+                        mask="(00) 0 0000-0000" formControlName="emergencyContact" required
+                        [ngClass]="{'error-border': (patientInfo.controls.emergencyContact.dirty || patientInfo.controls.emergencyContact.touched) &&patientInfo.controls.emergencyContact.errors}" />
+                    <span class="error-message" *ngIf="(patientInfo.controls.emergencyContact.dirty ||
+  patientInfo.controls.emergencyContact.touched) &&
+  patientInfo.controls.emergencyContact.errors &&
+  patientInfo.controls.emergencyContact.errors['required']">Campo obrigatório</span>
+                    <span class="error-message" *ngIf="(patientInfo.controls.emergencyContact.dirty ||
+  patientInfo.controls.emergencyContact.touched) &&
+  patientInfo.controls.emergencyContact.errors && (patientInfo.valid == false)">Preencha um telefone válido</span>
+                </div>
+
+
+                <div class="form-unit">
+                    <label for="patient-cep">CEP:</label>
+                    <input id="patient-cep" name="patient-cep" type="text" formControlName="cep"
+                        [ngClass]="{'error-border': (patientInfo.controls.cep.dirty || patientInfo.controls.cep.touched) &&patientInfo.controls.cep.errors}" />
+                    <span class="error-message" *ngIf="(patientInfo.controls.cep.dirty ||
+  patientInfo.controls.cep.touched) &&
+  patientInfo.controls.cep.errors &&
+  patientInfo.controls.cep.errors['required']">Campo obrigatório</span>
+
+                    <button id="cep-button" type="button" (click)="searchAddress()" title="Pesquisar CEP">Pesquisar CEP</button>
+                </div>
+                <div class="form-unit">
+                    <label for="address-street">Logradouro:</label>
+                    <input id="address-street" name="address-street" type="text" formControlName="addressStreet"
+                        [ngClass]="{'error-border': (patientInfo.controls.addressStreet.dirty || patientInfo.controls.addressStreet.touched) &&patientInfo.controls.addressStreet.errors}" />
+                    <span class="error-message" *ngIf="(patientInfo.controls.addressStreet.dirty ||
+  patientInfo.controls.addressStreet.touched) &&
+  patientInfo.controls.addressStreet.errors &&
+  patientInfo.controls.addressStreet.errors['required']">Campo obrigatório</span>
+                </div>
+                <div class="form-unit">
+                    <label for="address-number">Número:</label>
+                    <input id="address-number" name="address-number" type="text" formControlName="addressNumber" />
+                </div>
+                <div class="form-unit">
+                    <label for="address-extra">Complemento:</label>
+                    <input id="address-extra" name="address-extra" type="text" formControlName="addressComplement" />
+                </div>
+                <div class="form-unit">
+                    <label for="address-neighborhood">Bairro:</label>
+                    <input id="address-neighborhood" name="address-neighborhood" type="text"
+                        formControlName="addressNeighborhood" />
+                </div>
+                <div class="form-unit">
+                    <label for="address-city">Cidade:</label>
+                    <input id="address-city" name="address-city" type="text" formControlName="addressCity"
+                        [ngClass]="{'error-border': (patientInfo.controls.addressCity.dirty || patientInfo.controls.addressCity.touched) &&patientInfo.controls.addressCity.errors}" />
+                    <span class="error-message" *ngIf="(patientInfo.controls.addressCity.dirty ||
+  patientInfo.controls.addressCity.touched) &&
+  patientInfo.controls.addressCity.errors &&
+  patientInfo.controls.addressCity.errors['required']">Campo obrigatório</span>
+                </div>
+                <div class="form-unit">
+                    <label for="address-state">Estado:</label>
+                    <select id="address-state" name="address-state" type="text" formControlName="addressState"
+                    [ngClass]="{'error-border': (patientInfo.controls.addressState.dirty || patientInfo.controls.addressState.touched) &&patientInfo.controls.addressState.errors}">
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="AM">Amazonas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espirito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MS">Mato Grosso do Sul</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="TO">Tocantins</option>
+                    </select>
+                    <!-- <input id="address-state" name="address-state" type="text" formControlName="addressState"
+                        [ngClass]="{'error-border': (patientInfo.controls.addressState.dirty || patientInfo.controls.addressState.touched) &&patientInfo.controls.addressState.errors}" /> -->
+                    <span class="error-message" *ngIf="(patientInfo.controls.addressState.dirty ||
+  patientInfo.controls.addressState.touched) &&
+  patientInfo.controls.addressState.errors &&
+  patientInfo.controls.addressState.errors['required']">Campo obrigatório</span>
+                </div>
+                <div class="form-unit">
+                    <label for="address-landmark">Ponto de Referência:</label>
+                    <input id="address-landmark" name="address-landmark" type="text"
+                        formControlName="addressLandmark" />
+                </div>
+            </section>
+            <section class="patient-section" id="insurance-section">
+                <div class="form-unit">
+                    <label for="patient-insurance">Convênio:</label>
+                    <input id="patient-insurance" name="patient-insurance" type="text"
+                        formControlName="insuranceCompany" />
+                </div>
+                <div class="form-unit">
+                    <label for="patient-insurance-number">Número do Convênio:</label>
+                    <input id="patient-insurance-number" name="patient-insurance-number" type="text"
+                        formControlName="insuranceNumber" />
+                </div>
+                <div class="form-unit">
+                    <label for="patient-insurance-expiration">Validade do Convênio:</label>
+                    <input id="patient-insurance-expiration" name="patient-insurance-expiration" type="text"
+                        mask="d0/M0/0000" formControlName="insuranceExpiration" [validation]="false"
+                        [hiddenInput]="true" [ngClass]="{'error-border': (patientInfo.controls.insuranceExpiration.dirty ||
+                        patientInfo.controls.insuranceExpiration.touched) &&
+                        patientInfo.controls.insuranceExpiration.errors}" />
+                    <span class="error-message" *ngIf="(patientInfo.controls.insuranceExpiration.dirty ||
+                        patientInfo.controls.insuranceExpiration.touched) &&
+                        patientInfo.controls.insuranceExpiration.errors &&
+                        patientInfo.controls.insuranceExpiration.errors['pattern']">Utilize o formato dd/mm/aaaa</span>
+                </div>
+            </section>
+                <section class="patient-section">
+                <div class="form-unit">
+                    <label for="patient-allergies">Lista de Alergias:</label>
+                    <textarea id="patient-allergies" name="patient-allergies" type="text"
+                        formControlName="allergies"></textarea>
+                </div>
+                <div class="form-unit">
+                    <label for="patient-care">Cuidados Específicos:</label>
+                    <textarea id="patient-care" name="patient-care" type="text"
+                        formControlName="specialCare"></textarea>
+                </div>
+            </section>
+
+
+        </div>
+    </form>
+</div>

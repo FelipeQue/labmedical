@@ -1,0 +1,116 @@
+<div id="records-detail-container">
+
+    <div id="patient-data">
+        <div id="patient-data-header">
+            <div id="patient-portrait"><img src="../../../../assets/images/portrait-patient.png"></div>
+        </div>
+        <div id="patient-data-body">
+            <div id="patient-data-first-line">
+            <div id="patient-name">{{patient.name}}</div>
+            <div class="event-button"><button (click)="editPatient(patient.id)">Atualizar cadastro</button></div>
+            </div>
+            <h4 *ngIf="patient.insuranceCompany">Convênio</h4>
+            <p *ngIf="patient.insuranceCompany">{{patient.insuranceCompany}}</p>
+            <h4>Contato de emergência</h4>
+            <p>{{patient.emergencyContact | phone}}</p>
+            <h4 *ngIf="patient.allergies">Lista de alergias</h4>
+            <p *ngIf="patient.allergies">{{patient.allergies}}</p>
+            <h4 *ngIf="patient.specialCare">Lista de cuidados específicos</h4>
+            <p *ngIf="patient.specialCare">{{patient.specialCare}}</p>
+        </div>
+    </div>
+
+    <div id="events-container">
+
+        <div class="patient-event" *ngFor="let event of patientEvents">
+            <div class="event-consultation" *ngIf="event.reason">
+                <div class="event-header">
+                    <div>
+                        <h3>Consulta</h3>
+                    </div>
+                    <div class="event-header-secondrow">
+                        <div class="header-unit">
+                            <fa-icon [icon]="faStethoscope"></fa-icon>
+                            <h2>{{event.reason}}</h2>
+                        </div>
+                        <div class="event-header-datetime">
+                            <div class="header-unit">
+                                <fa-icon [icon]="faCalendarDay"></fa-icon>
+                                <h2>{{event.date | date: "dd/MM/YYYY"}}</h2>
+                            </div>
+                            <div class="header-unit">
+                                <div><fa-icon [icon]="faClock"></fa-icon></div>
+                                <div>
+                                    <h2>{{event.time}}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-body">
+                    <h4>Descrição do problema </h4>
+                    <p>{{event.issueDescription}}</p>
+
+                    <h4>Medicação Receitada </h4>
+                    <p>{{event.prescribedMedication}}</p>
+
+                    <h4>Dosagem e Precauções </h4>
+                    <p>{{event.dosagePrecautions}}</p>
+                </div>
+                <div class="event-button">
+                    <button (click)="editConsultation(event.id)">Editar</button>
+                </div>
+            </div>
+
+            <div class="event-exam" *ngIf="event.type">
+                <div class="event-header">
+                    <div>
+                        <h3>Exame</h3>
+                    </div>
+                    <div class="event-header-secondrow">
+                        <div class="header-unit">
+                            <fa-icon [icon]="faMicroscope"></fa-icon>
+                            <h2>{{event.name}}</h2>
+                        </div>
+                        <div class="event-header-datetime">
+                            <div class="header-unit">
+                                <fa-icon [icon]="faCalendarDay"></fa-icon>
+                                <h2>{{event.date | date: "dd/MM/YYYY"}}</h2>
+                            </div>
+                            <div class="header-unit">
+                                <div><fa-icon [icon]="faClock"></fa-icon></div>
+                                <div>
+                                    <h2>{{event.time}}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="event-body">
+                    <div class="event-body-firstrow">
+                        <div class="exam-lab">
+                            <h4>Laboratório </h4>
+                            <p>{{event.laboratory}}</p>
+                        </div>
+                        <div class="exam-type">
+                            <h4>Tipo </h4>
+                            <p>{{event.type}}</p>
+                        </div>
+                    </div>
+                    <h4 *ngIf="event.documentUrl">Anexo</h4>
+                    <a *ngIf="event.documentUrl" class="attachment" href="{{event.documentUrl}}"
+                        target="_blank"><fa-icon [icon]="faPaperclip"></fa-icon></a>
+                    <h4>Resultados </h4>
+                    <p>{{event.results}}</p>
+                </div>
+                <div class="event-button">
+                    <button (click)="editExam(event.id)">Editar</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>

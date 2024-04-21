@@ -1,0 +1,94 @@
+@import '../../../assets/styles/mixins';
+@import '../../../assets/styles/variables';
+
+#records-container {
+    background-color: $pageBackground; 
+    padding: 1em;
+    width: 100%;
+    min-height: 100%;
+}
+
+#patient-search {
+    input {
+        width: 60%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        &:focus {
+            border: 2px solid $mainColor;
+            outline: none;
+        }
+    }
+    button {
+        @include basic-button;
+        margin-left: 10px;
+    }
+}
+
+.primary-button {
+    background-color: $buttonColor;
+    &:hover {
+        background-color: $buttonHover;
+    }
+    &:active {
+        background-color: $buttonActive;
+    }
+}
+
+#patient-search-form {
+    gap: 10px;
+}
+
+#patient-results {
+    @include flex-column-left;
+    gap: 0.8em;
+    margin-top: 1em;
+}
+
+.patient-strip {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    background-color: $thirdColor;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    .strip-main {
+        width: 40%;
+        min-height: 100%;
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+        background-color: $mainColor;
+        padding-top: 0.8em;
+        padding-bottom: 0.8em;
+        padding-left: 1em;
+        margin-right: 1em;
+        flex: 1;
+        h3 {
+            color: white;
+            font-size: 1.2em;
+            font-weight: 400;
+        }
+    }
+    .strip-secondary {
+        align-items: center;
+        width: 60%;
+        display: flex;
+        flex-direction: row;
+        .strip-unit {
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+            .strip-code {
+                text-transform: uppercase;
+                font-size: 0.8em;
+                color: gray;
+            }
+            .strip-label {
+                font-size: 0.8em;
+                font-weight: 700;
+            }
+        }
+    }
+}
