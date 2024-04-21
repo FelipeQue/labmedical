@@ -98,6 +98,7 @@ export class ExamComponent {
           const isIdMatch = searchedPatient.id && searchedPatient.id.includes(nameOrId);
           return isNameMatch || isIdMatch;
         });
+        this.resultsList.sort((a: any,b: any) => a.name.localeCompare(b.name));
         if (this.resultsList.length === 0) {
           this.toastrService.error("Não foram encontrados registros de paciente com este nome ou código de registro.");
         }
