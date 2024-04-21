@@ -9,11 +9,14 @@ import { ActivatedRoute } from '@angular/router';
 import { ConfirmDialogService } from '../../services/confirm-dialog.service';
 import { ExamService } from '../../services/exam.service';
 import { ConsultationService } from '../../services/consultation.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCircleChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-patient',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, NgxMaskDirective, NgxMaskPipe],
+  imports: [ReactiveFormsModule, CommonModule, NgxMaskDirective, NgxMaskPipe, FontAwesomeModule],
   templateUrl: './patient.component.html',
   styleUrl: './patient.component.scss'
 })
@@ -60,6 +63,9 @@ export class PatientComponent {
     addressState: new FormControl('', [Validators.required]),
     addressLandmark: new FormControl(''),
   });
+
+  faCircleChevronLeft = faCircleChevronLeft;
+  faPenToSquare = faPenToSquare;
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((parameters) => {

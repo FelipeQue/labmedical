@@ -57,13 +57,12 @@
       "id": "774c"
     },
     {
-      "id": "49e9",
       "name": "Ursula Kroeber Le Guin",
-      "gender": "female",
+      "gender": "Feminino",
       "birthDate": "21101929",
       "cpf": "00000000000",
       "rg": "000000 SSP/PE",
-      "maritalStatus": "other",
+      "maritalStatus": "Viuvou",
       "phone": "00000000000",
       "email": "",
       "birthCity": "Berkeley",
@@ -82,16 +81,16 @@
         "complement": "",
         "neighborhood": "Soledade",
         "landmark": ""
-      }
+      },
+      "id": "49e9"
     },
     {
-      "id": "920c",
       "name": "Isaac Asimov",
-      "gender": "male",
+      "gender": "Masculino",
       "birthDate": "02011920",
       "cpf": "11111111111",
       "rg": "123456 SSP/NY",
-      "maritalStatus": "male",
+      "maritalStatus": "Nunca casou",
       "phone": "11922222222",
       "email": "isaac.asimov@example.com",
       "birthCity": "Petrovichi",
@@ -110,16 +109,16 @@
         "complement": "Apto 4B",
         "neighborhood": "Jardim Nazle",
         "landmark": "Empire State Building (no Acre)"
-      }
+      },
+      "id": "920c"
     },
     {
-      "id": "9bcd",
       "name": "Arthur C. Clarke",
-      "gender": "male",
+      "gender": "Masculino",
       "birthDate": "16121917",
       "cpf": "22222222222",
       "rg": "654321 SSP/LON",
-      "maritalStatus": "prefer-not",
+      "maritalStatus": "Viuvou",
       "phone": "44555555555",
       "email": "arthur.clarke@example.com",
       "birthCity": "Minehead",
@@ -138,7 +137,8 @@
         "complement": null,
         "neighborhood": "Gruta de Lourdes",
         "landmark": null
-      }
+      },
+      "id": "9bcd"
     },
     {
       "id": "e352",
