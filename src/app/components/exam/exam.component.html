@@ -2,7 +2,7 @@
 
 
     <div *ngIf="editingMode == false" id="patient-search">
-        <label for="patient-input">Busca de paciente:</label>
+        <label for="patient-input">Busca de paciente (por nome ou código de registro):</label>
         <form id="patient-search-form" (ngSubmit)="searchPatient()" [formGroup]="patientInput">
         <input id="patient-input" type="text" formControlName="nameOrId">
         <button type="submit" class="primary-button" title="Pesquisar">Pesquisar</button>

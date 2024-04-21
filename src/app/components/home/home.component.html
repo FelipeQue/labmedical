@@ -32,7 +32,7 @@
     </div>
     <div id="patient-search-container">
     <div id="patient-search">
-        <label for="patient-input">Busca de paciente:</label>
+        <label for="patient-input">Busca de paciente (por nome, telefone ou e-mail):</label>
         <form id="patient-search-form" (ngSubmit)="searchPatient()" [formGroup]="patientSearch">
             <input id="patient-input" type="text" formControlName="searchInput">
             <button type="submit" class="primary-button" title="Pesquisar">Pesquisar</button>
