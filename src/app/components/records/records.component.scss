@@ -49,8 +49,7 @@
 }
 
 #patient-results {
-    display: flex;
-    flex-direction: column;
+    @include flex-column-left;
     gap: 0.8em;
     margin-top: 1em;
 }
