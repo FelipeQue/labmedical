@@ -12,7 +12,6 @@
     }
 }
 
-
 #records-detail-container {
     background-color: $pageBackground;
     padding: 1em;
@@ -23,20 +22,17 @@
     border-radius: 8px;
     display: flex;
     flex-direction: row;
-    width: fit-content;
-    flex-wrap: wrap;
+    width: 100%;
 }
 
 #patient-data-header {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     border-radius: 8px;
-    background-color: $mainColor;
-    color: white;
-    padding: 0.5em;
-    font-size: 1.5em;
+    background-color: $thirdColor;
+    padding: 0.6em;
 }
 
 #patient-portrait {
@@ -52,12 +48,25 @@
 
 #patient-data-body {
     background-color: #ffffff;
-    padding: 1em;
+    padding-left: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
     display: flex;
     flex-direction: column;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
-    width: auto;
+    width: 100%;
+    #patient-data-first-line {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #patient-name {
+        font-size: 1.4em;
+        font-weight: 400;
+        margin-bottom: 0.8em;
+    }
     h4 {
         font-weight: 700;
         font-size: 0.9em;
@@ -139,7 +148,6 @@
 .event-body-firstrow {
     display: flex;
     flex-direction: row;
-    // justify-content: space-between;
     flex-wrap: wrap;
 }
 

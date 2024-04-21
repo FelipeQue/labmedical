@@ -87,7 +87,6 @@ export class HomeComponent {
     }
   };
 
-
   editPatient(id: string) {
     this.router.navigate(["edit-patient", id]);
   }
