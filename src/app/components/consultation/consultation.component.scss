@@ -175,27 +175,6 @@
     }
 }
 
-// .consultation-buttons {
-//     display: flex;
-//     justify-content: flex-end;
-//     flex-wrap: wrap;
-//     width: 100%;
-//     max-height: 2.8em;
-//     gap: 0.8em;
-//     button {
-//         color: #ffffff;
-//         border: none;
-//         border-radius: 4px;
-//         padding: 10px 20px;
-//         font-size: 1em;
-//         cursor: pointer;
-//         &:disabled {
-//             color: lightgray;
-//             background-color: #f0f0f0;
-//         }
-//     }
-// }
-
 .primary-button {
     background-color: $buttonColor;
     &:hover {
@@ -269,7 +248,6 @@
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 4px;
-        // resize: none;
         &:focus {
             border: 2px solid $buttonActive;
             outline: none;
