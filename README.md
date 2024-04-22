@@ -57,7 +57,7 @@ https://trello.com/b/xZyCobjC/projeto-labmedical (in Portuguese)
 - Download or clone this repository by executing the command `git clone https://github.com/FelipeQue/labmedical.git`.
 - Navigate to the project directory.
 - Install all dependencies with the command `npm install`. Ensure that JSON Server is installed.
-- Start the API server by executing the command `npm run json-server`. The API can then be accessed at `http://localhost:3000/`.
+- Start the API server by executing the command `npx json-server db.json`. The API can then be accessed at `http://localhost:3000/`.
 - Open a new terminal window or tab, then run `ng serve` to start the development server. The application can be accessed at `http://localhost:4200/`.
 
 ## Angular tips
