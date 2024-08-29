@@ -50,7 +50,10 @@ json-server@1.0.0-alpha.23
 ## Development process :building_construction:
 
 This project was developed using a Kanban board in Trello.  
-https://trello.com/b/xZyCobjC/projeto-labmedical (in Portuguese)
+[Trello](https://trello.com/b/xZyCobjC/projeto-labmedical) (in Portuguese)
+
+## Presentation 🎬
+[Video](https://drive.google.com/file/d/1c-5rG61trX89sS9sVxkUSr83tltmULAw/) (in Portuguese)
 
 ## How to run 🕺
 
